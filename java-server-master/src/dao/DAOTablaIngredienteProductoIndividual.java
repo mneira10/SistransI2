@@ -84,7 +84,7 @@ public class DAOTablaIngredienteProductoIndividual {
         String sql = "INSERT INTO INGREDIENTES_PRODUCTIND (ID_INGREDIENTE, ID_PRODINDIVIDUAL) VALUES (";
         sql += "'"+ingrediente.getIngrediente()+ "',";
         sql += "'"+ingrediente.getProducto() + "')";
-       
+
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
