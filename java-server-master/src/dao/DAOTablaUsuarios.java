@@ -47,8 +47,8 @@ public class DAOTablaUsuarios {
         return usuarios;
     }
 
-    public ArrayList<Usuario> buscarUsuariosPorId(Long id) throws SQLException, Exception {
-        ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    public Usuario buscarUsuariosPorId(Long id) throws SQLException, Exception {
+        Usuario usuario = null;
 
         String sql = "SELECT * FROM USUARIOS WHERE ID ='" + id + "'";
 
@@ -56,11 +56,16 @@ public class DAOTablaUsuarios {
         recursos.add(prepStmt);
         ResultSet rs = prepStmt.executeQuery();
 
-        while (rs.next()) {
-            insertarUsuario(rs,usuarios);
+        if(rs.next()){
+            Long id=rs.getLong("ID");
+            String nombres = rs.getString("NOMBRES");
+            String apellidos = rs.getString("APELLIDOS");
+            String tipo = rs.getString("TIPOID");
+            Long numId = rs.getLong("NUMID");
+            usuario =(new Usuario(id,nombres,apellidos,tipo,numId));
         }
 
-        return usuarios;
+        return usuario;
     }
 
     public void updateUsuario(Usuario usuario) throws SQLException, Exception {
