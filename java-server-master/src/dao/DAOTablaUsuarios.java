@@ -63,7 +63,7 @@ public class DAOTablaUsuarios {
         return usuarios;
     }
 
-    public void updateZona(Usuario usuario) throws SQLException, Exception {
+    public void updateUsuario(Usuario usuario) throws SQLException, Exception {
 
         String sql = "UPDATE USUARIOS SET ";
         sql += "NOMBRES="+"'"+usuario.getNombres()+"',";
@@ -92,7 +92,7 @@ public class DAOTablaUsuarios {
 
     }
 
-    public void deleteZona(Usuario usuario) throws SQLException, Exception {
+    public void deleteUsuario(Usuario usuario) throws SQLException, Exception {
 
         String sql = "DELETE FROM USUARIOS";
         sql += " WHERE ID = " + usuario.getId();
