@@ -57,12 +57,12 @@ public class DAOTablaUsuarios {
         ResultSet rs = prepStmt.executeQuery();
 
         if(rs.next()){
-            Long id=rs.getLong("ID");
+            Long id1=rs.getLong("ID");
             String nombres = rs.getString("NOMBRES");
             String apellidos = rs.getString("APELLIDOS");
             String tipo = rs.getString("TIPOID");
             Long numId = rs.getLong("NUMID");
-            usuario =(new Usuario(id,nombres,apellidos,tipo,numId));
+            usuario =(new Usuario(id1,nombres,apellidos,tipo,numId));
         }
 
         return usuario;
