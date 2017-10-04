@@ -100,10 +100,6 @@ public class DAOTablaItems {
         prepStmt.executeQuery();
     }
 
-    private boolean parseBoolean(int num){
-        if(num==0) return false;
-        else return true;
-    }
 
     private void insertarItem(ResultSet rs,ArrayList<Item> items) throws SQLException{
         Long id = rs.getLong("ID");
@@ -113,10 +109,6 @@ public class DAOTablaItems {
         items.add(new Item(id,personalizacion,idProd,idCarrito));
     }
 
-    private int antiParseBoolean(Boolean bol){
-        if (bol ) return 1;
-        else return 0;
-    }
 
 
 }

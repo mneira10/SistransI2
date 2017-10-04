@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import vos.Producto;
-import vos.Usuario;
+
 
 public class DAOTablaProductos {
 	

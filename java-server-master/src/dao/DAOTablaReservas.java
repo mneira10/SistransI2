@@ -107,10 +107,6 @@ public class DAOTablaReservas {
         prepStmt.executeQuery();
     }
 
-    private boolean parseBoolean(int num){
-        if(num==0) return false;
-        else return true;
-    }
 
     private void insertarReserva(ResultSet rs,ArrayList<Reserva> reservas) throws SQLException{
         Long id = rs.getLong("ID");
@@ -124,9 +120,5 @@ public class DAOTablaReservas {
         reservas.add(new Reserva(id,fechaInicio,fechaFin,numcomensales,usuariosregistrados_id,zona,menu));
     }
 
-    private int antiParseBoolean(Boolean bol){
-        if (bol ) return 1;
-        else return 0;
-    }
 
 }

@@ -2,7 +2,6 @@ package vos;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import java.util.Date;
 
 public class Zona {
     @JsonProperty(value="nombre")

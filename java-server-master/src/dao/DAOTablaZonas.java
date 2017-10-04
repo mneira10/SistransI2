@@ -2,7 +2,6 @@ package dao;
 
 import vos.Zona;
 
-import javax.swing.text.StyledEditorKit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

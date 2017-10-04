@@ -103,10 +103,6 @@ public class DAOTablaIngredientes {
         prepStmt.executeQuery();
     }
 
-    private boolean parseBoolean(int num){
-        if(num==0) return false;
-        else return true;
-    }
 
     private void insertarIngrediente(ResultSet rs,ArrayList<Ingrediente> ingredientes) throws SQLException{
         Long id = rs.getLong("ID");
@@ -118,10 +114,6 @@ public class DAOTablaIngredientes {
         ingredientes.add(new Ingrediente(id,nombre,descrEsp,descrIng,grupo,restauranteID));
     }
 
-    private int antiParseBoolean(Boolean bol){
-        if (bol ) return 1;
-        else return 0;
-    }
 
 
 }

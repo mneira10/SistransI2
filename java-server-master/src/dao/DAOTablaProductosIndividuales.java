@@ -97,21 +97,11 @@ public class DAOTablaProductosIndividuales {
         prepStmt.executeQuery();
     }
 
-    private boolean parseBoolean(int num){
-        if(num==0) return false;
-        else return true;
-    }
-
     private void insertarProductoIndividual(ResultSet rs,ArrayList<ProductoIndividual> productoIndividuals) throws SQLException{
         Long id = rs.getLong("ID");
         String categoria = rs.getString("CATEGORIA");
         Integer grupo = rs.getInt("GRUPO");
         productoIndividuals.add(new ProductoIndividual(id,categoria,grupo));
-    }
-
-    private int antiParseBoolean(Boolean bol){
-        if (bol ) return 1;
-        else return 0;
     }
 
 }

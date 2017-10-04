@@ -83,10 +83,6 @@ public class DAOTablaMenus {
         prepStmt.executeQuery();
     }
 
-    private boolean parseBoolean(int num){
-        if(num==0) return false;
-        else return true;
-    }
 
     private void insertarIngrediente(ResultSet rs,ArrayList<Menu> menus) throws SQLException{
         Long id = rs.getLong("ID");
@@ -94,9 +90,5 @@ public class DAOTablaMenus {
         menus.add(new Menu(id));
     }
 
-    private int antiParseBoolean(Boolean bol){
-        if (bol ) return 1;
-        else return 0;
-    }
 
 }

@@ -6,10 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import vos.Carrito;
 import vos.Historial;
-import vos.Producto;
-import vos.Usuario;
+
 
 public class DAOTablaHistorial {
 	

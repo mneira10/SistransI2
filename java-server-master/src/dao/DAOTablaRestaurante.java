@@ -105,10 +105,6 @@ public class DAOTablaRestaurante {
         prepStmt.executeQuery();
     }
 
-    private boolean parseBoolean(int num){
-        if(num==0) return false;
-        else return true;
-    }
 
     private void insertarRestaurante(ResultSet rs,ArrayList<Restaurante> restaurantes) throws SQLException{
         Long id = rs.getLong("ID");
@@ -119,9 +115,6 @@ public class DAOTablaRestaurante {
         restaurantes.add(new Restaurante(id,nombre,tipo,paginaWeb,zona));
     }
 
-    private int antiParseBoolean(Boolean bol){
-        if (bol ) return 1;
-        else return 0;
-    }
+
 
 }

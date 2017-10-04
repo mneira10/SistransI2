@@ -98,10 +98,6 @@ public class DAOTablaCapacidadesTecnicas {
         prepStmt.executeQuery();
     }
 
-    private boolean parseBoolean(int num){
-        if(num==0) return false;
-        else return true;
-    }
 
     private void insertarCapacidadTecnica(ResultSet rs,ArrayList<CapacidadTecnica> capacidadesTecnicas) throws SQLException{
         String nombre = rs.getString("NOMBRE");
@@ -109,11 +105,6 @@ public class DAOTablaCapacidadesTecnicas {
         String zona= rs.getString("ZONA");
 
         capacidadesTecnicas.add(new CapacidadTecnica(nombre,descripcion,zona));
-    }
-
-    private int antiParseBoolean(Boolean bol){
-        if (bol ) return 1;
-        else return 0;
     }
 
 }

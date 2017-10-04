@@ -101,10 +101,6 @@ public class DAOTablaProductosPreferidos {
         prepStmt.executeQuery();
     }
 
-    private boolean parseBoolean(int num){
-        if(num==0) return false;
-        else return true;
-    }
 
     private void insertarProductoPreferido(ResultSet rs,ArrayList<ProductoPreferido> productosPreferidos) throws SQLException{
         Long usr = rs.getLong("ID_PRODUCTO");
@@ -113,9 +109,5 @@ public class DAOTablaProductosPreferidos {
         productosPreferidos.add(new ProductoPreferido(usr,prod));
     }
 
-    private int antiParseBoolean(Boolean bol){
-        if (bol ) return 1;
-        else return 0;
-    }
 
 }
