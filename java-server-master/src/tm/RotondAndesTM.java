@@ -11,6 +11,11 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 
+import dao.DAOTablaVideos;
+import dao.DAOTablaZonas;
+import vos.Video;
+import vos.Zona;
+
 public class RotondAndesTM {
 
     /**
@@ -75,6 +80,103 @@ public class RotondAndesTM {
         System.out.println("Connecting to: " + url + " With user: " + user);
         return DriverManager.getConnection(url, user, password);
     }
+
+	public Zona buscarZonaPorNombre(String name) throws SQLException,Exception {
+		List<Zona> zonas;
+		DAOTablaZonas daoZonas = new DAOTablaZonas();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoZonas.setConn(conn);
+			zonas = daoZonas.buscarZonasPorName(name);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoZonas.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return zonas.get(0);
+	}
+	
+public void addZona(Zona zona) throws Exception {
+		
+		DAOTablaZonas daoZonas = new DAOTablaZonas();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoZonas.setConn(conn);
+			daoZonas.addZona(zona);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoZonas.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		
+	}
+
+public List<Zona> darZonas() throws Exception {
+	List<Zona> zonas;
+	DAOTablaZonas daoZonas = new DAOTablaZonas();
+	try 
+	{
+		//////transaccion
+		this.conn = darConexion();
+		daoZonas.setConn(conn);
+		zonas = daoZonas.darZonas();
+
+	} catch (SQLException e) {
+		System.err.println("SQLException:" + e.getMessage());
+		e.printStackTrace();
+		throw e;
+	} catch (Exception e) {
+		System.err.println("GeneralException:" + e.getMessage());
+		e.printStackTrace();
+		throw e;
+	} finally {
+		try {
+			daoZonas.cerrarRecursos();
+			if(this.conn!=null)
+				this.conn.close();
+		} catch (SQLException exception) {
+			System.err.println("SQLException closing resources:" + exception.getMessage());
+			exception.printStackTrace();
+			throw exception;
+		}
+	}
+	return zonas;
+}
 
 
     public List<Usuario> darUsuarios() throws Exception{
