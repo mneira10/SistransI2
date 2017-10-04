@@ -63,12 +63,12 @@ public class DAOTablaZonas {
 
     public void updateZona(Zona zona) throws SQLException, Exception {
 
-        String sql = "UPDATE ZONA SET ";
-        sql += "NOMBRE='" + zona.getNombre() + "',";
-        sql += "CERRADO=" + antiParseBoolean(zona.getCerrado());
-        sql += " TIPO = " + zona.getTipo();
-        sql += "APTODESCAP=" + antiParseBoolean(zona.getAptoDescap());
-        sql += "CAPACIDAD=" + zona.getCapacidad();
+        String sql = "UPDATE ZONAS SET ";
+        sql += "CERRADO='" + antiParseBoolean(zona.getCerrado())+"',";
+        sql += " TIPO = '" + zona.getTipo()+"',";
+        sql += "APTODESCAP='" + antiParseBoolean(zona.getAptoDescap())+"',";
+        sql += "CAPACIDAD='" + zona.getCapacidad()+"'";
+        sql += "WHERE NOMBRE LIKE '" + zona.getNombre() + "'";
 
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -78,12 +78,12 @@ public class DAOTablaZonas {
 
     public void addZona(Zona zona) throws SQLException, Exception {
 
-        String sql = "INSERT INTO ZONA (nombre, cerrado, tipo, aptoDiscap, capacidad) VALUES (";
-        sql += zona.getNombre() + "',";
-        sql += antiParseBoolean(zona.getCerrado());
-        sql += zona.getTipo();
-        sql += antiParseBoolean(zona.getAptoDescap());
-        sql += zona.getCapacidad();
+        String sql = "INSERT INTO ZONAS (nombre, cerrado, tipo, aptoDiscap, capacidad) VALUES (";
+        sql += "'"+zona.getNombre() + "',";
+        sql += "'"+antiParseBoolean(zona.getCerrado())+ "',";
+        sql += "'"+zona.getTipo()+ "',";
+        sql += "'"+antiParseBoolean(zona.getAptoDescap())+ "',";
+        sql += "'"+zona.getCapacidad()+ "')";
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
@@ -93,8 +93,8 @@ public class DAOTablaZonas {
 
     public void deleteZona(Zona zona) throws SQLException, Exception {
 
-        String sql = "DELETE FROM ZONA";
-        sql += " WHERE NOMBRE = " + zona.getNombre();
+        String sql = "DELETE FROM ZONAS";
+        sql += " WHERE NOMBRE = '" + zona.getNombre()+"'";
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
