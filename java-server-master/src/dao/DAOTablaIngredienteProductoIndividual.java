@@ -79,16 +79,12 @@ public class DAOTablaIngredienteProductoIndividual {
 
 
 
-    public void addIngredienteProd(Ingrediente ingrediente) throws SQLException, Exception {
+    public void addIngredienteProd(IngredientesProductoIndividual ingrediente) throws SQLException, Exception {
 
         String sql = "INSERT INTO INGREDIENTES_PRODUCTIND (ID_INGREDIENTE, ID_PRODINDIVIDUAL) VALUES (";
-        sql += "'"+ingrediente.getId() + "',";
-        sql += "'"+ingrediente.getNombre() + "',";
-        sql += "'"+ingrediente.getDescrEsp()+"',";
-        sql += "'"+ingrediente.getDescrIng()+"',";
-        sql += "'"+ingrediente.getGrupo()+"',";
-        sql += "'"+ingrediente.getRestauranteId()+"')";
-
+        sql += "'"+ingrediente.getIngrediente()+ "',";
+        sql += "'"+ingrediente.getProducto() + "')";
+       
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
