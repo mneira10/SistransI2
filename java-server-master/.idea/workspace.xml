@@ -109,7 +109,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="DAOTablaItems.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="DAOTablaItems.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/dao/DAOTablaItems.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="645">
@@ -127,6 +127,29 @@
                     <marker date="1507138249218" expanded="true" signature="1712:1728" ph="UPDATE ITEMS... " />
                     <marker date="1507138249218" expanded="true" signature="2195:2268" ph="INSERT INTO ITEMS... " />
                     <marker date="1507138249218" expanded="true" signature="2690:2707" ph="DELETE FROM " />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ProductoIndividual.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/vos/ProductoIndividual.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="615">
+                  <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+                  <folding>
+                    <element signature="e#495#496#0" expanded="true" />
+                    <element signature="e#524#525#0" expanded="true" />
+                    <element signature="e#566#567#0" expanded="true" />
+                    <element signature="e#602#603#0" expanded="true" />
+                    <element signature="e#638#639#0" expanded="true" />
+                    <element signature="e#670#671#0" expanded="true" />
+                    <element signature="e#720#721#0" expanded="true" />
+                    <element signature="e#762#763#0" expanded="true" />
+                    <element signature="e#795#796#0" expanded="true" />
+                    <element signature="e#823#824#0" expanded="true" />
+                    <element signature="e#866#867#0" expanded="true" />
+                    <element signature="e#900#901#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -218,8 +241,8 @@
           <file leaf-file-name="DAOTablaIngredientes.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/dao/DAOTablaIngredientes.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="839">
-                  <caret line="125" column="0" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="125" selection-end-column="0" />
+                <state relative-caret-position="824">
+                  <caret line="124" column="0" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="124" selection-end-column="0" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#327#328#0" expanded="true" />
@@ -275,12 +298,35 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Item.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Item.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/vos/Item.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="300">
-                  <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+                <state relative-caret-position="75">
+                  <caret line="5" column="29" lean-forward="true" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
                   <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="DAOTablaProductosIndividuales.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/dao/DAOTablaProductosIndividuales.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-285">
+                  <caret line="45" column="0" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#352#353#0" expanded="true" />
+                    <element signature="e#402#403#0" expanded="true" />
+                    <element signature="e#755#756#0" expanded="true" />
+                    <element signature="e#786#787#0" expanded="true" />
+                    <element signature="e#963#983#0" expanded="true" />
+                    <element signature="e#1530#1550#0" expanded="true" />
+                    <marker date="1507139029439" expanded="true" signature="1010:1046" ph="SELECT * FRO... PRODUCTOS_INDIVIDUALES" />
+                    <marker date="1507139029439" expanded="true" signature="1577:1624" ph="SELECT * FRO... PRODUCTOS_INDIVIDUALES" />
+                    <marker date="1507139029439" expanded="true" signature="2062:2095" ph="UPDATE PRODU... " />
+                    <marker date="1507139029439" expanded="true" signature="2569:2636" ph="INSERT INTO PRODUCTOS_INDIVIDUALES... " />
+                    <marker date="1507139029439" expanded="true" signature="3088:3122" ph="DELETE FROM " />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -321,6 +367,8 @@
         <option value="$PROJECT_DIR$/src/dao/DAOTablaMenus.java" />
         <option value="$PROJECT_DIR$/src/vos/Item.java" />
         <option value="$PROJECT_DIR$/src/dao/DAOTablaItems.java" />
+        <option value="$PROJECT_DIR$/src/vos/ProductoIndividual.java" />
+        <option value="$PROJECT_DIR$/src/dao/DAOTablaProductosIndividuales.java" />
       </list>
     </option>
   </component>
@@ -533,12 +581,12 @@
       <option name="presentableId" value="Default" />
       <updated>1506612363466</updated>
       <workItem from="1506612365302" duration="1018000" />
-      <workItem from="1507129174672" duration="9120000" />
+      <workItem from="1507129174672" duration="9845000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10138000" />
+    <option name="totallyTimeSpent" value="10863000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1680" height="1050" extended-state="6" />
@@ -823,10 +871,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/dao/DAOTablaItems.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="112" column="56" lean-forward="false" selection-start-line="112" selection-start-column="56" selection-end-line="112" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#306#307#0" expanded="true" />
+            <element signature="e#356#357#0" expanded="true" />
+            <element signature="e#709#710#0" expanded="true" />
+            <element signature="e#740#741#0" expanded="true" />
+            <element signature="e#859#865#0" expanded="true" />
+            <element signature="e#1295#1301#0" expanded="true" />
+            <marker date="1507138249218" expanded="true" signature="892:911" ph="SELECT * FRO... ITEMS" />
+            <marker date="1507138249218" expanded="true" signature="1328:1358" ph="SELECT * FRO... ITEMS" />
+            <marker date="1507138249218" expanded="true" signature="1712:1728" ph="UPDATE ITEMS... " />
+            <marker date="1507138249218" expanded="true" signature="2195:2268" ph="INSERT INTO ITEMS... " />
+            <marker date="1507138249218" expanded="true" signature="2690:2707" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/vos/Item.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="29" lean-forward="true" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/dao/DAOTablaIngredientes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="839">
-          <caret line="125" column="0" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="125" selection-end-column="0" />
+        <state relative-caret-position="824">
+          <caret line="124" column="0" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="124" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#327#328#0" expanded="true" />
@@ -846,31 +923,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/vos/Item.java">
+    <entry file="file://$PROJECT_DIR$/src/dao/DAOTablaProductosIndividuales.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-          <folding />
+        <state relative-caret-position="-285">
+          <caret line="45" column="0" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#352#353#0" expanded="true" />
+            <element signature="e#402#403#0" expanded="true" />
+            <element signature="e#755#756#0" expanded="true" />
+            <element signature="e#786#787#0" expanded="true" />
+            <element signature="e#963#983#0" expanded="true" />
+            <element signature="e#1530#1550#0" expanded="true" />
+            <marker date="1507139029439" expanded="true" signature="1010:1046" ph="SELECT * FRO... PRODUCTOS_INDIVIDUALES" />
+            <marker date="1507139029439" expanded="true" signature="1577:1624" ph="SELECT * FRO... PRODUCTOS_INDIVIDUALES" />
+            <marker date="1507139029439" expanded="true" signature="2062:2095" ph="UPDATE PRODU... " />
+            <marker date="1507139029439" expanded="true" signature="2569:2636" ph="INSERT INTO PRODUCTOS_INDIVIDUALES... " />
+            <marker date="1507139029439" expanded="true" signature="3088:3122" ph="DELETE FROM " />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/DAOTablaItems.java">
+    <entry file="file://$PROJECT_DIR$/src/vos/ProductoIndividual.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="112" column="56" lean-forward="false" selection-start-line="112" selection-start-column="56" selection-end-line="112" selection-end-column="56" />
+        <state relative-caret-position="615">
+          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#306#307#0" expanded="true" />
-            <element signature="e#356#357#0" expanded="true" />
-            <element signature="e#709#710#0" expanded="true" />
-            <element signature="e#740#741#0" expanded="true" />
-            <element signature="e#859#865#0" expanded="true" />
-            <element signature="e#1295#1301#0" expanded="true" />
-            <marker date="1507138249218" expanded="true" signature="892:911" ph="SELECT * FRO... ITEMS" />
-            <marker date="1507138249218" expanded="true" signature="1328:1358" ph="SELECT * FRO... ITEMS" />
-            <marker date="1507138249218" expanded="true" signature="1712:1728" ph="UPDATE ITEMS... " />
-            <marker date="1507138249218" expanded="true" signature="2195:2268" ph="INSERT INTO ITEMS... " />
-            <marker date="1507138249218" expanded="true" signature="2690:2707" ph="DELETE FROM " />
+            <element signature="e#495#496#0" expanded="true" />
+            <element signature="e#524#525#0" expanded="true" />
+            <element signature="e#566#567#0" expanded="true" />
+            <element signature="e#602#603#0" expanded="true" />
+            <element signature="e#638#639#0" expanded="true" />
+            <element signature="e#670#671#0" expanded="true" />
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#762#763#0" expanded="true" />
+            <element signature="e#795#796#0" expanded="true" />
+            <element signature="e#823#824#0" expanded="true" />
+            <element signature="e#866#867#0" expanded="true" />
+            <element signature="e#900#901#0" expanded="true" />
           </folding>
         </state>
       </provider>
