@@ -13,7 +13,10 @@ public class Item {
     private Long carritoId;
 
 
-    public Item(Long id, String personalizacion, Long productoId, Long carritoId) {
+    public Item(@JsonProperty(value="id")Long id,
+                @JsonProperty(value="personalizacion")String personalizacion,
+                @JsonProperty(value="productoId")Long productoId,
+                @JsonProperty(value="carritoId")Long carritoId) {
         this.id = id;
         this.personalizacion = personalizacion;
         this.productoId = productoId;

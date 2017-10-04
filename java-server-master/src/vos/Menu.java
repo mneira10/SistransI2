@@ -6,7 +6,7 @@ public class Menu {
     @JsonProperty(value="id_producto")
     private Long id_producto;
 
-    public Menu(Long id_producto) {
+    public Menu(@JsonProperty(value="id_producto") Long id_producto) {
         this.id_producto = id_producto;
     }
 

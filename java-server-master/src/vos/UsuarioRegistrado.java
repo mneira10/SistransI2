@@ -10,7 +10,9 @@ public class UsuarioRegistrado {
     @JsonProperty(value="password")
     private String password;
 
-    public UsuarioRegistrado(Long usuario_id, String login, String password) {
+    public UsuarioRegistrado(@JsonProperty(value="usuario_id")Long usuario_id,
+                             @JsonProperty(value="login")String login,
+                             @JsonProperty(value="password")String password) {
         this.usuario_id = usuario_id;
         this.login = login;
         this.password = password;

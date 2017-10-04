@@ -15,7 +15,11 @@ public class Restaurante {
     @JsonProperty(value="zonaID")
     private String zonaId;
 
-    public Restaurante(long id, String nombre, String tipo, String paginaWeb, String zonaId) {
+    public Restaurante(@JsonProperty(value="id")long id,
+                       @JsonProperty(value="nombre")String nombre,
+                       @JsonProperty(value="tipo")String tipo,
+                       @JsonProperty(value="paginaWeb")String paginaWeb,
+                       @JsonProperty(value="zonaID")String zonaId) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;

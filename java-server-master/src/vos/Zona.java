@@ -20,7 +20,11 @@ public class Zona {
     @JsonProperty(value="capacidad")
     private Integer capacidad;
 
-    public Zona(String nombre, Boolean cerrado, String tipo, Boolean aptoDescap, Integer capacidad) {
+    public Zona(@JsonProperty(value="nombre")String nombre,
+                @JsonProperty(value="cerrado")Boolean cerrado,
+                @JsonProperty(value="tipo")String tipo,
+                @JsonProperty(value="aptoDescap")Boolean aptoDescap,
+                @JsonProperty(value="capacidad")Integer capacidad) {
         this.nombre = nombre;
         this.cerrado = cerrado;
         this.tipo = tipo;

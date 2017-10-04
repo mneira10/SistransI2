@@ -17,7 +17,12 @@ public class Ingrediente {
     private Long restauranteId;
 
 
-    public Ingrediente(Long id, String nombre, String descrEsp, String descrIng, Integer grupo, Long restauranteId) {
+    public Ingrediente(@JsonProperty(value="id") Long id,
+                       @JsonProperty(value="nombre") String nombre,
+                       @JsonProperty(value="descrEsp") String descrEsp,
+                       @JsonProperty(value="descrIng")String descrIng,
+                       @JsonProperty(value="grupo")Integer grupo,
+                       @JsonProperty(value="restauranteId")Long restauranteId) {
         this.id = id;
         this.nombre = nombre;
         this.descrEsp = descrEsp;

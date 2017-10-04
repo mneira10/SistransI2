@@ -11,7 +11,9 @@ public class ProductoIndividual {
     private Integer grupo;
 
 
-    public ProductoIndividual(Long prodId, String categoria, Integer grupo) {
+    public ProductoIndividual(@JsonProperty(value="prodId")Long prodId,
+                              @JsonProperty(value="categoria")String categoria,
+                              @JsonProperty(value="grupo")Integer grupo) {
         this.prodId = prodId;
         this.categoria = categoria;
         this.grupo = grupo;
