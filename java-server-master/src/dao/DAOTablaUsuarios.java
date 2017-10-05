@@ -84,16 +84,19 @@ public class DAOTablaUsuarios {
 
     public void addUsuario(Usuario usuario) throws SQLException, Exception {
 
-        String sql = "INSERT INTO USUARIOS (ID, NOMBRES, APELLIDOS, TIPOID, NUMID) VALUES (";
+        String sql = "INSERT INTO USUARIOS (id, nombres, apellidos, tipoId, numId) VALUES (";
         sql += "'"+usuario.getId() + "',";
         sql += "'"+usuario.getNombres()+"',";
         sql += "'"+usuario.getApellidos()+"',";
         sql += "'"+usuario.getTipoId()+"',";
-        sql += "'"+usuario.getNumId()+"');";
+        sql += "'"+usuario.getNumId()+"')";
+
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
         prepStmt.executeQuery();
+          
+        
 
     }
 

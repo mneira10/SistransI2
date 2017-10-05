@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import vos.Producto;
 
@@ -48,7 +49,7 @@ public class DAOTablaProductos {
         return productos;
     }
 
-    public ArrayList<Producto> buscarProductosPorId(Long id) throws SQLException, Exception {
+    public Producto buscarProductosPorId(Long id) throws SQLException, Exception {
         ArrayList<Producto> productos = new ArrayList<Producto>();
 
         String sql = "SELECT * FROM PRODUCTOS WHERE ID ='" + id + "'";
@@ -61,7 +62,7 @@ public class DAOTablaProductos {
             insertarProducto(rs,productos);
         }
 
-        return productos;
+        return productos.get(0);
     }
 
     public void updateProducto(Producto producto) throws SQLException, Exception {
@@ -117,7 +118,7 @@ public class DAOTablaProductos {
         Double tPrep = rs.getDouble("TPREP");
         Double costo = rs.getDouble("COSTO");
         Double precio = rs.getDouble("PRECIO");
-        Long restauranteId = rs.getLong("RESTAURANTE_ID");
+        Long restauranteId = rs.getLong("RESTAURANTES_ID");
         productos.add(new Producto(id,nombre,descrEsp,descrIng,tPrep, costo, precio, restauranteId));
     }
 }

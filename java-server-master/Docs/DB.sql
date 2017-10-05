@@ -35,6 +35,7 @@ CREATE TABLE USUARIOS_REGISTRADOS (
   ID NUMBER(10) NOT NULL PRIMARY KEY ,
   LOGIN VARCHAR2(20) NOT NULL,
   PASSWORD VARCHAR2(20) NOT NULL,
+  TIPO VARCHAR(20) CHECK ((TIPO LIKE 'RESTAURANTE') OR (TIPO LIKE 'ADMIN') OR (TIPO=NULL)),
   CONSTRAINT FK_USUARIOS FOREIGN KEY (ID) REFERENCES USUARIOS(ID)
 );
 
@@ -229,8 +230,8 @@ insert into ZONAS (nombre, cerrado, tipo, aptoDiscap, capacidad) values ('balanc
 insert into ZONAS (nombre, cerrado, tipo, aptoDiscap, capacidad) values ('full-range', 0, 'vel', 0, '372');
 insert into ZONAS (nombre, cerrado, tipo, aptoDiscap, capacidad) values ('value-added', 1, 'quis', 0, '557');
 
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (30, 'aramsted0', 'jvL8CjeAQSD');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (22, 'tmcvicar1', '8BDezKMXb3');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (30, 'aramsted0', 'jvL8CjeAQSD', 'RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (22, 'tmcvicar1', '8BDezKMXb3', 'ADMIN');
 insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (3, 'abirbeck2', '3qZyk5LU');
 insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (19, 'tmccurtin3', 'DqMdNgrL');
 insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (9, 'gmapam4', '8EI2G96Shh7');

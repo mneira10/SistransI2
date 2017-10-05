@@ -45,7 +45,7 @@ public class DAOTablaUsuariosRegistrados {
         return usuarioRegistrados;
     }
 
-    public ArrayList<UsuarioRegistrado> buscarUsuarioRegistradosPorID(Long id) throws SQLException, Exception {
+    public UsuarioRegistrado buscarUsuarioRegistradosPorID(Long id) throws SQLException, Exception {
         ArrayList<UsuarioRegistrado> usuarioRegistrados = new ArrayList<UsuarioRegistrado>();
 
         String sql = "SELECT * FROM USUARIOS_REGISTRADOS WHERE ID =" + id ;
@@ -58,7 +58,23 @@ public class DAOTablaUsuariosRegistrados {
             insertarUsuarioRegistrado(rs,usuarioRegistrados);
         }
 
-        return usuarioRegistrados;
+        return usuarioRegistrados.get(0);
+    }
+    
+    public UsuarioRegistrado buscarUsuarioRegistradosPorLogin(String login) throws SQLException, Exception {
+        ArrayList<UsuarioRegistrado> usuarioRegistrados = new ArrayList<UsuarioRegistrado>();
+
+        String sql = "SELECT * FROM USUARIOS_REGISTRADOS WHERE LOGIN LIKE" + login ;
+
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            insertarUsuarioRegistrado(rs,usuarioRegistrados);
+        }
+
+        return usuarioRegistrados.get(0);
     }
 
     public void updateUsuarioRegistrado(UsuarioRegistrado usuarioRegistrado) throws SQLException, Exception {
@@ -66,7 +82,7 @@ public class DAOTablaUsuariosRegistrados {
         String sql = "UPDATE USUARIOS_REGISTRADOS SET ";
         sql += "LOGIN='" + usuarioRegistrado.getLogin()+"',";
         sql += "PASSWORD= '" + usuarioRegistrado.getPassword()+"'";
-
+        sql += "TIPO= '" + usuarioRegistrado.getTipo()+"'";
         sql += "WHERE ID = "+ usuarioRegistrado.getUsuario_id();
 
 
@@ -77,10 +93,11 @@ public class DAOTablaUsuariosRegistrados {
 
     public void addUsuarioRegistrado(UsuarioRegistrado usuarioRegistrado) throws SQLException, Exception {
 
-        String sql = "INSERT INTO USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) VALUES (";
+        String sql = "INSERT INTO USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) VALUES (";
         sql += "'"+usuarioRegistrado.getUsuario_id() + "',";
         sql += "'"+usuarioRegistrado.getLogin() + "',";
-        sql += "'"+usuarioRegistrado.getPassword()+"')";
+        sql += "'"+usuarioRegistrado.getPassword() + "',";
+        sql += "'"+usuarioRegistrado.getTipo()+"')";
 
 
 
@@ -105,8 +122,55 @@ public class DAOTablaUsuariosRegistrados {
         Long id = rs.getLong("ID");
         String login = rs.getString("LOGIN");
         String password = rs.getString("PASSWORD");
-        usuarioRegistrados.add(new UsuarioRegistrado(id,login,password));
+        String tipo=rs.getString("TIPO");
+        usuarioRegistrados.add(new UsuarioRegistrado(id,login,password, tipo));
     }
+    
+	public boolean confirmarAdmin(String loginAdmin, String passAdmin) throws SQLException, Exception {
+		
+		boolean resp=false;
+		
+		ArrayList<UsuarioRegistrado> usuarioRegistrados = new ArrayList<UsuarioRegistrado>();
+
+        String sql = "SELECT * FROM USUARIOS_REGISTRADOS WHERE LOGIN LIKE" + loginAdmin+ " AND PASSWORD LIKE"+passAdmin+ " AND TIPO LIKE ADMIN" ;
+
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            insertarUsuarioRegistrado(rs,usuarioRegistrados);
+        }
+        
+        if(usuarioRegistrados.size()==1){
+        	resp=true;
+        }
+        	
+       return resp;
+
+	}
+	public boolean confirmarRestaurante(String loginAdmin, String passAdmin) throws SQLException, Exception {
+		
+		boolean resp=false;
+		
+		ArrayList<UsuarioRegistrado> usuarioRegistrados = new ArrayList<UsuarioRegistrado>();
+
+        String sql = "SELECT * FROM USUARIOS_REGISTRADOS WHERE LOGIN =" + loginAdmin+ " AND PASSWORD="+passAdmin+ " AND TIPO=RESTAURANTE" ;
+
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            insertarUsuarioRegistrado(rs,usuarioRegistrados);
+        }
+        
+        if(usuarioRegistrados.size()==1){
+        	resp=true;
+        }
+        	
+       return resp;
+	}
 
 
 }

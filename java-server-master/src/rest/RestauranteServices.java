@@ -30,14 +30,15 @@ import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
 import vos.Restaurante;
+import vos.UsuarioRegistrado;
 import vos.Zona;
 
 /**
  * Clase que expone servicios REST con ruta base: http://"ip o nombre de host":8080/VideoAndes/rest/videos/...
  * @author Monitores 2017-20
  */
-@Path("zonas")
-public class ZonasServices {
+@Path("restaurantes")
+public class RestauranteServices {
 
 	/**
 	 * Atributo que usa la anotacion @Context para tener el ServletContext de la conexion actual.
@@ -67,15 +68,15 @@ public class ZonasServices {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getZonas() {
+	public Response getRestaurantes() {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
-		List<Zona> zonas;
+		List<Restaurante> rest;
 		try {
-			zonas = tm.darZonas();
+			rest = tm.darRestaurantes();
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zonas).build();
+		return Response.status(200).entity(rest).build();
 	}
 
 	 /**
@@ -86,14 +87,32 @@ public class ZonasServices {
      * el error que se produjo
      */
 	@GET
-	@Path( "{nombre}" )
+	@Path( "{id:\\d+}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getZona( @QueryParam( "nombre" ) String nombre )
+	public Response getRestaurante( @PathParam( "id" ) Long id )
 	{
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
 		try
 		{
-			Zona v = tm.buscarZonaPorNombre( nombre );
+			List<Restaurante> v = tm.buscarRestaurantePorId( id );
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "zona/{nombreZona}" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getRestaurantesZona( @QueryParam( "nombreZona" ) String zona )
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		List<Restaurante> v;
+		try
+		{
+			v = tm.buscarRestaurantesPorZona( zona );
 			return Response.status( 200 ).entity( v ).build( );			
 		}
 		catch( Exception e )
@@ -111,11 +130,11 @@ public class ZonasServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addZona(Zona usuarioRegistrado, @HeaderParam("loginAdmin") String loginAdmin, @HeaderParam("adminPassword") String passAdmin) {
+	public Response addRestaurante(Restaurante usuarioRegistrado, @HeaderParam("loginAdmin") String loginAdmin, @HeaderParam("adminPassword") String passAdmin) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
 			if(tm.verificarCredencialesAdmin(loginAdmin,passAdmin)){
-			tm.addZona(usuarioRegistrado);
+			tm.addRestaurante(usuarioRegistrado);
 			}
 			else{
 				Exception ef = new Exception("Credenciales inválidas");
@@ -127,6 +146,7 @@ public class ZonasServices {
 		return Response.status(200).entity(usuarioRegistrado).build();
 	}
 	
+   
 	
     /**
      * Metodo que expone servicio REST usando PUT que actualiza el video que recibe en Json
@@ -137,14 +157,14 @@ public class ZonasServices {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateZona(Zona zona) {
+	public Response updateRestaurante(Restaurante rest) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.updateZona(zona);
+			tm.updateRestaurante(rest);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zona).build();
+		return Response.status(200).entity(rest).build();
 	}
 	
     /**
@@ -156,14 +176,14 @@ public class ZonasServices {
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteZona(Zona zona) {
+	public Response deleteRestaurante(Restaurante rest) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.deleteZona(zona);
+			tm.deleteRestaurante(rest);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zona).build();
+		return Response.status(200).entity(rest).build();
 	}
 
 

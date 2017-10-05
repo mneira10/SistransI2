@@ -17,7 +17,6 @@ import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -29,15 +28,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
-import vos.Restaurante;
 import vos.Zona;
 
 /**
  * Clase que expone servicios REST con ruta base: http://"ip o nombre de host":8080/VideoAndes/rest/videos/...
  * @author Monitores 2017-20
  */
-@Path("zonas")
-public class ZonasServices {
+@Path("carritos")
+public class CarritosServices {
 
 	/**
 	 * Atributo que usa la anotacion @Context para tener el ServletContext de la conexion actual.
@@ -111,22 +109,37 @@ public class ZonasServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addZona(Zona usuarioRegistrado, @HeaderParam("loginAdmin") String loginAdmin, @HeaderParam("adminPassword") String passAdmin) {
+	public Response addZona(Zona zona) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			if(tm.verificarCredencialesAdmin(loginAdmin,passAdmin)){
-			tm.addZona(usuarioRegistrado);
-			}
-			else{
-				Exception ef = new Exception("Credenciales inválidas");
-				return Response.status(412).entity(doErrorMessage(ef)).build();
+			tm.addZona(zona);
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(zona).build();
+	}
+	
+    /**
+     * Metodo que expone servicio REST usando POST que agrega los videos que recibe en Json
+     * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos/varios
+     * @param videos - videos a agregar. 
+     * @return Json con el video que agrego o Json con el error que se produjo
+     */
+	@POST
+	@Path("/varios")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addVideo(List<Zona> zonas) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		try {
+			for(Zona zona:zonas){
+			tm.addZona(zona);
 			}
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(usuarioRegistrado).build();
+		return Response.status(200).entity(zonas).build();
 	}
-	
 	
     /**
      * Metodo que expone servicio REST usando PUT que actualiza el video que recibe en Json
@@ -137,7 +150,7 @@ public class ZonasServices {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateZona(Zona zona) {
+	public Response updateVideo(Zona zona) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
 			tm.updateZona(zona);
@@ -156,7 +169,7 @@ public class ZonasServices {
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteZona(Zona zona) {
+	public Response deleteVideo(Zona zona) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
 			tm.deleteZona(zona);

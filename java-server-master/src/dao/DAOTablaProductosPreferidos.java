@@ -60,6 +60,23 @@ public class DAOTablaProductosPreferidos {
 
         return productosPreferidos;
     }
+    
+    public ArrayList<ProductoPreferido> buscarProductosPreferidosPorIDUsrIdProd(Long idUser, Long idProd) throws SQLException, Exception {
+        ArrayList<ProductoPreferido> productosPreferidos = new ArrayList<ProductoPreferido>();
+
+        String sql = "SELECT * FROM PRODUCTOS_PREFERIDOS WHERE ID_USUARIO_REGISTRADO =" + idUser + " AND ID_PRODUCTO="+ idProd ;
+
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            insertarProductoPreferido(rs,productosPreferidos);
+        }
+
+        return productosPreferidos;
+    }
+    
     public ArrayList<ProductoPreferido> buscarProductosPreferidosPorIDProd(Long id) throws SQLException, Exception {
         ArrayList<ProductoPreferido> productosPreferidos = new ArrayList<ProductoPreferido>();
 

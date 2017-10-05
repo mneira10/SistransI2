@@ -63,6 +63,22 @@ public class DAOTablaRestaurante {
 
         return restaurantes;
     }
+    
+    public ArrayList<Restaurante> buscarRestaurantesPorZona(String zona) throws SQLException, Exception {
+        ArrayList<Restaurante> restaurantes = new ArrayList<Restaurante>();
+
+        String sql = "SELECT * FROM RESTAURANTES WHERE ZONA =" + zona ;
+
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            insertarRestaurante(rs,restaurantes);
+        }
+
+        return restaurantes;
+    }
 
     public void updateRestaurante(Restaurante restaurante) throws SQLException, Exception {
 

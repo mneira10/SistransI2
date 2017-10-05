@@ -29,6 +29,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
+import vos.Producto;
 import vos.Restaurante;
 import vos.Zona;
 
@@ -36,8 +37,8 @@ import vos.Zona;
  * Clase que expone servicios REST con ruta base: http://"ip o nombre de host":8080/VideoAndes/rest/videos/...
  * @author Monitores 2017-20
  */
-@Path("zonas")
-public class ZonasServices {
+@Path("productos")
+public class ProductosServices {
 
 	/**
 	 * Atributo que usa la anotacion @Context para tener el ServletContext de la conexion actual.
@@ -67,15 +68,15 @@ public class ZonasServices {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getZonas() {
+	public Response getProductos() {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
-		List<Zona> zonas;
+		List<Producto> productos;
 		try {
-			zonas = tm.darZonas();
+			productos = tm.darProductos();
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zonas).build();
+		return Response.status(200).entity(productos).build();
 	}
 
 	 /**
@@ -86,14 +87,14 @@ public class ZonasServices {
      * el error que se produjo
      */
 	@GET
-	@Path( "{nombre}" )
+	@Path( "{id: \\d+}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getZona( @QueryParam( "nombre" ) String nombre )
+	public Response getProducto( @PathParam( "id" ) Long id )
 	{
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
 		try
 		{
-			Zona v = tm.buscarZonaPorNombre( nombre );
+			Producto v = tm.buscarProductoPorId( id );
 			return Response.status( 200 ).entity( v ).build( );			
 		}
 		catch( Exception e )
@@ -111,11 +112,11 @@ public class ZonasServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addZona(Zona usuarioRegistrado, @HeaderParam("loginAdmin") String loginAdmin, @HeaderParam("adminPassword") String passAdmin) {
+	public Response addProducto(Producto producto, @HeaderParam("loginRestaurante") String loginAdmin, @HeaderParam("restaurantePassword") String passAdmin) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			if(tm.verificarCredencialesAdmin(loginAdmin,passAdmin)){
-			tm.addZona(usuarioRegistrado);
+			if(tm.verificarCredencialesRestaurante(loginAdmin,passAdmin)){
+			tm.addProducto(producto);
 			}
 			else{
 				Exception ef = new Exception("Credenciales inválidas");
@@ -124,9 +125,8 @@ public class ZonasServices {
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(usuarioRegistrado).build();
+		return Response.status(200).entity(producto).build();
 	}
-	
 	
     /**
      * Metodo que expone servicio REST usando PUT que actualiza el video que recibe en Json
@@ -137,7 +137,7 @@ public class ZonasServices {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateZona(Zona zona) {
+	public Response updateVideo(Zona zona) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
 			tm.updateZona(zona);
@@ -156,7 +156,7 @@ public class ZonasServices {
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteZona(Zona zona) {
+	public Response deleteVideo(Zona zona) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
 			tm.deleteZona(zona);

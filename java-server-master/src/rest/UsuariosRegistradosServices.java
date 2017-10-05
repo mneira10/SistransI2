@@ -29,15 +29,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
-import vos.Restaurante;
+import vos.UsuarioRegistrado;
 import vos.Zona;
 
 /**
  * Clase que expone servicios REST con ruta base: http://"ip o nombre de host":8080/VideoAndes/rest/videos/...
  * @author Monitores 2017-20
  */
-@Path("zonas")
-public class ZonasServices {
+@Path("usuariosRegistrados")
+public class UsuariosRegistradosServices {
 
 	/**
 	 * Atributo que usa la anotacion @Context para tener el ServletContext de la conexion actual.
@@ -67,15 +67,15 @@ public class ZonasServices {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getZonas() {
+	public Response getUsuariosRegistrados() {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
-		List<Zona> zonas;
+		List<UsuarioRegistrado> usuariosRegistrados;
 		try {
-			zonas = tm.darZonas();
+			usuariosRegistrados = tm.darUsuariosRegistrados();
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zonas).build();
+		return Response.status(200).entity(usuariosRegistrados).build();
 	}
 
 	 /**
@@ -86,14 +86,14 @@ public class ZonasServices {
      * el error que se produjo
      */
 	@GET
-	@Path( "{nombre}" )
+	@Path( "id/{id: \\d+}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getZona( @QueryParam( "nombre" ) String nombre )
+	public Response getUsuarioRegoistradoId( @PathParam( "id" ) Long id )
 	{
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
 		try
 		{
-			Zona v = tm.buscarZonaPorNombre( nombre );
+			UsuarioRegistrado v = tm.buscarUsuarioRegistradoporId( id );
 			return Response.status( 200 ).entity( v ).build( );			
 		}
 		catch( Exception e )
@@ -101,6 +101,24 @@ public class ZonasServices {
 			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
 		}
 	}
+	
+	@GET
+	@Path( "{login}" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getUsuarioRegistradoLogin( @QueryParam( "login" ) String login )
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			UsuarioRegistrado v = tm.buscarUsuarioRegistradoporLogin( login );
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+
 
     /**
      * Metodo que expone servicio REST usando POST que agrega el video que recibe en Json
@@ -111,11 +129,11 @@ public class ZonasServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addZona(Zona usuarioRegistrado, @HeaderParam("loginAdmin") String loginAdmin, @HeaderParam("adminPassword") String passAdmin) {
+	public Response addUsuarioRegistrado(UsuarioRegistrado usuarioRegistrado, @HeaderParam("loginAdmin") String loginAdmin, @HeaderParam("adminPassword") String passAdmin) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
 			if(tm.verificarCredencialesAdmin(loginAdmin,passAdmin)){
-			tm.addZona(usuarioRegistrado);
+			tm.addUsuarioRegistrado(usuarioRegistrado);
 			}
 			else{
 				Exception ef = new Exception("Credenciales inválidas");
@@ -137,14 +155,14 @@ public class ZonasServices {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateZona(Zona zona) {
+	public Response updateUsuarioRegistrado(UsuarioRegistrado user) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.updateZona(zona);
+			tm.updateUsuarioRegistrado(user);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zona).build();
+		return Response.status(200).entity(user).build();
 	}
 	
     /**
@@ -156,14 +174,14 @@ public class ZonasServices {
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteZona(Zona zona) {
+	public Response deleteUsuarioRegistrado(UsuarioRegistrado user) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.deleteZona(zona);
+			tm.deleteUsuarioRegistrado(user);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zona).build();
+		return Response.status(200).entity(user).build();
 	}
 
 

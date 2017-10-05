@@ -48,6 +48,7 @@ public class Producto {
 	@JsonProperty(value="precio")
 	private Double precio;
 	
+
 	public String getNombre() {
 		return nombre;
 	}

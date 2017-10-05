@@ -17,7 +17,6 @@ import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -29,15 +28,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
-import vos.Restaurante;
+import vos.ProductoPreferido;
 import vos.Zona;
 
 /**
  * Clase que expone servicios REST con ruta base: http://"ip o nombre de host":8080/VideoAndes/rest/videos/...
  * @author Monitores 2017-20
  */
-@Path("zonas")
-public class ZonasServices {
+@Path("productosPreferidos")
+public class ProductosPreferidosServices {
 
 	/**
 	 * Atributo que usa la anotacion @Context para tener el ServletContext de la conexion actual.
@@ -67,7 +66,7 @@ public class ZonasServices {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getZonas() {
+	public Response getPreferencias() {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		List<Zona> zonas;
 		try {
@@ -86,14 +85,48 @@ public class ZonasServices {
      * el error que se produjo
      */
 	@GET
-	@Path( "{nombre}" )
+	@Path( "idProd/{idProd}/idUsuario{idUsuario}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getZona( @QueryParam( "nombre" ) String nombre )
+	public Response getPreferencia( @PathParam( "idProd" ) Long idProd, @PathParam( "idUsuario" ) Long idUsuario )
 	{
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
 		try
 		{
-			Zona v = tm.buscarZonaPorNombre( nombre );
+			List<ProductoPreferido> v = tm.buscarPreferenciaPorProductoUsuario( idProd, idUsuario );
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "idProd/{idProd}" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getPreferenciaProducto( @PathParam( "idProd" ) Long idProd )
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<ProductoPreferido> v = tm.buscarPreferenciaPorProducto( idProd);
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "idUsuario/{idUsuario}" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getPreferenciaUsuario( @PathParam( "idUsuario" ) Long idUsuario )
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<ProductoPreferido> v = tm.buscarPreferenciaPorUsuario( idUsuario);
 			return Response.status( 200 ).entity( v ).build( );			
 		}
 		catch( Exception e )
@@ -111,40 +144,14 @@ public class ZonasServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addZona(Zona usuarioRegistrado, @HeaderParam("loginAdmin") String loginAdmin, @HeaderParam("adminPassword") String passAdmin) {
+	public Response addPreferencia(ProductoPreferido prod) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			if(tm.verificarCredencialesAdmin(loginAdmin,passAdmin)){
-			tm.addZona(usuarioRegistrado);
-			}
-			else{
-				Exception ef = new Exception("Credenciales inválidas");
-				return Response.status(412).entity(doErrorMessage(ef)).build();
-			}
+			tm.addProdPreferido(prod);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(usuarioRegistrado).build();
-	}
-	
-	
-    /**
-     * Metodo que expone servicio REST usando PUT que actualiza el video que recibe en Json
-     * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos
-     * @param video - video a actualizar. 
-     * @return Json con el video que actualizo o Json con el error que se produjo
-     */
-	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateZona(Zona zona) {
-		RotondAndesTM tm = new RotondAndesTM(getPath());
-		try {
-			tm.updateZona(zona);
-		} catch (Exception e) {
-			return Response.status(500).entity(doErrorMessage(e)).build();
-		}
-		return Response.status(200).entity(zona).build();
+		return Response.status(200).entity(prod).build();
 	}
 	
     /**
@@ -156,10 +163,10 @@ public class ZonasServices {
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteZona(Zona zona) {
+	public Response deletePreferencia(ProductoPreferido zona) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.deleteZona(zona);
+			tm.deleteProductoPreferido(zona);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
