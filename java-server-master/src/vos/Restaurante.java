@@ -14,17 +14,21 @@ public class Restaurante {
     private String paginaWeb;
     @JsonProperty(value="zonaID")
     private String zonaId;
+    @JsonProperty(value="idAdmin")
+    private long idAdmin;
 
     public Restaurante(@JsonProperty(value="id")long id,
                        @JsonProperty(value="nombre")String nombre,
                        @JsonProperty(value="tipo")String tipo,
                        @JsonProperty(value="paginaWeb")String paginaWeb,
-                       @JsonProperty(value="zonaID")String zonaId) {
+                       @JsonProperty(value="zonaID")String zonaId,
+                       @JsonProperty(value="idAdmin")long idAdmin) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
         this.paginaWeb = paginaWeb;
         this.zonaId = zonaId;
+        this.idAdmin=idAdmin;
     }
 
     public long getId() {
@@ -33,6 +37,14 @@ public class Restaurante {
 
     public void setId(long id) {
         this.id = id;
+    }
+    
+    public long getIdAdmin() {
+        return idAdmin;
+    }
+
+    public void setIdAdmin(long id) {
+        this.idAdmin = id;
     }
 
     public String getNombre() {

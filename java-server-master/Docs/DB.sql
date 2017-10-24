@@ -22,7 +22,8 @@ id NUMBER(10)NOT NULL PRIMARY KEY,
 nombres VARCHAR2(30) NOT NULL,
 apellidos VARCHAR2(30) NOT NULL,
 tipoId VARCHAR2(5) NOT NULL,
-numId NUMBER(10) NOT NULL);
+numId NUMBER(10) NOT NULL
+email VARCHAR2(50));
 
 CREATE TABLE ZONAS(
 nombre VARCHAR(20)NOT NULL PRIMARY KEY,
@@ -45,7 +46,9 @@ CREATE TABLE RESTAURANTES (
   TIPO VARCHAR2(20),
   PAGINA_WEB VARCHAR2(100),
   ZONA VARCHAR2(20) NOT NULL,
-  CONSTRAINT FK_ZONA FOREIGN KEY (ZONA) REFERENCES ZONAS(NOMBRE)
+  ID_ADMIN NUMBER(10) NOT NULL,
+  CONSTRAINT FK_ZONA FOREIGN KEY (ZONA) REFERENCES ZONAS(NOMBRE),
+  CONSTRAINT FK_ID_ADMIN FOREIGN KEY (ID_ADMIN) REFERENCES USUARIOS_REGISTRADOS(ID)
 );
 
 CREATE TABLE PRODUCTOS(
@@ -167,36 +170,36 @@ CONSTRAINT PK_ZONAS_PREFERIDAS PRIMARY KEY(usuariosRegistrados_id, zonas_nombre)
 
 
 
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (1, 'Trudi', 'Verdy', 'III', 6901366213);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (2, 'Freedman', 'Morriarty', 'III', 6967895656);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (3, 'Free', 'Yuill', 'II', 0877777683);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (4, 'Tommie', 'Knowler', 'III', 4659921875);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (5, 'Purcell', 'Rowlson', 'III', 0260703893);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (6, 'Farlie', 'Staddart', 'III', 4167106299);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (7, 'Danya', 'Blandamore', 'IV', 2257896254);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (8, 'Costa', 'Furbank', 'Jr', 6805010527);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (9, 'Lura', 'Serfati', 'IV', 4569603211);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (10, 'Renelle', 'Kleuer', 'IV', 1980475512);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (11, 'Will', 'Kerrod', 'IV', 2629542521);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (12, 'Vanny', 'Dullard', 'II', 2938374283);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (13, 'Humfrid', 'Putten', 'Jr', 2141417112);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (14, 'Lucille', 'Giovanizio', 'IV', 7894868949);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (15, 'Gar', 'Davern', 'Sr', 7555664135);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (16, 'Elvera', 'Mugford', 'III', 705782158);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (17, 'Lazaro', 'Cowwell', 'Sr', 4598700068);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (18, 'Donelle', 'Kobierra', 'II', 0929554574);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (19, 'Dacy', 'Piatti', 'Sr', 6750167489);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (20, 'Eudora', 'Ioannou', 'Jr', 0880230037);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (21, 'Danella', 'Esche', 'III', 6109529265);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (22, 'Mab', 'Scotchbrook', 'III', 3352857725);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (23, 'Glynn', 'Spera', 'II', 9860426910);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (24, 'Monika', 'Olliffe', 'II', 6593611778);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (25, 'Anica', 'Andrioli', 'IV', 0734882777);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (26, 'Henrik', 'Cathro', 'II', 9675024755);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (27, 'Valentina', 'Sanderson', 'Jr', 8281165758);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (28, 'Franz', 'Spiller', 'II', 5551296032);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (29, 'Kai', 'Belcham', 'III', 8012639416);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (30, 'Debbi', 'Denyukin', 'II', 3006210964);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (1, 'Trudi', 'Verdy', 'III', 6901366213, 'tVerdy@hotmail.com');
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (2, 'Freedman', 'Morriarty', 'III', 6967895656, 'fMorri@live.con');
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (3, 'Free', 'Yuill', 'II', 0877777683, 'FreYu@outlook.com');
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (4, 'Tommie', 'Knowler', 'III', 4659921875, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (5, 'Purcell', 'Rowlson', 'III', 0260703893, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (6, 'Farlie', 'Staddart', 'III', 4167106299, 'staddart@gmail.com');
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (7, 'Danya', 'Blandamore', 'IV', 2257896254, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (8, 'Costa', 'Furbank', 'Jr', 6805010527, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (9, 'Lura', 'Serfati', 'IV', 4569603211, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (10, 'Renelle', 'Kleuer', 'IV', 1980475512, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (11, 'Will', 'Kerrod', 'IV', 2629542521, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (12, 'Vanny', 'Dullard', 'II', 2938374283, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (13, 'Humfrid', 'Putten', 'Jr', 2141417112, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (14, 'Lucille', 'Giovanizio', 'IV', 7894868949, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (15, 'Gar', 'Davern', 'Sr', 7555664135, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (16, 'Elvera', 'Mugford', 'III', 705782158, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (17, 'Lazaro', 'Cowwell', 'Sr', 4598700068, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (18, 'Donelle', 'Kobierra', 'II', 0929554574, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (19, 'Dacy', 'Piatti', 'Sr', 6750167489, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (20, 'Eudora', 'Ioannou', 'Jr', 0880230037, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (21, 'Danella', 'Esche', 'III', 6109529265, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (22, 'Mab', 'Scotchbrook', 'III', 3352857725, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (23, 'Glynn', 'Spera', 'II', 9860426910, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (24, 'Monika', 'Olliffe', 'II', 6593611778, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (25, 'Anica', 'Andrioli', 'IV', 0734882777, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (26, 'Henrik', 'Cathro', 'II', 9675024755, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (27, 'Valentina', 'Sanderson', 'Jr', 8281165758, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (28, 'Franz', 'Spiller', 'II', 5551296032, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (29, 'Kai', 'Belcham', 'III', 8012639416, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (30, 'Debbi', 'Denyukin', 'II', 3006210964, null);
 
 
 insert into ZONAS (nombre, cerrado, tipo, aptoDiscap, capacidad) values ('national', 1, 'odio', 1, '262');

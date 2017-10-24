@@ -86,7 +86,8 @@ public class DAOTablaRestaurante {
         sql += "NOMBRE='" + restaurante.getNombre() + "',";
         sql += " TIPO = '" + restaurante.getTipo()+"',";
         sql += "PAGINA_WEB='" + restaurante.getPaginaWeb()+"',";
-        sql += "ZONA='" + restaurante.getZonaId()+"'";
+        sql += "ZONA='" + restaurante.getZonaId()+"',";
+        sql += "ID_ADMIN='" + restaurante.getIdAdmin()+"'";
         sql += "WHERE ID = "+restaurante.getId();
 
 
@@ -97,12 +98,13 @@ public class DAOTablaRestaurante {
 
     public void addRestaurante(Restaurante restaurante) throws SQLException, Exception {
 
-        String sql = "INSERT INTO RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) VALUES (";
+        String sql = "INSERT INTO RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) VALUES (";
         sql += "'"+restaurante.getId() + "',";
         sql += "'"+restaurante.getNombre()+"',";
         sql += "'"+restaurante.getTipo()+"',";
         sql += "'"+restaurante.getPaginaWeb() + "',";
-        sql += "'"+restaurante.getZonaId()+"')";
+        sql += "'"+restaurante.getZonaId() + "',";
+        sql += "'"+restaurante.getIdAdmin()+"')";
 
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -128,7 +130,8 @@ public class DAOTablaRestaurante {
         String tipo = rs.getString("TIPO");
         String paginaWeb = rs.getString("PAGINA_WEB");
         String zona = rs.getString("ZONA");
-        restaurantes.add(new Restaurante(id,nombre,tipo,paginaWeb,zona));
+        Long idAdmin=rs.getLong("ID_ADMIN");
+        restaurantes.add(new Restaurante(id,nombre,tipo,paginaWeb,zona, idAdmin));
     }
 
 

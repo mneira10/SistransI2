@@ -64,7 +64,7 @@ public class DAOTablaCapacidadesTecnicas {
 
         String sql = "UPDATE CAPACIDADES_TECNICAS SET ";
 
-        sql += "DESCRIPCION='" + capacidadTecnica.getDescripcion()+"',";
+        sql += "DESCRIPCION ='" + capacidadTecnica.getDescripcion()+"',";
         sql += "ZONA = '" + capacidadTecnica.getZona()+"'";
 
         sql += "WHERE NOMBRE LIKE "+ capacidadTecnica.getNombre();

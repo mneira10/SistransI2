@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import vos.Historial;
 import vos.Usuario;
 
 public class DAOTablaUsuarios {
@@ -62,7 +63,8 @@ public class DAOTablaUsuarios {
             String apellidos = rs.getString("APELLIDOS");
             String tipo = rs.getString("TIPOID");
             Long numId = rs.getLong("NUMID");
-            usuario =(new Usuario(id1,nombres,apellidos,tipo,numId));
+            String email =rs.getString("EMAIL");
+            usuario =(new Usuario(id1,nombres,apellidos,tipo,numId, email));
         }
 
         return usuario;
@@ -75,6 +77,7 @@ public class DAOTablaUsuarios {
         sql += "APELLIDOS="+"'"+usuario.getApellidos()+"',";
         sql += "TIPOID="+"'"+usuario.getTipoId()+"',";
         sql += "NUMID="+"'"+usuario.getNumId()+"' ";
+        sql += "EMAIL="+"'"+usuario.getEmail()+"' ";
         sql += "WHERE ID="+"'"+usuario.getId()+"';";
         
         PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -84,12 +87,13 @@ public class DAOTablaUsuarios {
 
     public void addUsuario(Usuario usuario) throws SQLException, Exception {
 
-        String sql = "INSERT INTO USUARIOS (id, nombres, apellidos, tipoId, numId) VALUES (";
+        String sql = "INSERT INTO USUARIOS (id, nombres, apellidos, tipoId, numId, email) VALUES (";
         sql += "'"+usuario.getId() + "',";
         sql += "'"+usuario.getNombres()+"',";
         sql += "'"+usuario.getApellidos()+"',";
         sql += "'"+usuario.getTipoId()+"',";
-        sql += "'"+usuario.getNumId()+"')";
+        sql += "'"+usuario.getNumId()+"',";
+        sql += "'"+usuario.getEmail()+"')";
 
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
@@ -116,6 +120,7 @@ public class DAOTablaUsuarios {
         String apellidos = rs.getString("APELLIDOS");
         String tipo = rs.getString("TIPOID");
         Long numId = rs.getLong("NUMID");
-        usuarios.add(new Usuario(id,nombres,apellidos,tipo,numId));
+        String email =rs.getString("EMAIL");
+        usuarios.add(new Usuario(id,nombres,apellidos,tipo,numId, email));
     }
 }

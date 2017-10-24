@@ -30,6 +30,9 @@ public class Usuario {
 	@JsonProperty(value="tipoId")
 	private String tipoId;
 	
+	@JsonProperty(value="email")
+	private String email;
+	
 	
 	/**
 	 * Numero de identificacion del usuario
@@ -125,6 +128,13 @@ public class Usuario {
 		this.numId = numId;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email=email;
+	}
 ////Constructor
 
 	/**
@@ -137,13 +147,14 @@ public class Usuario {
 	 * @param numId - Numero de identificacion del usuario. numId != null
 	 * 
 	 */
-	public Usuario (@JsonProperty(value="id")Long id, @JsonProperty(value="nombres")String name,@JsonProperty(value="apellidos")String apellidos, @JsonProperty(value="tipoId")String tipoId, @JsonProperty(value="numId")Long numId) {
+	public Usuario (@JsonProperty(value="id")Long id, @JsonProperty(value="nombres")String name,@JsonProperty(value="apellidos")String apellidos, @JsonProperty(value="tipoId")String tipoId, @JsonProperty(value="numId")Long numId,@JsonProperty(value="email")String email) {
 		super();
 		this.id = id;
 		this.nombres = name;
 		this.apellidos = apellidos;
 		this.tipoId= tipoId;
 		this.numId= numId;
+		this.email= email;
 	}
 	
 }
