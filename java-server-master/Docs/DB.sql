@@ -22,7 +22,7 @@ id NUMBER(10)NOT NULL PRIMARY KEY,
 nombres VARCHAR2(30) NOT NULL,
 apellidos VARCHAR2(30) NOT NULL,
 tipoId VARCHAR2(5) NOT NULL,
-numId NUMBER(10) NOT NULL
+numId NUMBER(10) NOT NULL,
 email VARCHAR2(50));
 
 CREATE TABLE ZONAS(
@@ -173,33 +173,33 @@ CONSTRAINT PK_ZONAS_PREFERIDAS PRIMARY KEY(usuariosRegistrados_id, zonas_nombre)
 insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (1, 'Trudi', 'Verdy', 'III', 6901366213, 'tVerdy@hotmail.com');
 insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (2, 'Freedman', 'Morriarty', 'III', 6967895656, 'fMorri@live.con');
 insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (3, 'Free', 'Yuill', 'II', 0877777683, 'FreYu@outlook.com');
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (4, 'Tommie', 'Knowler', 'III', 4659921875, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (5, 'Purcell', 'Rowlson', 'III', 0260703893, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (4, 'Tommie', 'Knowler', 'III', 4659921875);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (5, 'Purcell', 'Rowlson', 'III', 0260703893);
 insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (6, 'Farlie', 'Staddart', 'III', 4167106299, 'staddart@gmail.com');
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (7, 'Danya', 'Blandamore', 'IV', 2257896254, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (8, 'Costa', 'Furbank', 'Jr', 6805010527, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (9, 'Lura', 'Serfati', 'IV', 4569603211, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (10, 'Renelle', 'Kleuer', 'IV', 1980475512, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (11, 'Will', 'Kerrod', 'IV', 2629542521, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (12, 'Vanny', 'Dullard', 'II', 2938374283, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (13, 'Humfrid', 'Putten', 'Jr', 2141417112, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (14, 'Lucille', 'Giovanizio', 'IV', 7894868949, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (15, 'Gar', 'Davern', 'Sr', 7555664135, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (16, 'Elvera', 'Mugford', 'III', 705782158, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (17, 'Lazaro', 'Cowwell', 'Sr', 4598700068, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (18, 'Donelle', 'Kobierra', 'II', 0929554574, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (19, 'Dacy', 'Piatti', 'Sr', 6750167489, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (20, 'Eudora', 'Ioannou', 'Jr', 0880230037, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (21, 'Danella', 'Esche', 'III', 6109529265, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (22, 'Mab', 'Scotchbrook', 'III', 3352857725, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (23, 'Glynn', 'Spera', 'II', 9860426910, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (24, 'Monika', 'Olliffe', 'II', 6593611778, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (25, 'Anica', 'Andrioli', 'IV', 0734882777, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (26, 'Henrik', 'Cathro', 'II', 9675024755, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (27, 'Valentina', 'Sanderson', 'Jr', 8281165758, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (28, 'Franz', 'Spiller', 'II', 5551296032, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (29, 'Kai', 'Belcham', 'III', 8012639416, null);
-insert into USUARIOS (id, nombres, apellidos, tipoId, numId, email) values (30, 'Debbi', 'Denyukin', 'II', 3006210964, null);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (7, 'Danya', 'Blandamore', 'IV', 2257896254);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (8, 'Costa', 'Furbank', 'Jr', 6805010527);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (9, 'Lura', 'Serfati', 'IV', 4569603211);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (10, 'Renelle', 'Kleuer', 'IV', 1980475512);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (11, 'Will', 'Kerrod', 'IV', 2629542521);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (12, 'Vanny', 'Dullard', 'II', 2938374283);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (13, 'Humfrid', 'Putten', 'Jr', 2141417112);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (14, 'Lucille', 'Giovanizio', 'IV', 7894868949);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (15, 'Gar', 'Davern', 'Sr', 7555664135);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (16, 'Elvera', 'Mugford', 'III', 705782158);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (17, 'Lazaro', 'Cowwell', 'Sr', 4598700068);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (18, 'Donelle', 'Kobierra', 'II', 0929554574);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (19, 'Dacy', 'Piatti', 'Sr', 6750167489);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (20, 'Eudora', 'Ioannou', 'Jr', 0880230037);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (21, 'Danella', 'Esche', 'III', 6109529265);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (22, 'Mab', 'Scotchbrook', 'III', 3352857725);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (23, 'Glynn', 'Spera', 'II', 9860426910);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (24, 'Monika', 'Olliffe', 'II', 6593611778);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (25, 'Anica', 'Andrioli', 'IV', 0734882777);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (26, 'Henrik', 'Cathro', 'II', 9675024755);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (27, 'Valentina', 'Sanderson', 'Jr', 8281165758);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (28, 'Franz', 'Spiller', 'II', 5551296032);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (29, 'Kai', 'Belcham', 'III', 8012639416);
+insert into USUARIOS (id, nombres, apellidos, tipoId, numId) values (30, 'Debbi', 'Denyukin', 'II', 3006210964);
 
 
 insert into ZONAS (nombre, cerrado, tipo, aptoDiscap, capacidad) values ('national', 1, 'odio', 1, '262');
@@ -234,46 +234,51 @@ insert into ZONAS (nombre, cerrado, tipo, aptoDiscap, capacidad) values ('full-r
 insert into ZONAS (nombre, cerrado, tipo, aptoDiscap, capacidad) values ('value-added', 1, 'quis', 0, '557');
 
 insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (30, 'aramsted0', 'jvL8CjeAQSD', 'RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (6, 'aramsted1', 'jvL8CjeAQSD', 'RESTAURANTE');
 insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (22, 'tmcvicar1', '8BDezKMXb3', 'ADMIN');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (3, 'abirbeck2', '3qZyk5LU');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (3, 'abirbeck2', '3qZyk5LU','RESTAURANTE');
 insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (19, 'tmccurtin3', 'DqMdNgrL');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (9, 'gmapam4', '8EI2G96Shh7');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (9, 'gmapam4', '8EI2G96Shh7','RESTAURANTE');
 insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (21, 'fhusk5', 'Dxrfs5a2');
 insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (29, 'kbaglin6', 'Wl9s6CnsDEQe');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (1, 'bcraythorn7', 'ogAtxh0D');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (18, 'zherion8', 'mnxQytZ4w');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (1, 'bcraythorn7', 'ogAtxh0D','RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (18, 'zherion8', 'mnxQytZ4w','RESTAURANTE');
 insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (24, 'rfildes9', 'Fo5CBv8');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (13, 'dmarplea', 'goLePW5wr');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (4, 'gdallmanb', 'u5QdGVOI7nz');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (7, 'stumiotoc', 'RBZ5FshKRSwQ');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (5, 'lkiddd', 'gTTBQCmh95i');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (16, 'rwigglesworthe', 'TtZAoIhHo3Ea');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (2, 'mhorsellf', 'oW7n38DGK6SM');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (11, 'bcarcassg', 'v3qu00c6');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (17, 'pkupish', 'RykBUYdV');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (15, 'myarrowi', '2SDKRmgooYv');
-insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD) values (8, 'lsloatj', '3zTyXyEjnDk');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (13, 'dmarplea', 'goLePW5wr','RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (4, 'gdallmanb', 'u5QdGVOI7nz','RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (7, 'stumiotoc', 'RBZ5FshKRSwQ','RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (5, 'lkiddd', 'gTTBQCmh95i','RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (16, 'rwigglesworthe', 'TtZAoIhHo3Ea','RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (2, 'mhorsellf', 'oW7n38DGK6SM','RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (11, 'bcarcassg', 'v3qu00c6','RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (17, 'pkupish', 'RykBUYdV','RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (15, 'myarrowi', '2SDKRmgooYv','RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (8, 'lsloatj', '3zTyXyEjnDk','RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (10, 'lsloat5', '3zTyXyEjnDk','RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (12, 'lsloat35WE', '3zTyXyEjnDk','RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (14, 'lsloSDGWt35WE', '3zTyXyEjnDk','RESTAURANTE');
+insert into USUARIOS_REGISTRADOS (ID, LOGIN, PASSWORD, TIPO) values (20, 'lslefsdvWE', '3zTyXfdjsdjnDk','RESTAURANTE');
 
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (1, 'Realblab', 'jcb', 'http://over-blog.com', 'national');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (2, 'Thoughtstorm', 'jcb', 'http://wufoo.com', 'national');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (3, 'Izio', 'americanexpress', 'http://alexa.com', 'national');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (4, 'Zooxo', 'jcb', 'https://whitehouse.gov', 'national');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (5, 'Wordpedia', 'jcb', 'http://github.io', 'national');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (6, 'Quire', 'jcb', 'http://wikipedia.org', 'national');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (7, 'Zoombox', 'switch', 'https://huffingtonpost.com', 'national');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (8, 'Yacero', 'visa-electron', 'https://e-recht24.de', 'national');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (9, 'Dynabox', 'maestro', 'http://networksolutions.com', 'national');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (10, 'Blogspan', 'americanexpress', 'https://wunderground.com', 'national');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (11, 'Aimbu', 'mastercard', 'https://barnesandnoble.com', 'complexity');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (12, 'Skynoodle', 'maestro', 'https://edublogs.org', 'complexity');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (13, 'Tazz', 'mastercard', 'https://fema.gov', 'complexity');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (14, 'Photolist', 'instapayment', 'http://reddit.com', 'complexity');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (16, 'Dynazzy', 'diners-club-us-ca', 'https://japanpost.jp', 'complexity');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (15, 'Eimbee', 'bankcard', 'http://usa.gov', 'complexity');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (17, 'Fliptune', 'jcb', 'https://vinaora.com', 'complexity');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (18, 'Realblab', 'diners-club', 'http://tripadvisor.com', 'complexity');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (19, 'Eabox', 'visa', 'https://sourceforge.net', 'complexity');
-insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA) values (20, 'Centidel', 'jcb', 'https://soundcloud.com', 'complexity');
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (1, 'Realblab', 'jcb', 'http://over-blog.com', 'national',1);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (2, 'Thoughtstorm', 'jcb', 'http://wufoo.com', 'national',2);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (3, 'Izio', 'americanexpress', 'http://alexa.com', 'national',3);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (4, 'Zooxo', 'jcb', 'https://whitehouse.gov', 'national',4);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (5, 'Wordpedia', 'jcb', 'http://github.io', 'national',5);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (6, 'Quire', 'jcb', 'http://wikipedia.org', 'national',6);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (7, 'Zoombox', 'switch', 'https://huffingtonpost.com', 'national',7);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (8, 'Yacero', 'visa-electron', 'https://e-recht24.de', 'national',8);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (9, 'Dynabox', 'maestro', 'http://networksolutions.com', 'national',9);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (10, 'Blogspan', 'americanexpress', 'https://wunderground.com', 'national',10);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (11, 'Aimbu', 'mastercard', 'https://barnesandnoble.com', 'complexity',11);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (12, 'Skynoodle', 'maestro', 'https://edublogs.org', 'complexity',12);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (13, 'Tazz', 'mastercard', 'https://fema.gov', 'complexity',13);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (14, 'Photolist', 'instapayment', 'http://reddit.com', 'complexity',14);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (16, 'Dynazzy', 'diners-club-us-ca', 'https://japanpost.jp', 'complexity',15);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (15, 'Eimbee', 'bankcard', 'http://usa.gov', 'complexity',16);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (17, 'Fliptune', 'jcb', 'https://vinaora.com', 'complexity',17);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (18, 'Realblab', 'diners-club', 'http://tripadvisor.com', 'complexity',18);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (19, 'Eabox', 'visa', 'https://sourceforge.net', 'complexity',19);
+insert into RESTAURANTES (ID, NOMBRE, TIPO, PAGINA_WEB, ZONA, ID_ADMIN) values (20, 'Centidel', 'jcb', 'https://soundcloud.com', 'complexity',20);
 
 
 insert into PRODUCTOS (id, nombre, descrEsp, descrIng, tPrep, costo, precio, restaurantes_id) values (1, 'Mandras tree shrew', 'molestie hendrerit at vulputate vitae nisl aenean', 'aliquet ultrices erat tortor', 22, 21339.69, 45243, 6);

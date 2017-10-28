@@ -106,7 +106,9 @@ public class IngredientesServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addIngrediente(Ingrediente ingrediente, @HeaderParam("loginRestaurante") String loginAdmin, @HeaderParam("restaurantePassword") String passAdmin) {
+	public Response addIngrediente(	Ingrediente ingrediente, 
+									@HeaderParam("loginRestaurante") String loginAdmin, 
+									@HeaderParam("restaurantePassword") String passAdmin) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
 			if(tm.verificarCredencialesRestaurante(loginAdmin,passAdmin)){

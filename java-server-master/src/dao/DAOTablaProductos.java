@@ -121,4 +121,55 @@ public class DAOTablaProductos {
         Long restauranteId = rs.getLong("RESTAURANTES_ID");
         productos.add(new Producto(id,nombre,descrEsp,descrIng,tPrep, costo, precio, restauranteId));
     }
+
+	public List<Producto> buscarProductosRestaurante(Long idRestaurante) throws SQLException {
+		
+		 ArrayList<Producto> productos = new ArrayList<Producto>();
+
+	        String sql = "SELECT * FROM PRODUCTOS WHERE RESTAURANTES_ID ='" + idRestaurante + "'";
+
+	        PreparedStatement prepStmt = conn.prepareStatement(sql);
+	        recursos.add(prepStmt);
+	        ResultSet rs = prepStmt.executeQuery();
+
+	        while (rs.next()) {
+	            insertarProducto(rs,productos);
+	        }
+
+	        return productos;
+	}
+	
+	public List<Producto> buscarProductosRangoPrecios(Double menorRango, Double mayorRango) throws SQLException {
+		
+		 ArrayList<Producto> productos = new ArrayList<Producto>();
+
+	        String sql = "SELECT * FROM PRODUCTOS WHERE PRECIO >'" + menorRango + "' AND PRECIO <'"+ mayorRango +"'";
+
+	        PreparedStatement prepStmt = conn.prepareStatement(sql);
+	        recursos.add(prepStmt);
+	        ResultSet rs = prepStmt.executeQuery();
+
+	        while (rs.next()) {
+	            insertarProducto(rs,productos);
+	        }
+
+	        return productos;
+	}
+	
+	public List<Producto> buscarProductosCategoria(String categoria ) throws SQLException {
+		
+		 ArrayList<Producto> productos = new ArrayList<Producto>();
+
+	        String sql = "SELECT * FROM PRODUCTOS NATURAL JOIN PRODUCTOS_INDIVIDUALES WHERE CATEGORIA LIKE '"+categoria+"'";
+
+	        PreparedStatement prepStmt = conn.prepareStatement(sql);
+	        recursos.add(prepStmt);
+	        ResultSet rs = prepStmt.executeQuery();
+
+	        while (rs.next()) {
+	            insertarProducto(rs,productos);
+	        }
+
+	        return productos;
+	}
 }

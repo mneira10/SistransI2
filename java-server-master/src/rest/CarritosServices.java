@@ -28,6 +28,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
+import vos.Carrito;
 import vos.Zona;
 
 /**
@@ -109,38 +110,16 @@ public class CarritosServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addZona(Zona zona) {
+	public Response addCarrito(Carrito carrito) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.addZona(zona);
+			tm.addCarrito(carrito);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zona).build();
+		return Response.status(200).entity(carrito).build();
 	}
-	
-    /**
-     * Metodo que expone servicio REST usando POST que agrega los videos que recibe en Json
-     * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos/varios
-     * @param videos - videos a agregar. 
-     * @return Json con el video que agrego o Json con el error que se produjo
-     */
-	@POST
-	@Path("/varios")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response addVideo(List<Zona> zonas) {
-		RotondAndesTM tm = new RotondAndesTM(getPath());
-		try {
-			for(Zona zona:zonas){
-			tm.addZona(zona);
-			}
-		} catch (Exception e) {
-			return Response.status(500).entity(doErrorMessage(e)).build();
-		}
-		return Response.status(200).entity(zonas).build();
-	}
-	
+		
     /**
      * Metodo que expone servicio REST usando PUT que actualiza el video que recibe en Json
      * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos

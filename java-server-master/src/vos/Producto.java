@@ -153,5 +153,7 @@ public class Producto {
 		this.precio=precio;
 		this.restauranteId=restauranteId;
 	}
-	
+	public Producto() {
+		
+	}
 }

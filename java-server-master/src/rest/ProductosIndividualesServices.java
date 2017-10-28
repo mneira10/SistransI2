@@ -28,6 +28,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
+import vos.ProductoIndividual;
 import vos.Zona;
 
 /**
@@ -109,14 +110,14 @@ public class ProductosIndividualesServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addZona(Zona zona) {
+	public Response addProducto(ProductoIndividual prodInd) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.addZona(zona);
+			tm.addProductoInd(prodInd);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zona).build();
+		return Response.status(200).entity(prodInd).build();
 	}
 	
     /**

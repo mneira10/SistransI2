@@ -102,6 +102,71 @@ public class ProductosServices {
 			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
 		}
 	}
+	
+	 /**
+     * Metodo que expone servicio REST usando GET que busca el video con el id que entra como parametro
+     * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos/<<id>>" para la busqueda"
+     * @param name - Nombre del video a buscar que entra en la URL como parametro 
+     * @return Json con el/los videos encontrados con el nombre que entra como parametro o json con 
+     * el error que se produjo
+     */
+	@GET
+	@Path( "restaurante/{id: \\d+}" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductoRestaurante( @PathParam( "idRestaurante" ) Long idRestaurante )
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.buscarProductosRestaurante( idRestaurante );
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	 /**
+     * Metodo que expone servicio REST usando GET que busca el video con el id que entra como parametro
+     * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos/<<id>>" para la busqueda"
+     * @param name - Nombre del video a buscar que entra en la URL como parametro 
+     * @return Json con el/los videos encontrados con el nombre que entra como parametro o json con 
+     * el error que se produjo
+     */
+	@GET
+	@Path( "precios" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductoRango( @HeaderParam( "rangoMinimo" ) Double rangoMinimo, @HeaderParam( "rangoMaximo" ) Double rangoMaximo )
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.buscarProductosRangoPrecios(rangoMinimo, rangoMaximo);
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "categoria" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductoRango( @HeaderParam( "categoria" ) String categoria)
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.buscarProductosCategoria(categoria);
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
 
     /**
      * Metodo que expone servicio REST usando POST que agrega el video que recibe en Json

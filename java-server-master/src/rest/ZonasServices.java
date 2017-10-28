@@ -111,11 +111,13 @@ public class ZonasServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addZona(Zona usuarioRegistrado, @HeaderParam("loginAdmin") String loginAdmin, @HeaderParam("adminPassword") String passAdmin) {
+	public Response addZona(	Zona zona, 
+								@HeaderParam("loginAdmin") String loginAdmin,
+								@HeaderParam("adminPassword") String passAdmin) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
 			if(tm.verificarCredencialesAdmin(loginAdmin,passAdmin)){
-			tm.addZona(usuarioRegistrado);
+			tm.addZona(zona);
 			}
 			else{
 				Exception ef = new Exception("Credenciales inválidas");
@@ -124,7 +126,7 @@ public class ZonasServices {
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(usuarioRegistrado).build();
+		return Response.status(200).entity(zona).build();
 	}
 	
 	

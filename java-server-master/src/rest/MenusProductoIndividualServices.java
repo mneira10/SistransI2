@@ -28,6 +28,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
+import vos.MenuProductoIndividual;
 import vos.Zona;
 
 /**
@@ -65,15 +66,15 @@ public class MenusProductoIndividualServices {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getZonas() {
+	public Response getMenusProductoIndividual() {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
-		List<Zona> zonas;
+		List<MenuProductoIndividual> menusInd;
 		try {
-			zonas = tm.darZonas();
+			menusInd = tm.darMenuProdInd();
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zonas).build();
+		return Response.status(200).entity(menusInd).build();
 	}
 
 	 /**

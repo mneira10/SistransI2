@@ -106,11 +106,13 @@ public class MenusServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addMenu(Menu ingrediente, @HeaderParam("loginRestaurante") String loginAdmin, @HeaderParam("restaurantePassword") String passAdmin) {
+	public Response addMenu(Menu menu, 
+							@HeaderParam("loginRestaurante") String loginAdmin, 
+							@HeaderParam("restaurantePassword") String passAdmin) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
 			if(tm.verificarCredencialesRestaurante(loginAdmin,passAdmin)){
-			tm.addMenu(ingrediente);
+			tm.addMenu(menu);
 			}
 			else{
 				Exception ef = new Exception("Credenciales inválidas");
@@ -119,7 +121,7 @@ public class MenusServices {
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(ingrediente).build();
+		return Response.status(200).entity(menu).build();
 	}
 	
     
