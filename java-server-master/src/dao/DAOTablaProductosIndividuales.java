@@ -43,6 +43,22 @@ public class DAOTablaProductosIndividuales {
         }
         return productoIndividuals;
     }
+    
+    public ArrayList<ProductoIndividual> darProductosMasUtilizadoMenu() throws Exception {
+    	ArrayList<ProductoIndividual> productoIndividuals = new ArrayList<ProductoIndividual>();
+
+        String sql = "SELECT WHERE ID =";
+
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            insertarProductoIndividual(rs,productoIndividuals);
+        }
+
+        return productoIndividuals;
+    }
 
     public ArrayList<ProductoIndividual> buscarProductosIndividualesPorID(Long id) throws SQLException, Exception {
         ArrayList<ProductoIndividual> productoIndividuals = new ArrayList<ProductoIndividual>();

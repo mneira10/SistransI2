@@ -1394,7 +1394,7 @@ public class RotondAndesTM {
 		}
 		return zonas;
 	}
-
+	
 	public List<MenuProductoIndividual> darMenuProdInd() {
 		// TODO Auto-generated method stub
 		return null;
@@ -1873,6 +1873,11 @@ public class RotondAndesTM {
 	}
 
 	public List<Producto> datTotPedidos() {
+		return null;
+	}
+
+	public List<Historial> darHistorialUsuario(Long usuario_id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

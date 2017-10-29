@@ -11,6 +11,7 @@
 package rest;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -29,8 +30,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
+import vos.Historial;
+import vos.Producto;
+import vos.ProductoPreferido;
 import vos.UsuarioRegistrado;
+import vos.UsuarioRegistradoDetail;
 import vos.Zona;
+import vos.ZonaPreferida;
 
 /**
  * Clase que expone servicios REST con ruta base: http://"ip o nombre de host":8080/VideoAndes/rest/videos/...
@@ -88,13 +94,32 @@ public class UsuariosRegistradosServices {
 	@GET
 	@Path( "id/{id: \\d+}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getUsuarioRegoistradoId( @PathParam( "id" ) Long id )
+	public Response getUsuarioRegistradoId( @PathParam( "id" ) Long id )
 	{
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
 		try
 		{
 			UsuarioRegistrado v = tm.buscarUsuarioRegistradoporId( id );
-			return Response.status( 200 ).entity( v ).build( );			
+			List<ProductoPreferido> list1=tm.buscarPreferenciaPorUsuario(v.getUsuario_id());
+			List<ZonaPreferida> zonas=tm.buscarZonaPreferidaPorId(v.getUsuario_id());
+			List<Producto> list2=new ArrayList<>();
+			List<Zona> zonas1=new ArrayList<>();
+			List<Historial> hist=tm.darHistorialUsuario(v.getUsuario_id());
+			List<Producto> historial=new ArrayList<>();
+			for(ProductoPreferido prod: list1) {
+				Producto prod1=tm.buscarProductoPorId(prod.getProducto());
+				list2.add(prod1);
+			}
+			for(ZonaPreferida zona: zonas) {
+				Zona zona2=tm.buscarZonaPorNombre(zona.getZonaNombre());
+				zonas1.add(zona2);
+			}
+			for(Historial hist1:hist) {
+				Producto prod=tm.buscarProductoPorId(hist1.getIdProducto());
+				historial.add(prod);
+			}
+			UsuarioRegistradoDetail vD=new UsuarioRegistradoDetail(v.getUsuario_id(), v.getLogin(), v.getPassword(), v.getTipo(),list2, zonas1, historial);
+			return Response.status( 200 ).entity( vD ).build( );			
 		}
 		catch( Exception e )
 		{
