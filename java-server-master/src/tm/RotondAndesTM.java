@@ -1867,5 +1867,13 @@ public class RotondAndesTM {
 			// TODO RFC6
 			return null;
 		}
+
+	public List<Producto> darPedidosRestaurante(UsuarioRegistrado usuarioRegistrado) {
+		return null;
 	}
+
+	public List<Producto> datTotPedidos() {
+		return null;
+	}
+}
 

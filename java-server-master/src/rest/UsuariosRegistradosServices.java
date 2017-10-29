@@ -81,7 +81,7 @@ public class UsuariosRegistradosServices {
 	 /**
      * Metodo que expone servicio REST usando GET que busca el video con el id que entra como parametro
      * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos/<<id>>" para la busqueda"
-     * @param name - Nombre del video a buscar que entra en la URL como parametro 
+     * @param 	name - Nombre del video a buscar que entra en la URL como parametro
      * @return Json con el/los videos encontrados con el nombre que entra como parametro o json con 
      * el error que se produjo
      */
@@ -129,14 +129,16 @@ public class UsuariosRegistradosServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addUsuarioRegistrado(UsuarioRegistrado usuarioRegistrado, @HeaderParam("loginAdmin") String loginAdmin, @HeaderParam("adminPassword") String passAdmin) {
+	public Response addUsuarioRegistrado(UsuarioRegistrado usuarioRegistrado,
+										 @HeaderParam("loginAdmin") String loginAdmin,
+										 @HeaderParam("adminPassword") String passAdmin) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
 			if(tm.verificarCredencialesAdmin(loginAdmin,passAdmin)){
 			tm.addUsuarioRegistrado(usuarioRegistrado);
 			}
 			else{
-				Exception ef = new Exception("Credenciales inválidas");
+				Exception ef = new Exception("Credenciales invï¿½lidas");
 				return Response.status(412).entity(doErrorMessage(ef)).build();
 			}
 		} catch (Exception e) {
