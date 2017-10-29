@@ -11,6 +11,7 @@
 package rest;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -31,6 +32,8 @@ import javax.ws.rs.core.Response;
 import tm.RotondAndesTM;
 import vos.Ingrediente;
 import vos.Menu;
+import vos.MenuDetail;
+import vos.Producto;
 import vos.Zona;
 
 /**
@@ -68,15 +71,22 @@ public class MenusServices {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getZonas() {
+	public Response getMenus() {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
-		List<Zona> zonas;
+		List<Menu> menus;
+		List<MenuDetail> menusDetallado;
 		try {
-			zonas = tm.darZonas();
+			menus = tm.darMenus();
+			menusDetallado=new ArrayList<>();
+			for(Menu menu: menus) {
+				List<Producto> productosMenu= tm.darProductosMenu(menu.getId());
+				MenuDetail menuDetail= new MenuDetail(menu.getNombre(), menu.getDescrEsp(), menu.getDescrIng(), menu.gettPrep(), menu.getCosto(),menu.getPrecio(), menu.getRestauranteId(),menu.getId(), productosMenu);
+				menusDetallado.add(menuDetail);
+			}
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zonas).build();
+		return Response.status(200).entity(menusDetallado).build();
 	}
 
 	 /**
@@ -87,15 +97,22 @@ public class MenusServices {
      * el error que se produjo
      */
 	@GET
-	@Path( "{nombre}" )
+	@Path( "{id: \\d+}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getZona( @QueryParam( "nombre" ) String nombre )
+	public Response getZona( @PathParam( "id" ) Long id )
 	{
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
 		try
 		{
-			Zona v = tm.buscarZonaPorNombre( nombre );
-			return Response.status( 200 ).entity( v ).build( );			
+			Menu v = tm.buscarMenuPorId( id ).get(0);
+			if(v!=null) {
+				List<Producto> prod=tm.darProductosMenu(id);
+				MenuDetail vE= new MenuDetail(v.getNombre(),v.getDescrEsp(), v.getDescrIng(), v.gettPrep(),v.getCosto(),v.getPrecio(),v.getRestauranteId(), v.getId_producto(), prod);
+				return Response.status( 200 ).entity( v ).build( );		
+			}
+			else {
+				return Response.status(404).entity("No existe Menu").build();
+			}
 		}
 		catch( Exception e )
 		{
@@ -112,6 +129,7 @@ public class MenusServices {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
 			if(tm.verificarCredencialesRestaurante(loginAdmin,passAdmin)){
+			tm.addProducto(menu);
 			tm.addMenu(menu);
 			}
 			else{

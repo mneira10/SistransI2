@@ -33,7 +33,7 @@ public class DAOTablaCarritos {
         this.conn = con;
     }
 
-    public ArrayList<Carrito> darProductos() throws SQLException, Exception {
+    public ArrayList<Carrito> darCarritos() throws SQLException, Exception {
         ArrayList<Carrito> carritos = new ArrayList<Carrito>();
 
         String sql = "SELECT * FROM CARRITOS";
@@ -64,7 +64,7 @@ public class DAOTablaCarritos {
         return carritos;
     }
 
-    public void updateProducto(Carrito producto) throws SQLException, Exception {
+    public void updateCarrito(Carrito producto) throws SQLException, Exception {
 
         String sql = "UPDATE CARRITOS SET ";
         sql += "NOMBRE="+"'"+producto.getNombre()+"',";

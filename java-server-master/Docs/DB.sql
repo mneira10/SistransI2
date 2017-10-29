@@ -69,6 +69,8 @@ CREATE TABLE PRODUCTOS_INDIVIDUALES(
 id NUMBER(10) NOT NULL PRIMARY KEY,
 categoria VARCHAR2(20) NOT NULL,
 grupo NUMBER(10) NOT NULL,
+cantidadDisponible NUMBER(10) NOT NULL,
+maximo NUMBER(10) NOT NULL,
 CONSTRAINT FK_PRODUCTOS
         FOREIGN KEY (id)
         REFERENCES PRODUCTOS(id)
@@ -146,6 +148,7 @@ CREATE TABLE CAPACIDADES_TECNICAS (
 CREATE TABLE HISTORIAL (
   ID_PRODUCTO NUMBER(10) NOT NULL,
   ID_USUARIO_REGISTRADO NUMBER(10) NOT NULL,
+  FECHA DATE NOT NULL,
   CONSTRAINT HISTORIAL_PROD_FK FOREIGN KEY (ID_PRODUCTO) REFERENCES PRODUCTOS(ID),
   CONSTRAINT HISTORIAL_USR_REG_FK FOREIGN KEY (ID_USUARIO_REGISTRADO) REFERENCES USUARIOS_REGISTRADOS(ID),
   CONSTRAINT HISTORIAL_PK PRIMARY KEY (ID_PRODUCTO,ID_USUARIO_REGISTRADO)
@@ -302,16 +305,16 @@ insert into PRODUCTOS (id, nombre, descrEsp, descrIng, tPrep, costo, precio, res
 insert into PRODUCTOS (id, nombre, descrEsp, descrIng, tPrep, costo, precio, restaurantes_id) values (19, 'Whale', 'nulla suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus sit', 'est donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum ac est lacinia nisi venenatis tristique fusce congue', 12, 9747.54, 143452, 13);
 insert into PRODUCTOS (id, nombre, descrEsp, descrIng, tPrep, costo, precio, restaurantes_id) values (20, 'Russian dragonfly', 'viverra eget congue eget semper rutrum nulla nunc purus phasellus in felis donec', 'ultrices mattis odio donec vitae nisi nam ultrices', 46, 150999.92, 130181, 16);
 
-insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo) values (1, 'plato_fuerte', 5);
-insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo) values (2, 'acompanamiento', 5);
-insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo) values (3, 'acompanamiento', 1);
-insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo) values (4, 'acompanamiento', 1);
-insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo) values (5, 'bebida', 3);
-insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo) values (6, 'acompanamiento', 2);
-insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo) values (7, 'acompanamiento', 1);
-insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo) values (8, 'plato_fuerte', 3);
-insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo) values (9, 'bebida', 4);
-insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo) values (10, 'acompanamiento', 5);
+insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo, cantidadDisponible, maximo) values (1, 'plato_fuerte', 5, 23, 20);
+insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo, cantidadDisponible, maximo) values (2, 'acompanamiento', 5, 5, 10);
+insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo, cantidadDisponible, maximo) values (3, 'acompanamiento', 1, 6, 10);
+insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo, cantidadDisponible, maximo) values (4, 'acompanamiento', 1, 14, 20);
+insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo, cantidadDisponible, maximo) values (5, 'bebida', 3, 18, 20);
+insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo, cantidadDisponible, maximo) values (6, 'acompanamiento', 2, 15, 20);
+insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo, cantidadDisponible, maximo) values (7, 'acompanamiento', 1, 17, 20);
+insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo, cantidadDisponible, maximo) values (8, 'plato_fuerte', 3, 28, 30);
+insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo, cantidadDisponible, maximo) values (9, 'bebida', 4, 3, 10);
+insert into PRODUCTOS_INDIVIDUALES (id, categoria, grupo, cantidadDisponible, maximo) values (10, 'acompanamiento', 5, 30, 30);
 
 insert into CARRITOS (id, nombre, costo, usuario_id) values (1, 'Roombo', 95755.76, 8);
 insert into CARRITOS (id, nombre, costo, usuario_id) values (2, 'Abatz', 68426.11, 27);
@@ -438,26 +441,26 @@ Insert into ZONAS_PREFERIDAS (USUARIOSREGISTRADOS_ID, ZONAS_NOMBRE) values ('17'
 Insert into ZONAS_PREFERIDAS (USUARIOSREGISTRADOS_ID, ZONAS_NOMBRE) values ('15','De-engineered');
 Insert into ZONAS_PREFERIDAS (USUARIOSREGISTRADOS_ID, ZONAS_NOMBRE) values ('8','6th generation');
 
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('4','30');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('1','22');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('3','3');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('6','19');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('9','9');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('14','21');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('9','29');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('18','1');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('20','18');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('2','24');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('11','13');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('17','4');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('15','7');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('17','5');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('5','16');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('8','2');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('10','11');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('7','17');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('12','15');
-Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) values ('13','8');
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('4','30', TO_DATE('2017/05/17 13:45:34','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('1','22', TO_DATE('2017/06/17 13:45:35','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('3','3', TO_DATE('2017/07/17 13:45:36','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('6','19', TO_DATE('2017/08/17 13:45:37','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('9','9', TO_DATE('2017/09/17 13:45:38','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('14','21', TO_DATE('2017/10/17 13:45:39','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('9','29', TO_DATE('2017/11/17 13:45:40','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('18','1', TO_DATE('2017/12/17 13:45:41','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('20','18', TO_DATE('2017/05/18 13:45:42','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('2','24', TO_DATE('2017/06/18 13:45:43','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('11','13', TO_DATE('2017/07/18 13:45:44','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('17','4', TO_DATE('2017/08/18 13:45:45','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('15','7', TO_DATE('2017/09/19 13:45:46','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('17','5', TO_DATE('2017/10/18 13:45:47','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('5','16', TO_DATE('2017/11/18 13:45:48','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('8','2', TO_DATE('2017/12/19 13:45:49','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('10','11', TO_DATE('2017/05/19 13:45:50','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('7','17', TO_DATE('2017/06/19 13:45:51','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('12','15', TO_DATE('2017/07/19 13:45:52','yyyy/mm/dd hh24:mi:ss'));
+Insert into HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) values ('13','8', TO_DATE('2017/08/19 13:45:53','yyyy/mm/dd hh24:mi:ss'));
 
 Insert into INGREDIENTES_PRODUCTIND (ID_INGREDIENTE, ID_PRODINDIVIDUAL) values ('1','1');
 Insert into INGREDIENTES_PRODUCTIND (ID_INGREDIENTE, ID_PRODINDIVIDUAL) values ('2','2');

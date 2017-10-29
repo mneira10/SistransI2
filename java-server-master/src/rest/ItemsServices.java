@@ -11,6 +11,7 @@
 package rest;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -28,6 +29,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
+import vos.Item;
+import vos.Producto;
 import vos.Zona;
 
 /**
@@ -65,7 +68,7 @@ public class ItemsServices {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getZonas() {
+	public Response getItems() {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		List<Zona> zonas;
 		try {
@@ -84,15 +87,20 @@ public class ItemsServices {
      * el error que se produjo
      */
 	@GET
-	@Path( "{nombre}" )
+	@Path( "{id: \\d+}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getZona( @QueryParam( "nombre" ) String nombre )
+	public Response getItems( @PathParam( "id" ) Long idCarrito )
 	{
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
 		try
 		{
-			Zona v = tm.buscarZonaPorNombre( nombre );
-			return Response.status( 200 ).entity( v ).build( );			
+			List<Item> v = tm.buscarItemsCarrito( idCarrito );
+			List<Producto> productos=new ArrayList<>();
+			for(Item item:v) {
+				Producto p=tm.buscarProductoPorId(item.getProductoId());
+				productos.add(p);
+			}
+			return Response.status( 200 ).entity( productos ).build( );			
 		}
 		catch( Exception e )
 		{
@@ -109,14 +117,14 @@ public class ItemsServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addZona(Zona zona) {
+	public Response addItem(Item item) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.addZona(zona);
+			tm.addItem(item);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zona).build();
+		return Response.status(200).entity(item).build();
 	}
 	
     /**

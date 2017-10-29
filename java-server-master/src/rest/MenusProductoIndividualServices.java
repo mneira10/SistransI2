@@ -29,6 +29,7 @@ import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
 import vos.MenuProductoIndividual;
+import vos.ProductoIndividual;
 import vos.Zona;
 
 /**
@@ -110,14 +111,14 @@ public class MenusProductoIndividualServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addZona(Zona zona) {
+	public Response addMenuProdIndividual(MenuProductoIndividual menuProductoIndividual) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.addZona(zona);
+			tm.addMenuProductoIndividual(menuProductoIndividual);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zona).build();
+		return Response.status(200).entity(menuProductoIndividual).build();
 	}
 	
     /**
@@ -130,16 +131,16 @@ public class MenusProductoIndividualServices {
 	@Path("/varios")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addVideo(List<Zona> zonas) {
+	public Response addVideo(List<MenuProductoIndividual> menuProductoIndividuales) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			for(Zona zona:zonas){
-			tm.addZona(zona);
+			for(MenuProductoIndividual menuProductoIndividual:menuProductoIndividuales){
+			tm.addMenuProductoIndividual(menuProductoIndividual);
 			}
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zonas).build();
+		return Response.status(200).entity(menuProductoIndividuales).build();
 	}
 	
     /**

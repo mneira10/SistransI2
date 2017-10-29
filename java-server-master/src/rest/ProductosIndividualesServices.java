@@ -17,6 +17,7 @@ import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -28,6 +29,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
+import vos.Producto;
 import vos.ProductoIndividual;
 import vos.Zona;
 
@@ -120,26 +122,23 @@ public class ProductosIndividualesServices {
 		return Response.status(200).entity(prodInd).build();
 	}
 	
-    /**
-     * Metodo que expone servicio REST usando POST que agrega los videos que recibe en Json
-     * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos/varios
-     * @param videos - videos a agregar. 
-     * @return Json con el video que agrego o Json con el error que se produjo
-     */
 	@POST
-	@Path("/varios")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addVideo(List<Zona> zonas) {
+	public Response addProducto(ProductoIndividual producto, @HeaderParam("loginRestaurante") String loginAdmin, @HeaderParam("restaurantePassword") String passAdmin) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			for(Zona zona:zonas){
-			tm.addZona(zona);
+			if(tm.verificarCredencialesRestaurante(loginAdmin,passAdmin)){
+			tm.addProductoInd(producto);
+			}
+			else{
+				Exception ef = new Exception("Credenciales inválidas");
+				return Response.status(412).entity(doErrorMessage(ef)).build();
 			}
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zonas).build();
+		return Response.status(200).entity(producto).build();
 	}
 	
     /**
@@ -151,7 +150,7 @@ public class ProductosIndividualesServices {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateVideo(Zona zona) {
+	public Response updateProductoIndividual(Zona zona) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
 			tm.updateZona(zona);

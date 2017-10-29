@@ -7,7 +7,7 @@ public class Menu extends Producto{
 	@JsonProperty(value="id_producto")
 	private Long id_producto;
 
-	public Menu(@JsonProperty(value="id")Long id, 
+	public Menu( 
 			@JsonProperty(value="nombre")String name,
 			@JsonProperty(value="descrEsp")String descrEsp, 
 			@JsonProperty(value="descrIng")String descrIng, 
@@ -16,7 +16,7 @@ public class Menu extends Producto{
 			@JsonProperty(value="precio")Double precio, 
 			@JsonProperty(value="restauranteId")Long restauranteId,
 			@JsonProperty(value="id_producto") Long id_producto) {
-		super(id, name, descrEsp,descrIng,tPrep,costo,precio,restauranteId);
+		super(id_producto, name, descrEsp,descrIng,tPrep,costo,precio,restauranteId);
 		this.id_producto = id_producto;
 	}
 

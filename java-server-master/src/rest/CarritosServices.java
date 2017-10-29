@@ -66,15 +66,15 @@ public class CarritosServices {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getZonas() {
+	public Response getCarritos() {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
-		List<Zona> zonas;
+		List<Carrito> carritos;
 		try {
-			zonas = tm.darZonas();
+			carritos = tm.darCarritos();
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zonas).build();
+		return Response.status(200).entity(carritos).build();
 	}
 
 	 /**
@@ -85,14 +85,14 @@ public class CarritosServices {
      * el error que se produjo
      */
 	@GET
-	@Path( "{nombre}" )
+	@Path( "{id: \\d+}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getZona( @QueryParam( "nombre" ) String nombre )
+	public Response get( @PathParam( "id" ) Long id )
 	{
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
 		try
 		{
-			Zona v = tm.buscarZonaPorNombre( nombre );
+			List<Carrito> v = tm.buscarCarritoPorId( id );
 			return Response.status( 200 ).entity( v ).build( );			
 		}
 		catch( Exception e )
@@ -129,10 +129,10 @@ public class CarritosServices {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateVideo(Zona zona) {
+	public Response updateCarrito(Carrito zona) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.updateZona(zona);
+			tm.updateCarrito(zona);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
@@ -148,10 +148,10 @@ public class CarritosServices {
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteVideo(Zona zona) {
+	public Response deleteCarrito(Carrito zona) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		try {
-			tm.deleteZona(zona);
+			tm.deleteCarrito(zona);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}

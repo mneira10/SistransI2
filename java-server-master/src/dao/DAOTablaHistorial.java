@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import vos.Historial;
 
@@ -98,9 +99,10 @@ public class DAOTablaHistorial {
 
     public void addHistorial(Historial historial) throws SQLException, Exception {
 
-        String sql = "INSERT INTO HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO) VALUES (";
+        String sql = "INSERT INTO HISTORIAL (ID_PRODUCTO, ID_USUARIO_REGISTRADO, FECHA) VALUES (";
         sql += "'"+historial.getIdProducto() + "',";
-        sql += "'"+historial.getIdUsuarioRegistrado()+"');";
+        sql += "'"+historial.getIdUsuarioRegistrado() + "',";
+        sql += "'SYSDATE');";
         
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
@@ -121,6 +123,7 @@ public class DAOTablaHistorial {
     private void insertarHistorial(ResultSet rs,ArrayList<Historial> historial) throws SQLException{
     	Long idProducto=rs.getLong("ID_PRODUCTO");
         Long idUsuarioRegistrado = rs.getLong("ID_USUARIO_REGISTRADO");
-        historial.add(new Historial(idProducto, idUsuarioRegistrado));
+        Date fecha=rs.getDate("FECHA");
+        historial.add(new Historial(idProducto, idUsuarioRegistrado, fecha));
     }
 }

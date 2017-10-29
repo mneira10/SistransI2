@@ -11,6 +11,7 @@
 package rest;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -27,7 +28,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import vos.Menu;
+import vos.Producto;
 import tm.RotondAndesTM;
+import vos.Historial;
+import vos.Item;
 import vos.Zona;
 
 /**
@@ -65,7 +70,7 @@ public class HistorialServices {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getZonas() {
+	public Response getHistoriales() {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		List<Zona> zonas;
 		try {
@@ -109,14 +114,27 @@ public class HistorialServices {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addZona(Zona zona) {
+	public Response addHistorial(Long idCarrito) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
+		List<Producto> productos= new ArrayList<>();
 		try {
-			tm.addZona(zona);
+			tm.addItemHistorial(idCarrito);
+			List<Item> zona1= tm.buscarItemsCarrito(idCarrito);
+			for(Item item:zona1) {
+				List<Menu> menus=tm.buscarMenuPorId(item.getProductoId());
+				if(menus.size()==0) {
+					Producto producto= tm.buscarProductoPorId(item.getProductoId());
+					productos.add(producto);
+				}
+				else {
+					List<Producto> productosMenu=tm.darProductosMenu(item.getProductoId());
+					productos.addAll(productosMenu);
+				}
+			}
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(zona).build();
+		return Response.status(200).entity(productos).build();
 	}
 	
     /**

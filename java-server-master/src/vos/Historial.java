@@ -1,5 +1,7 @@
 package vos;
 
+import java.util.Date;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 
 public class Historial {
@@ -18,6 +20,9 @@ public class Historial {
 	@JsonProperty(value="idUsuarioRegistrado")
 	private Long idUsuarioRegistrado;
 	
+	@JsonProperty(value="fecha")
+	private Date fecha;
+	
 	
 	public Long getIdProducto() {
 		return idProducto;
@@ -25,6 +30,14 @@ public class Historial {
 
 	public void setIdProducto(Long idProducto) {
 		this.idProducto = idProducto;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	public Long getIdUsuarioRegistrado() {
@@ -35,9 +48,10 @@ public class Historial {
 		this.idUsuarioRegistrado = idUsuarioRegistrado;
 	}
 	
-	public Historial (@JsonProperty(value="idProducto")Long idProducto, @JsonProperty(value="idUsuarioRegistrado")Long idUsuarioRegistrado) {
+	public Historial (@JsonProperty(value="idProducto")Long idProducto, @JsonProperty(value="idUsuarioRegistrado")Long idUsuarioRegistrado, @JsonProperty(value="fecha") Date fecha) {
 		super();
 		this.idUsuarioRegistrado = idUsuarioRegistrado;
 		this.idProducto = idProducto;
+		this.fecha=fecha;
 	}
 }

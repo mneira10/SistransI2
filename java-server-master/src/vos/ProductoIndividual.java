@@ -9,6 +9,10 @@ public class ProductoIndividual extends Producto {
     private String categoria;
     @JsonProperty(value="grupo")
     private Integer grupo;
+    @JsonProperty(value="cantidadDisponible")
+    private Integer cantidadDisponible;
+    @JsonProperty(value="maximo")
+    private Integer maximo;
 
 
     public ProductoIndividual(	@JsonProperty(value="id")Long id, 
@@ -19,23 +23,30 @@ public class ProductoIndividual extends Producto {
 					    		@JsonProperty(value="costo")Double costo, 
 					    		@JsonProperty(value="precio")Double precio, 
 					    		@JsonProperty(value="restauranteId")Long restauranteId,
-					    		@JsonProperty(value="prodId")Long prodId,
 					    		@JsonProperty(value="categoria")String categoria,
-					    		@JsonProperty(value="grupo")Integer grupo) {
+					    		@JsonProperty(value="grupo")Integer grupo,
+					    		@JsonProperty(value="cantidadDisponible") Integer cantidadDisponible,
+					    		@JsonProperty(value="maximo") Integer maximo) {
     	super(id, name, descrEsp,descrIng,tPrep,costo,precio,restauranteId);
-        this.prodId = prodId;
+        this.prodId = id;
         this.categoria = categoria;
         this.grupo = grupo;
+        this.cantidadDisponible=cantidadDisponible;
+        this.maximo=maximo;
     }
 
     public ProductoIndividual(
     		@JsonProperty(value="prodId")Long prodId,
     		@JsonProperty(value="categoria")String categoria,
-    		@JsonProperty(value="grupo")Integer grupo) {
+    		@JsonProperty(value="grupo")Integer grupo,
+    		@JsonProperty(value="cantidadDisponible") Integer cantidadDisponible,
+    		@JsonProperty(value="maximo") Integer maximo) {
 	super();
 	this.prodId = prodId;
 	this.categoria = categoria;
 	this.grupo = grupo;
+	this.cantidadDisponible=cantidadDisponible;
+	this.maximo=maximo;
 	}
     public Long getProdId() {
         return prodId;
@@ -53,7 +64,23 @@ public class ProductoIndividual extends Producto {
         this.categoria = categoria;
     }
 
-    public Integer getGrupo() {
+    public Integer getMaximo() {
+		return maximo;
+	}
+
+	public void setMaximo(Integer maximo) {
+		this.maximo = maximo;
+	}
+
+	public Integer getCantidadDisponible() {
+		return cantidadDisponible;
+	}
+
+	public void setCantidadDisponible(Integer cantidadDisponible) {
+		this.cantidadDisponible = cantidadDisponible;
+	}
+
+	public Integer getGrupo() {
         return grupo;
     }
 

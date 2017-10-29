@@ -64,22 +64,43 @@ public class DAOTablaProductosIndividuales {
 
         String sql = "UPDATE PRODUCTOS_INDIVIDUALES SET ";
         sql += "CATEGORIA='" + productoIndividual.getCategoria() + "',";
-        sql += "GRUPO='" + productoIndividual.getGrupo()+"'";
+        sql += "GRUPO='" + productoIndividual.getGrupo() + "',";
+        sql += "CANTIDADDISPONIBLE='" + productoIndividual.getCantidadDisponible() + "',";
+        sql += "MAXIMO='" + productoIndividual.getMaximo()+"'";
 
         sql += "WHERE ID = "+ productoIndividual.getProdId();
-
-
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
         prepStmt.executeQuery();
     }
+    
+    public void venderProductoIndividual(Long idProdIndividual) throws SQLException, Exception {
+    	
+    	ArrayList<ProductoIndividual> buscados= buscarProductosIndividualesPorID(idProdIndividual);
+    	ProductoIndividual prodInd=buscados.get(0);
+    	if(buscados.size()==0){
+    		throw new Exception("No existe el producto a vender");
+    	}
+    	else if(prodInd.getCantidadDisponible()==0) {
+    		throw new Exception("No hay inventario");
+    	}
+    	else{String sql = "UPDATE PRODUCTOS_INDIVIDUALES SET ";
+        sql += "CANTIDADDISPONIBLE='" + (prodInd.getCantidadDisponible()-1)+"'";
+        sql += "WHERE ID = "+ idProdIndividual;
 
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        prepStmt.executeQuery();}
+    }
+    
     public void addProductoIndividual(ProductoIndividual productoIndividual) throws SQLException, Exception {
 
-        String sql = "INSERT INTO PRODUCTOS_INDIVIDUALES (id, categoria, grupo)  VALUES (";
+        String sql = "INSERT INTO PRODUCTOS_INDIVIDUALES (id, categoria, grupo, cantidadDisponible, maximo)  VALUES (";
         sql += "'"+productoIndividual.getProdId() + "',";
         sql += "'"+productoIndividual.getCategoria() + "',";
-        sql += "'"+productoIndividual.getGrupo()+"')";
+        sql += "'"+productoIndividual.getGrupo() + "',";
+        sql += "'"+productoIndividual.getCantidadDisponible() + "',";
+        sql += "'"+productoIndividual.getMaximo()+"')";
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
@@ -101,7 +122,9 @@ public class DAOTablaProductosIndividuales {
         Long id = rs.getLong("ID");
         String categoria = rs.getString("CATEGORIA");
         Integer grupo = rs.getInt("GRUPO");
-        productoIndividuals.add(new ProductoIndividual(id,categoria,grupo));
+        Integer cantDisponible= rs.getInt("CANTIDADDISPONIBLE");
+        Integer maximo= rs.getInt("MAXIMO");
+        productoIndividuals.add(new ProductoIndividual(id,categoria,grupo, cantDisponible,maximo));
     }
 
 }

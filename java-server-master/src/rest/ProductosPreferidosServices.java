@@ -57,26 +57,6 @@ public class ProductosPreferidosServices {
 		return "{ \"ERROR\": \""+ e.getMessage() + "\"}" ;
 	}
 	
-
-	/**
-	 * Metodo que expone servicio REST usando GET que da todos los videos de la base de datos.
-	 * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos
-	 * @return Json con todos los videos de la base de datos o json con 
-     * el error que se produjo
-	 */
-	@GET
-	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getPreferencias() {
-		RotondAndesTM tm = new RotondAndesTM(getPath());
-		List<Zona> zonas;
-		try {
-			zonas = tm.darZonas();
-		} catch (Exception e) {
-			return Response.status(500).entity(doErrorMessage(e)).build();
-		}
-		return Response.status(200).entity(zonas).build();
-	}
-
 	 /**
      * Metodo que expone servicio REST usando GET que busca el video con el id que entra como parametro
      * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos/<<id>>" para la busqueda"
@@ -102,9 +82,9 @@ public class ProductosPreferidosServices {
 	}
 	
 	@GET
-	@Path( "idProd/{idProd}" )
+	@Path( "idProd/{idPro}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getPreferenciaProducto( @PathParam( "idProd" ) Long idProd )
+	public Response getPreferenciaProducto( @PathParam( "idPro" ) Long idProd )
 	{
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
 		try
@@ -119,9 +99,9 @@ public class ProductosPreferidosServices {
 	}
 	
 	@GET
-	@Path( "idUsuario/{idUsuario}" )
+	@Path( "idUsuario/{idUsua}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getPreferenciaUsuario( @PathParam( "idUsuario" ) Long idUsuario )
+	public Response getPreferenciaUsuario( @PathParam( "idUsua" ) Long idUsuario )
 	{
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
 		try

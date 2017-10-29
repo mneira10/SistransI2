@@ -44,10 +44,10 @@ public class DAOTablaItems {
         return items;
     }
 
-    public ArrayList<Item> buscarItemsPorID(Long id) throws SQLException, Exception {
+    public ArrayList<Item> buscarItemsPorIDCarrito(Long id) throws SQLException, Exception {
         ArrayList<Item> items = new ArrayList<Item>();
 
-        String sql = "SELECT * FROM ITEMS WHERE ID =" + id ;
+        String sql = "SELECT * FROM ITEMS WHERE ID_CARRITO =" + id ;
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
