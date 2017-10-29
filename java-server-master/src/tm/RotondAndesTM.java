@@ -1853,9 +1853,42 @@ public class RotondAndesTM {
 			//TODO RF17
 		}
 
-		public void surtirProd(Long id) {
-			// TODO RF13
-			
+
+
+		public void surtirRestaurante(Restaurante restaurante) throws Exception{
+			DAOTablaProductos daoProductos = new DAOTablaProductos();
+			DAOTablaProductosIndividuales daoTablaProductosIndividuales = new DAOTablaProductosIndividuales();
+			try
+			{
+				//////transaccion
+				this.conn = darConexion();
+				List<Producto> productosDeRestaurante = daoProductos.buscarProductosRestaurante(restaurante.getId());
+				for(Producto prod : productosDeRestaurante){
+					daoTablaProductosIndividuales.surtirProducto(prod.getId());
+				}
+				conn.commit();
+
+			} catch (SQLException e) {
+				System.err.println("SQLException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				System.err.println("GeneralException:" + e.getMessage());
+				e.printStackTrace();
+				throw e;
+			} finally {
+				try {
+					daoProductos.cerrarRecursos();
+					daoTablaProductosIndividuales.cerrarRecursos();
+					if(this.conn!=null)
+						this.conn.close();
+				} catch (SQLException exception) {
+					System.err.println("SQLException closing resources:" + exception.getMessage());
+					exception.printStackTrace();
+					throw exception;
+				}
+			}
+
 		}
 
 		public List<Producto> buscarProductoMasOfrecidos() {
@@ -1868,12 +1901,77 @@ public class RotondAndesTM {
 			return null;
 		}
 
-	public List<Producto> darPedidosRestaurante(UsuarioRegistrado usuarioRegistrado) {
-		return null;
+	public List<Producto> darPedidosRestaurante(UsuarioRegistrado usuarioRegistrado) throws Exception{
+		List<Producto> productos = new ArrayList<>();
+		DAOTablaHistorial daoHistorial=  new DAOTablaHistorial();
+		try
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoHistorial.setConn(conn);
+			List<Historial> historial = daoHistorial.buscarHistorialPorIdUsuarioRegistrado(usuarioRegistrado.getUsuario_id());
+			for(Historial historia : historial){
+				productos.add(buscarProductoPorId(historia.getIdProducto()));
+			}
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoHistorial.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			}
+			catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return productos;
 	}
 
-	public List<Producto> datTotPedidos() {
-		return null;
+
+	public List<Producto> datTotPedidos() throws Exception {
+		List<Producto> productos = new ArrayList<>();
+		DAOTablaHistorial daoHistorial=  new DAOTablaHistorial();
+		try
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoHistorial.setConn(conn);
+			List<Historial> historial = daoHistorial.darHistorial();
+			for(Historial historia : historial){
+				productos.add(buscarProductoPorId(historia.getIdProducto()));
+			}
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoHistorial.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			}
+			catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return productos;
 	}
 }
 

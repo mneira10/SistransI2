@@ -138,7 +138,7 @@ public class RestauranteServices {
 			tm.addRestaurante(usuarioRegistrado);
 			}
 			else{
-				Exception ef = new Exception("Credenciales inválidas");
+				Exception ef = new Exception("Credenciales invï¿½lidas");
 				return Response.status(412).entity(doErrorMessage(ef)).build();
 			}
 		} catch (Exception e) {
@@ -167,7 +167,9 @@ public class RestauranteServices {
 		}
 		return Response.status(200).entity(rest).build();
 	}
-	
+
+
+
     /**
      * Metodo que expone servicio REST usando DELETE que elimina el video que recibe en Json
      * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos
@@ -186,11 +188,14 @@ public class RestauranteServices {
 		}
 		return Response.status(200).entity(rest).build();
 	}
-	
+
+	@PUT
 	@Path( "surtir/{idRestaurante: \\d+}" )
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response surtirRestaurante(@PathParam("idRestaurante") Long idRest) {
+	public Response surtirRestaurante(@PathParam("idRestaurante") Long idRest,
+									  @HeaderParam("login") String login,
+									  @HeaderParam("password") String password) {
 		RotondAndesTM tm = new RotondAndesTM(getPath());
 		Restaurante r;
 		try {
@@ -198,11 +203,12 @@ public class RestauranteServices {
 			if(r==null) {
 				return Response.status(404).entity("No existe el restaurante a surtir").build();
 			}
-			else {
-			List<Producto> prod=tm.buscarProductosRestaurante(idRest);
-			for(Producto producto:prod) {
-				tm.surtirProd(producto.getId());
+			else if(!tm.verificarCredencialesRestaurante(login,password)){
+				Exception ef = new Exception("Credenciales invï¿½lidas");
+				return Response.status(412).entity(doErrorMessage(ef)).build();
 			}
+			else {
+				tm.surtirRestaurante(r);
 			}
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
