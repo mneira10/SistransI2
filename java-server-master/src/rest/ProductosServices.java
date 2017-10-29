@@ -103,6 +103,40 @@ public class ProductosServices {
 		}
 	}
 	
+	@GET
+	@Path( "masOfrecido" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductosMasOfrecidos()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.buscarProductoMasOfrecidos();
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "masVendido" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductosMasVendidos()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<Producto> v = tm.buscarProductoMasVendidos();
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
 	 /**
      * Metodo que expone servicio REST usando GET que busca el video con el id que entra como parametro
      * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos/<<id>>" para la busqueda"

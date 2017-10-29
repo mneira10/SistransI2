@@ -91,6 +91,7 @@ public class DAOTablaItems {
     }
 
     public void deleteItem(Item item) throws SQLException, Exception {
+    	
 
         String sql = "DELETE FROM ITEMS";
         sql += " WHERE ID = " + item.getId();

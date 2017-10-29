@@ -29,6 +29,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
+import vos.Producto;
 import vos.Restaurante;
 import vos.UsuarioRegistrado;
 import vos.Zona;
@@ -104,9 +105,9 @@ public class RestauranteServices {
 	}
 	
 	@GET
-	@Path( "zona/{nombreZona}" )
+	@Path( "zona" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getRestaurantesZona( @QueryParam( "nombreZona" ) String zona )
+	public Response getRestaurantesZona( @HeaderParam( "nombreZona" ) String zona )
 	{
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
 		List<Restaurante> v;
@@ -185,6 +186,28 @@ public class RestauranteServices {
 		}
 		return Response.status(200).entity(rest).build();
 	}
-
+	
+	@Path( "surtir/{idRestaurante: \\d+}" )
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response surtirRestaurante(@PathParam("idRestaurante") Long idRest) {
+		RotondAndesTM tm = new RotondAndesTM(getPath());
+		Restaurante r;
+		try {
+			r=tm.buscarRestaurantePorId(idRest).get(0);
+			if(r==null) {
+				return Response.status(404).entity("No existe el restaurante a surtir").build();
+			}
+			else {
+			List<Producto> prod=tm.buscarProductosRestaurante(idRest);
+			for(Producto producto:prod) {
+				tm.surtirProd(producto.getId());
+			}
+			}
+		} catch (Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
+		return Response.status(200).entity(r).build();
+	}
 
 }

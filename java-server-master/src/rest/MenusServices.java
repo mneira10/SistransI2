@@ -108,7 +108,7 @@ public class MenusServices {
 			if(v!=null) {
 				List<Producto> prod=tm.darProductosMenu(id);
 				MenuDetail vE= new MenuDetail(v.getNombre(),v.getDescrEsp(), v.getDescrIng(), v.gettPrep(),v.getCosto(),v.getPrecio(),v.getRestauranteId(), v.getId_producto(), prod);
-				return Response.status( 200 ).entity( v ).build( );		
+				return Response.status( 200 ).entity( vE ).build( );		
 			}
 			else {
 				return Response.status(404).entity("No existe Menu").build();

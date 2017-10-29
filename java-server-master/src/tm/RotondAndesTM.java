@@ -1848,5 +1848,24 @@ public class RotondAndesTM {
 			}
 
 		}
+		
+		public void deleteItem(Item item) {
+			//TODO RF17
+		}
+
+		public void surtirProd(Long id) {
+			// TODO RF13
+			
+		}
+
+		public List<Producto> buscarProductoMasOfrecidos() {
+			// TODO RFC4
+			return null;
+		}
+
+		public List<Producto> buscarProductoMasVendidos() {
+			// TODO RFC6
+			return null;
+		}
 	}
 
