@@ -143,4 +143,11 @@ public class DAOTablaProductosIndividuales {
         productoIndividuals.add(new ProductoIndividual(id,categoria,grupo, cantDisponible,maximo));
     }
 
+    public void surtirProducto(Long id) throws SQLException{
+        String sql = "UPDATE PRODUCTOS_INDIVIDUALES SET CANTIDADDISPONIBLE = MAXIMO WHERE ID = " + id;
+
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        prepStmt.executeQuery();
+    }
 }
