@@ -1961,9 +1961,38 @@ public class RotondAndesTM {
 		return productos;
 	}
 
-	public List<Historial> darHistorialUsuario(Long usuario_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Historial> darHistorialUsuario(Long usuario_id) throws Exception{
+		List<Historial> historials = new ArrayList<>();
+		DAOTablaHistorial daoHistorial=  new DAOTablaHistorial();
+		try
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoHistorial.setConn(conn);
+			historials = daoHistorial.buscarHistorialPorIdUsuarioRegistrado(usuario_id);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoHistorial.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			}
+			catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return historials;
 	}
 
 	public List<ProductoFacturado> datTotProductosFacturados(Date fechaInicio,Date fechaFin) throws Exception{

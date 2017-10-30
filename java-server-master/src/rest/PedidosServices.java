@@ -41,6 +41,7 @@ public class PedidosServices {
      */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_JSON })
     public Response getPedidos(UsuarioRegistrado usuarioRegistrado,
                                @HeaderParam("login") String login,
                                @HeaderParam("password") String password) {
@@ -75,6 +76,13 @@ public class PedidosServices {
 
     }
 
+
+    @PUT
+    @Path( "idProd/{idProd}/idUsuario{idUsuario}" )
+    public Response cancelarPedido(){
+        //TODO
+        return null;
+    }
 
 
 }
