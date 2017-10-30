@@ -6,8 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import vos.Historial;
+import vos.ProductoFacturado;
+import vos.ProductoMasVendido;
 
 
 public class DAOTablaHistorial {
@@ -126,4 +129,100 @@ public class DAOTablaHistorial {
         Date fecha=rs.getDate("FECHA");
         historial.add(new Historial(idProducto, idUsuarioRegistrado, fecha));
     }
+
+    public List<ProductoFacturado> darTotProductosFacturados(Date fechaInicio,Date fechaFin) throws SQLException {
+        ArrayList<ProductoFacturado> productoFacturados = new ArrayList<>();
+
+        String sql = "SELECT ID_PRODUCTO, CATEGORIA, NOMBRE, RESTAURANTES_ID, SUM(COSTO) COSTOTOTAL, SUM(PRECIO) PRECIOTOTAL, COUNT(*) NUMPRODUCTOS " +
+                "      FROM       HISTORIAL  H " +
+                "            JOIN PRODUCTOS  P ON (H.ID_PRODUCTO=P.ID) " +
+                "            JOIN PRODUCTOS_INDIVIDUALES PI ON (H.ID_PRODUCTO=PI.ID) " +
+                "       WHERE FECHA> " + fechaInicio.toString() +" AND " + "FECHA <" + fechaFin.toString() + " " +
+                "      GROUP BY ID_PRODUCTO, CATEGORIA ,NOMBRE,RESTAURANTES_ID " +
+                "      ORDER BY PRECIOTOTAL DESC";
+
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            Long idProducto=rs.getLong("ID_PRODUCTO");
+            String categoria = rs.getString("CATEGORIA");
+            String nombre =rs.getString("NOMBRE");
+            Double costoTotal = rs.getDouble("COSTOTOTAL");
+            Double precioTotal = rs.getDouble("PRECIOTOTAL");
+            Long restauranteId = rs.getLong("RESTAURANTES_ID");
+
+            productoFacturados.add(new ProductoFacturado(idProducto,nombre,costoTotal,precioTotal,restauranteId,categoria));
+
+        }
+        return productoFacturados;
+
+    }
+
+    public List<ProductoFacturado> darProductosFactoradosRestaurante(Long usuario_id,Date fechaInicio,Date fechaFin) throws SQLException{
+        ArrayList<ProductoFacturado> productoFacturados = new ArrayList<>();
+
+        String sql = "SELECT ID_PRODUCTO, CATEGORIA, NOMBRE, RESTAURANTES_ID, SUM(COSTO) COSTOTOTAL, SUM(PRECIO) PRECIOTOTAL, COUNT(*) NUMPRODUCTOS " +
+                "      FROM       HISTORIAL  H " +
+                "            JOIN PRODUCTOS  P ON (H.ID_PRODUCTO=P.ID) " +
+                "            JOIN PRODUCTOS_INDIVIDUALES PI ON (H.ID_PRODUCTO=PI.ID) " +
+                "       WHERE RESTAURANTES_ID = " + usuario_id+" AND FECHA> " + fechaInicio.toString() +" AND " + "FECHA <" + fechaFin.toString() + " " +
+                "      GROUP BY ID_PRODUCTO, CATEGORIA ,NOMBRE,RESTAURANTES_ID " +
+                "      ORDER BY PRECIOTOTAL DESC";
+
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            Long idProducto=rs.getLong("ID_PRODUCTO");
+            String categoria = rs.getString("CATEGORIA");
+            String nombre =rs.getString("NOMBRE");
+            Double costoTotal = rs.getDouble("COSTOTOTAL");
+            Double precioTotal = rs.getDouble("PRECIOTOTAL");
+            Long restauranteId = rs.getLong("RESTAURANTES_ID");
+
+            productoFacturados.add(new ProductoFacturado(idProducto,nombre,costoTotal,precioTotal,restauranteId,categoria));
+
+        }
+        return productoFacturados;
+    }
+
+    public List<ProductoMasVendido> darProductosMasVendidos() throws SQLException {
+        ArrayList<ProductoMasVendido> productos= new ArrayList<>();
+
+        String sql = "SELECT * FROM(" +
+                "SELECT *\n" +
+                " FROM  (SELECT ID_PRODUCTO,ZONA, COUNT(ZONA) MASVENDPORZONA" +
+                "    FROM HISTORIAL H" +
+                "      JOIN PRODUCTOS P ON (H.ID_PRODUCTO=P.ID)" +
+                "      JOIN RESTAURANTES R ON (R.ID = P.RESTAURANTES_ID)" +
+                "    GROUP BY (ID_PRODUCTO, ZONA))" +
+                "    JOIN PRODUCTOS ON (ID_PRODUCTO=PRODUCTOS.ID)" +
+                "ORDER BY MASVENDPORZONA DESC)" +
+                "WHERE ROWNUM <=3";
+
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            Long idProducto=rs.getLong("ID_PRODUCTO");
+            String nombre =rs.getString("NOMBRE");
+            String descrEsp = rs.getString("DESCRESP");
+            String descrIng = rs.getString("DESCRING");
+            Double tPrep = rs.getDouble("TPREP");
+            Double costo = rs.getDouble("COSTO");
+            Double precio= rs.getDouble("PRECIO");
+            Long cantVendido = rs.getLong("MASVENDPORZONA");
+            String zona = rs.getString("ZONA");
+            Long restId = rs.getLong("RESTAURANTES_ID");
+
+            productos.add(new ProductoMasVendido(idProducto,nombre,descrEsp,descrIng,tPrep,costo,precio,restId,zona,cantVendido));
+
+        }
+        return productos;
+    }
+
 }

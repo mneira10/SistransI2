@@ -11,6 +11,7 @@
 package rest;
 
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -29,10 +30,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
-import vos.Producto;
-import vos.Restaurante;
-import vos.UsuarioRegistrado;
-import vos.Zona;
+import vos.*;
 
 /**
  * Clase que expone servicios REST con ruta base: http://"ip o nombre de host":8080/VideoAndes/rest/videos/...
@@ -215,6 +213,74 @@ public class RestauranteServices {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
 		return Response.status(200).entity(r).build();
+	}
+	@GET
+	@Path( "rentabilidad/{idRestaurante: \\d+}" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getRentabilidadRestaurante( UsuarioRegistrado usuarioRegistrado
+												,@PathParam( "idRestaurante" ) Integer idRestaurante,
+												@HeaderParam("login") String login,
+												@HeaderParam("password") String password,
+												@HeaderParam("fechaInicio") Date fechaInicio,
+												@HeaderParam("fechaFin") Date fechaFin)throws Exception
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+
+		try
+		{
+			if(usuarioRegistrado.getTipo().equals("RESTAURANTE")){
+				if(tm.verificarCredencialesRestaurante(login,password)){
+					return Response.status(200).entity(tm.darProductosFacturadosRestaurante(usuarioRegistrado.getUsuario_id(),fechaInicio,fechaFin)).build();
+				}
+				else{
+					Exception ef = new Exception("Credenciales inv�lidas");
+					return Response.status(412).entity(doErrorMessage(ef)).build();
+				}
+			}
+			else{
+				Exception ef = new Exception("Tipo de usuario invalido");
+				return Response.status(412).entity(doErrorMessage(ef)).build();
+			}
+
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	@GET
+	@Path( "rentabilidad" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getTotRentabilidadRestaurantes(UsuarioRegistrado usuarioRegistrado,
+												   @HeaderParam("login") String login,
+												   @HeaderParam("password") String password,
+												   @HeaderParam("fechaInicio") Date fechaInicio,
+												   @HeaderParam("fechaFin") Date fechaFin)throws Exception
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+
+		try
+		{
+			if(usuarioRegistrado.getTipo().equals("ADMIN")){
+				if(tm.verificarCredencialesAdmin(login,password)){
+					return Response.status(200).entity(tm.datTotProductosFacturados(fechaFin,fechaFin)).build();
+				}
+				else{
+					Exception ef = new Exception("Credenciales inv�lidas");
+					return Response.status(412).entity(doErrorMessage(ef)).build();
+				}
+			}
+
+			else{
+				Exception ef = new Exception("Tipo de usuario invalido");
+				return Response.status(412).entity(doErrorMessage(ef)).build();
+			}
+
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
 	}
 
 }
