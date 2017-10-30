@@ -2094,5 +2094,39 @@ public class RotondAndesTM {
 		}
 		return productos;
 	}
+
+	public void cancelarPedido(Long id) throws Exception {
+
+		DAOTablaCarritos daoTablaCarritos=  new DAOTablaCarritos();
+		try
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoTablaCarritos.setConn(conn);
+			daoTablaCarritos.cancelarPedido(id);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoTablaCarritos.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			}
+			catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+
+	}
 }
 

@@ -108,4 +108,14 @@ public class DAOTablaCarritos {
         Long usuarioId = rs.getLong("USUARIO_ID");
         carritos.add(new Carrito(id,nombre,costo,usuarioId));
     }
+
+    public void cancelarPedido(Long id) throws SQLException, Exception {
+
+        String sql = "DELETE FROM CARRITOS";
+        sql += " WHERE ID = " + id;
+
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        prepStmt.executeQuery();
+    }
 }

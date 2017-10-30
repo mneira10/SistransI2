@@ -78,10 +78,27 @@ public class PedidosServices {
 
 
     @PUT
-    @Path( "idProd/{idProd}/idUsuario{idUsuario}" )
-    public Response cancelarPedido(){
+    @Path( "cancelar/{id: \\d+}" )
+    public Response cancelarPedido(@PathParam("id") Long id){
         //TODO
-        return null;
+        RotondAndesTM tm = new RotondAndesTM(getPath());
+
+        try {
+
+            if(tm.buscarCarritoPorId(id).size()==0 ){
+
+                    Exception ef = new Exception("No hay pedido con ese id");
+                    return Response.status(412).entity(doErrorMessage(ef)).build();
+
+            }
+
+            else{
+                tm.cancelarPedido(id);
+                return Response.status(200).entity( new Object() ).build();
+            }
+        } catch (Exception e) {
+            return Response.status(500).entity(doErrorMessage(e)).build();
+        }
     }
 
 

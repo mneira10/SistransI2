@@ -116,6 +116,9 @@ public class HistorialServices {
 		try {
 			tm.addItemHistorial(idCarrito);
 			List<Item> zona1= tm.buscarItemsCarrito(idCarrito);
+			//borra el carrito de la lista de los carritos pues se ha comprado
+			tm.cancelarPedido(idCarrito);
+
 			for(Item item:zona1) {
 				List<Menu> menus=tm.buscarMenuPorId(item.getProductoId());
 				if(menus.size()==0) {
