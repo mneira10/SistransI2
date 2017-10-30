@@ -7,10 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42c2c232-745a-4a4c-9eb0-bca6fef640de" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/dao/DAOTablaCarritos.java" afterPath="$PROJECT_DIR$/src/dao/DAOTablaCarritos.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rest/HistorialServices.java" afterPath="$PROJECT_DIR$/src/rest/HistorialServices.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rest/PedidosServices.java" afterPath="$PROJECT_DIR$/src/rest/PedidosServices.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tm/RotondAndesTM.java" afterPath="$PROJECT_DIR$/src/tm/RotondAndesTM.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,9 +37,18 @@
         <entry file="file://$PROJECT_DIR$/src/tm/RotondAndesTM.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="147">
-              <caret line="2105" column="48" lean-forward="true" selection-start-line="2105" selection-start-column="48" selection-end-line="2105" selection-end-column="48" />
+              <caret line="2132" column="48" lean-forward="false" selection-start-line="2132" selection-start-column="48" selection-end-line="2132" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <marker date="1509328380930" expanded="true" signature="51126:51131" ph="{...}" />
+                <marker date="1509328380930" expanded="true" signature="51185:51222" ph="{...}" />
+                <marker date="1509328380930" expanded="true" signature="51322:52315" ph="{...}" />
+                <marker date="1509328380930" expanded="true" signature="52374:53309" ph="{...}" />
+                <marker date="1509328380930" expanded="true" signature="53388:54253" ph="{...}" />
+                <marker date="1509328380930" expanded="true" signature="54361:55212" ph="{...}" />
+                <marker date="1509328380930" expanded="true" signature="55345:56215" ph="{...}" />
+                <marker date="1509328380930" expanded="true" signature="56283:57113" ph="{...}" />
+                <marker date="1509328380930" expanded="true" signature="57169:57935" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -114,7 +120,7 @@
       <file leaf-file-name="HistorialServices.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/rest/HistorialServices.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
+            <state relative-caret-position="233">
               <caret line="114" column="37" lean-forward="false" selection-start-line="114" selection-start-column="37" selection-end-line="114" selection-end-column="37" />
               <folding />
             </state>
@@ -125,7 +131,7 @@
         <entry file="file://$PROJECT_DIR$/src/dao/DAOTablaHistorial.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2288">
-              <caret line="223" column="9" lean-forward="true" selection-start-line="223" selection-start-column="9" selection-end-line="223" selection-end-column="9" />
+              <caret line="223" column="9" lean-forward="false" selection-start-line="223" selection-start-column="9" selection-end-line="223" selection-end-column="9" />
               <folding>
                 <marker date="1509325724950" expanded="true" signature="1045:1068" ph="SELECT * FRO... HISTORIAL" />
                 <marker date="1509325724950" expanded="true" signature="1555:1671" ph="SELECT * FRO... HISTORIAL" />
@@ -156,7 +162,7 @@
         <entry file="file://$PROJECT_DIR$/src/rest/ItemsServices.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="248">
-              <caret line="122" column="18" lean-forward="true" selection-start-line="122" selection-start-column="18" selection-end-line="122" selection-end-column="18" />
+              <caret line="122" column="18" lean-forward="false" selection-start-line="122" selection-start-column="18" selection-end-line="122" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -236,7 +242,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="97" />
     <option name="y" value="46" />
     <option name="width" value="1400" />
@@ -244,7 +250,7 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator currentView="AndroidView" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -268,25 +274,7 @@
             <path>
               <item name="java-server-master" type="b2602c69:ProjectViewProjectNode" />
               <item name="java-server-master" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="java-server-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="java-server-master" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="java-server-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="java-server-master" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="rest" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="java-server-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="java-server-master" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="tm" type="462c0819:PsiDirectoryNode" />
+              <item name="Docs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="java-server-master" type="b2602c69:ProjectViewProjectNode" />
@@ -310,7 +298,22 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="AndroidView" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="java-server-master" type="1abcf292:AndroidViewProjectNode" />
+              <item name="java-server-master" type="1039202d:NonAndroidModuleNode" />
+            </path>
+            <path>
+              <item name="java-server-master" type="1abcf292:AndroidViewProjectNode" />
+              <item name="java-server-master" type="1039202d:NonAndroidModuleNode" />
+              <item name="java" type="b5c1fe26:NonAndroidSourceTypeNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Project Files">
@@ -527,12 +530,12 @@
       <workItem from="1509055467656" duration="1179000" />
       <workItem from="1509057329558" duration="418000" />
       <workItem from="1509132548506" duration="13639000" />
-      <workItem from="1509316840944" duration="10304000" />
+      <workItem from="1509316840944" duration="13482000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45082000" />
+    <option name="totallyTimeSpent" value="48260000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -544,8 +547,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="97" y="46" width="1600" height="873" extended-state="6" />
-    <editor active="true" />
+    <frame x="97" y="46" width="1600" height="873" extended-state="7" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328877" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -558,10 +560,10 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947233" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328877" sideWeight="0.497426" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328877" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328877" sideWeight="0.497426" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.328877" sideWeight="0.497426" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22844273" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22844273" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -820,16 +822,16 @@
         <state relative-caret-position="257">
           <caret line="146" column="84" lean-forward="false" selection-start-line="146" selection-start-column="84" selection-end-line="146" selection-end-column="84" />
           <folding>
-            <marker date="1509316967731" expanded="true" signature="1010:1046" ph="SELECT * FRO... PRODUCTOS_INDIVIDUALES" />
-            <marker date="1509316967731" expanded="true" signature="1553:1570" ph="SELECT WHERE... " />
-            <marker date="1509316967731" expanded="true" signature="2102:2149" ph="SELECT * FRO... PRODUCTOS_INDIVIDUALES" />
-            <marker date="1509316967731" expanded="true" signature="2587:2620" ph="UPDATE PRODU... " />
-            <marker date="1509316967731" expanded="true" signature="3597:3630" ph="UPDATE PRODU... " />
-            <marker date="1509316967731" expanded="true" signature="4039:4134" ph="INSERT INTO PRODUCTOS_INDIVIDUALES... " />
-            <marker date="1509316967731" expanded="true" signature="4714:4748" ph="DELETE FROM " />
-            <marker date="1509316967731" expanded="true" signature="5516:5549" ph="UPDATE PRODU... " />
-            <marker date="1509316967731" expanded="true" signature="5516:5576" ph="UPDATE PRODU... " />
-            <marker date="1509316967731" expanded="true" signature="5516:5589" ph="UPDATE PRODU... " />
+            <marker date="1509328380210" expanded="true" signature="1010:1046" ph="SELECT * FRO... PRODUCTOS_INDIVIDUALES" />
+            <marker date="1509328380210" expanded="true" signature="1553:1560" ph="SELECT WHERE... " />
+            <marker date="1509328380210" expanded="true" signature="2102:2149" ph="SELECT * FRO... PRODUCTOS_INDIVIDUALES" />
+            <marker date="1509328380210" expanded="true" signature="2587:2620" ph="UPDATE PRODU... " />
+            <marker date="1509328380210" expanded="true" signature="3597:3630" ph="UPDATE PRODU... " />
+            <marker date="1509328380210" expanded="true" signature="4039:4134" ph="INSERT INTO PRODUCTOS_INDIVIDUALES... " />
+            <marker date="1509328380210" expanded="true" signature="4714:4748" ph="DELETE FROM " />
+            <marker date="1509328380210" expanded="true" signature="6091:6124" ph="UPDATE PRODU... " />
+            <marker date="1509328380210" expanded="true" signature="6091:6151" ph="UPDATE PRODU... " />
+            <marker date="1509328380210" expanded="true" signature="6091:6164" ph="UPDATE PRODU... " />
           </folding>
         </state>
       </provider>
@@ -927,7 +929,7 @@
     <entry file="file://$PROJECT_DIR$/src/rest/ItemsServices.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
-          <caret line="122" column="18" lean-forward="true" selection-start-line="122" selection-start-column="18" selection-end-line="122" selection-end-column="18" />
+          <caret line="122" column="18" lean-forward="false" selection-start-line="122" selection-start-column="18" selection-end-line="122" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -955,7 +957,7 @@
     <entry file="file://$PROJECT_DIR$/src/dao/DAOTablaHistorial.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2288">
-          <caret line="223" column="9" lean-forward="true" selection-start-line="223" selection-start-column="9" selection-end-line="223" selection-end-column="9" />
+          <caret line="223" column="9" lean-forward="false" selection-start-line="223" selection-start-column="9" selection-end-line="223" selection-end-column="9" />
           <folding>
             <marker date="1509325724950" expanded="true" signature="1045:1068" ph="SELECT * FRO... HISTORIAL" />
             <marker date="1509325724950" expanded="true" signature="1555:1671" ph="SELECT * FRO... HISTORIAL" />
@@ -999,9 +1001,18 @@
     <entry file="file://$PROJECT_DIR$/src/tm/RotondAndesTM.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
-          <caret line="2105" column="48" lean-forward="true" selection-start-line="2105" selection-start-column="48" selection-end-line="2105" selection-end-column="48" />
+          <caret line="2132" column="48" lean-forward="false" selection-start-line="2132" selection-start-column="48" selection-end-line="2132" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1509328380930" expanded="true" signature="51126:51131" ph="{...}" />
+            <marker date="1509328380930" expanded="true" signature="51185:51222" ph="{...}" />
+            <marker date="1509328380930" expanded="true" signature="51322:52315" ph="{...}" />
+            <marker date="1509328380930" expanded="true" signature="52374:53309" ph="{...}" />
+            <marker date="1509328380930" expanded="true" signature="53388:54253" ph="{...}" />
+            <marker date="1509328380930" expanded="true" signature="54361:55212" ph="{...}" />
+            <marker date="1509328380930" expanded="true" signature="55345:56215" ph="{...}" />
+            <marker date="1509328380930" expanded="true" signature="56283:57113" ph="{...}" />
+            <marker date="1509328380930" expanded="true" signature="57169:57935" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1024,7 +1035,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/rest/HistorialServices.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
+        <state relative-caret-position="233">
           <caret line="114" column="37" lean-forward="false" selection-start-line="114" selection-start-column="37" selection-end-line="114" selection-end-column="37" />
           <folding />
         </state>
