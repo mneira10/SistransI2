@@ -47,7 +47,7 @@ public class DAOTablaZonas {
     public ArrayList<Zona> buscarZonasPorName(String name) throws SQLException, Exception {
         ArrayList<Zona> zonas = new ArrayList<Zona>();
 
-        String sql = "SELECT * FROM ZONAS WHERE NOMBRE ='" + name + "'";
+        String sql = "SELECT * FROM ZONAS WHERE NOMBRE LIKE '" + name + "'";
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);

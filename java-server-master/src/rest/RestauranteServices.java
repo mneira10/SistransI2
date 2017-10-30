@@ -205,7 +205,7 @@ public class RestauranteServices {
 				return Response.status(404).entity("No existe el restaurante a surtir").build();
 			}
 			else if(!tm.verificarCredencialesRestaurante(login,password)){
-				Exception ef = new Exception("Credenciales inv�lidas");
+				Exception ef = new Exception("Credenciales invalidas");
 				return Response.status(412).entity(doErrorMessage(ef)).build();
 			}
 			else {

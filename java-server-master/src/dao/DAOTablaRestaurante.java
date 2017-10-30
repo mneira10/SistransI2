@@ -67,7 +67,7 @@ public class DAOTablaRestaurante {
     public ArrayList<Restaurante> buscarRestaurantesPorZona(String zona) throws SQLException, Exception {
         ArrayList<Restaurante> restaurantes = new ArrayList<Restaurante>();
 
-        String sql = "SELECT * FROM RESTAURANTES WHERE ZONA =" + zona ;
+        String sql = "SELECT * FROM RESTAURANTES WHERE ZONA LIKE '" + zona +"'" ;
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);

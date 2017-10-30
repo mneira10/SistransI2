@@ -105,13 +105,15 @@ public class ZonasServices {
 	 */
 	@GET
 	@Path( "nombre" )
+	@HeaderParam("nombre")
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getZona( @HeaderParam( "nombre" ) String nombre )
+	public Response getZona(@HeaderParam( "nombre" ) String nombre )
 	{
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
 		try
 		{
 			Zona v = tm.buscarZonaPorNombre( nombre );
+			System.out.println("BUSCAAAAAAAAANDO");
 			List<Restaurante> restaurantes=tm.buscarRestaurantesPorZona(v.getNombre());
 			List<RestauranteDetail> restDetail=new ArrayList<>();
 			for(Restaurante rest: restaurantes) {

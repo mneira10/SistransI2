@@ -29,6 +29,12 @@ public class RestauranteDetail extends Restaurante {
                        @JsonProperty(value="idAdmin")long idAdmin,
                        @JsonProperty(value="productos")List<Producto> productos) {
         super(id, nombre,tipo,paginaWeb, zonaId, idAdmin);
+        this.id=id;
+        this.nombre=nombre;
+        this.tipo=tipo;
+        this.paginaWeb=paginaWeb;
+        this.zonaId=zonaId;
+        this.idAdmin=idAdmin;
         this.productos=productos;
     }
 

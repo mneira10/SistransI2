@@ -47,20 +47,20 @@ public class DAOTablaProductosIndividuales {
     public ArrayList<ProductoIndividual> darProductosMasUtilizadoMenu() throws Exception {
     	ArrayList<ProductoIndividual> productoIndividuals = new ArrayList<ProductoIndividual>();
 
-        String sql = "SELECT WHERE ID =";
-
+        String sql = "SELECT ID_PROD_INDIVIDUAL FROM ((SELECT ID_PROD_INDIVIDUAL , COUNT(ID_MENU) AS CUENTA FROM MENU_PRODUCTO_INDIVIDUAL GROUP BY ID_PROD_INDIVIDUAL)) JOIN (SELECT MAX(CUENTA) AS MAXIMO FROM (SELECT ID_PROD_INDIVIDUAL , COUNT(ID_MENU) AS CUENTA FROM MENU_PRODUCTO_INDIVIDUAL GROUP BY ID_PROD_INDIVIDUAL))ON CUENTA=MAXIMO";
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
         ResultSet rs = prepStmt.executeQuery();
 
         while (rs.next()) {
-            insertarProductoIndividual(rs,productoIndividuals);
+            insertarProductoIndividual1(rs,productoIndividuals);
         }
 
         return productoIndividuals;
     }
 
-    public ArrayList<ProductoIndividual> buscarProductosIndividualesPorID(Long id) throws SQLException, Exception {
+    
+	public ArrayList<ProductoIndividual> buscarProductosIndividualesPorID(Long id) throws SQLException, Exception {
         ArrayList<ProductoIndividual> productoIndividuals = new ArrayList<ProductoIndividual>();
 
         String sql = "SELECT * FROM PRODUCTOS_INDIVIDUALES WHERE ID =" + id ;
@@ -142,6 +142,11 @@ public class DAOTablaProductosIndividuales {
         Integer maximo= rs.getInt("MAXIMO");
         productoIndividuals.add(new ProductoIndividual(id,categoria,grupo, cantDisponible,maximo));
     }
+    
+    private void insertarProductoIndividual1(ResultSet rs, ArrayList<ProductoIndividual> productoIndividuals) throws SQLException, Exception  {
+    	Long id = rs.getLong("ID_PROD_INDIVIDUAL");
+        productoIndividuals.addAll(buscarProductosIndividualesPorID(id));
+	}
 
     public void surtirProducto(Long id) throws SQLException{
         String sql = "UPDATE PRODUCTOS_INDIVIDUALES SET CANTIDADDISPONIBLE = MAXIMO WHERE ID = " + id;

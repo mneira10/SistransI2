@@ -31,6 +31,11 @@ public class ZonaDetail extends Zona {
                 @JsonProperty(value="capacidad")Integer capacidad,
                 @JsonProperty(value="restaurantes")List<RestauranteDetail> restaurantes) {
         super(nombre, cerrado, tipo, aptoDescap, capacidad);
+        this.nombre=nombre;
+        this.cerrado=cerrado;
+        this.tipo=tipo;
+        this.aptoDescap=aptoDescap;
+        this.capacidad=capacidad;
         this.restaurantes=restaurantes;
     }
 

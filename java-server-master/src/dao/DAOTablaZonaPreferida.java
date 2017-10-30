@@ -83,7 +83,7 @@ public class DAOTablaZonaPreferida {
     public ArrayList<ZonaPreferida> buscarZonaPreferidaPorIdUsuarioRegistrado(Long idUsuarioRegistrado) throws SQLException, Exception {
         ArrayList<ZonaPreferida> zonasPreferidas = new ArrayList<ZonaPreferida>();
 
-        String sql = "SELECT * FROM ZONAS_PREFERIDAS WHERE ID_USUARIO_REGISTRADO ='" + idUsuarioRegistrado +"'";
+        String sql = "SELECT * FROM ZONAS_PREFERIDAS WHERE USUARIOSREGISTRADOS_ID = " + idUsuarioRegistrado ;
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);

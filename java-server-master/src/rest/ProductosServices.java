@@ -11,6 +11,7 @@
 package rest;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -30,6 +31,7 @@ import javax.ws.rs.core.Response;
 
 import tm.RotondAndesTM;
 import vos.Producto;
+import vos.ProductoIndividual;
 import vos.Restaurante;
 import vos.Zona;
 
@@ -111,8 +113,13 @@ public class ProductosServices {
 		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
 		try
 		{
-			List<Producto> v = tm.buscarProductoMasOfrecidos();
-			return Response.status( 200 ).entity( v ).build( );			
+			List<ProductoIndividual> v = tm.buscarProductoMasOfrecidos();
+			List<Producto> vd=new ArrayList<>();
+			for(ProductoIndividual prod: v) {
+				Producto p= tm.buscarProductoPorId(prod.getProdId());
+				vd.add(p);
+			}
+			return Response.status( 200 ).entity( vd ).build( );			
 		}
 		catch( Exception e )
 		{
@@ -184,6 +191,8 @@ public class ProductosServices {
 			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
 		}
 	}
+	
+	
 	
 	@GET
 	@Path( "categoria" )

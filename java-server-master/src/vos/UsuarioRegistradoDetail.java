@@ -17,8 +17,10 @@ public class UsuarioRegistradoDetail extends UsuarioRegistrado {
     @JsonProperty(value="login")
     private String login;
 
-	public UsuarioRegistradoDetail(@JsonProperty("")Long usuario_id, @JsonProperty("")String login, String password, String tipo, List<Producto> productosPreferidos, List<Zona> zonasPreferidas,@JsonProperty(value="historial")List<Producto> historial) {
+	public UsuarioRegistradoDetail(@JsonProperty("usuario_id")Long usuario_id, @JsonProperty("login")String login, String password, String tipo,@JsonProperty(value="productosPreferidos")List<Producto> productosPreferidos,@JsonProperty(value="zonasPreferidas") List<Zona> zonasPreferidas,@JsonProperty(value="historial")List<Producto> historial) {
 		super(usuario_id, login, password, tipo);
+		this.usuario_id=usuario_id;
+		this.login=login;
 		this.productosPreferidos=productosPreferidos;
 		this.zonasPreferidas=zonasPreferidas;
 		this.historial=historial;

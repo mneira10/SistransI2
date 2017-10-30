@@ -120,8 +120,8 @@ public class DAOTablaProductosPreferidos {
 
 
     private void insertarProductoPreferido(ResultSet rs,ArrayList<ProductoPreferido> productosPreferidos) throws SQLException{
-        Long usr = rs.getLong("ID_PRODUCTO");
-        Long prod= rs.getLong("ID_USUARIO_REGISTRADO");
+        Long usr = rs.getLong("ID_USUARIO_REGISTRADO");
+        Long prod= rs.getLong("ID_PRODUCTO");
 
         productosPreferidos.add(new ProductoPreferido(usr,prod));
     }
