@@ -1,0 +1,254 @@
+{
+	"variables": [],
+	"info": {
+		"name": "PruebasIteracion3",
+		"_postman_id": "7e29521b-bc1d-3e20-57c2-9108c8f78f29",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/VideoAndes/rest/productos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/VideoAndes/rest/productos",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {  \"usuarioRegistrado\":1,\n  \"proucto\":   1 \n  \t\n  }"
+				},
+				"description": "Consultar los productos de RotondAndes"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/VideoAndes/rest/usuarios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/VideoAndes/rest/usuarios",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {  \"usuarioRegistrado\":1,\n  \"proucto\":   1 \n  \t\n  }"
+				},
+				"description": "Consultar los usuarios de RotondAndes"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/VideoAndes/rest/zonas/nombre",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/VideoAndes/rest/zonas/nombre",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "nombre",
+						"value": "national",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {  \"usuarioRegistrado\":1,\n  \"proucto\":   1 \n  \t\n  }"
+				},
+				"description": "Consultar los usuarios de RotondAndes"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/VideoAndes/rest/zonas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/VideoAndes/rest/zonas",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "nombre",
+						"value": "national",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {  \"usuarioRegistrado\":1,\n  \"proucto\":   1 \n  \t\n  }"
+				},
+				"description": "Consultar los usuarios de RotondAndes"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/VideoAndes/rest/usuariosRegistrados",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/VideoAndes/rest/usuariosRegistrados",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "nombre",
+						"value": "national",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {  \"usuarioRegistrado\":1,\n  \"proucto\":   1 \n  \t\n  }"
+				},
+				"description": "Consultar los usuarios de RotondAndes"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/VideoAndes/rest/usuariosRegistrados/id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/VideoAndes/rest/usuariosRegistrados/id/16",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "nombre",
+						"value": "national",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {  \"usuarioRegistrado\":1,\n  \"proucto\":   1 \n  \t\n  }"
+				},
+				"description": "Consultar los usuarios de RotondAndes"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/VideoAndes/rest/productos/masOfrecido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/VideoAndes/rest/productos/masOfrecido",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "nombre",
+						"value": "national",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {  \"usuarioRegistrado\":1,\n  \"proucto\":   1 \n  \t\n  }"
+				},
+				"description": "Consultar los usuarios de RotondAndes"
+			},
+			"response": []
+		}
+	]
+}
