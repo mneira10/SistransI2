@@ -28,12 +28,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import vos.Menu;
-import vos.Producto;
+import vos.*;
 import tm.RotondAndesTM;
-import vos.Historial;
-import vos.Item;
-import vos.Zona;
 
 /**
  * Clase que expone servicios REST con ruta base: http://"ip o nombre de host":8080/VideoAndes/rest/videos/...
@@ -157,6 +153,23 @@ public class HistorialServices {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
 		return Response.status(200).entity(zonas).build();
+	}
+
+	@GET
+	@Path( "masVendidos" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getMasVendidos( )
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<ProductoMasVendido> masVendidos = tm.darMasVendidos( );
+			return Response.status( 200 ).entity( masVendidos ).build( );
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
 	}
 	
     /**
