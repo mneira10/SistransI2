@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/java-server-master.iml" filepath="$PROJECT_DIR$/.idea/java-server-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SistransI2.iml" filepath="$PROJECT_DIR$/.idea/SistransI2.iml" />
     </modules>
   </component>
 </project>
