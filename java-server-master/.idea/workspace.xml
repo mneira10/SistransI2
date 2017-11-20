@@ -7,11 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff06331d-36b3-44cc-bd9e-bba1324a49ef" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Docs/DB.sql" afterPath="$PROJECT_DIR$/Docs/DB.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Docs/scripts.txt" afterPath="$PROJECT_DIR$/Docs/scripts.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/java_server_master_war_exploded/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/out/artifacts/java_server_master_war_exploded/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/java_server_master_war_exploded/WEB-INF/ConnectionData/conexion.properties" afterPath="$PROJECT_DIR$/out/artifacts/java_server_master_war_exploded/WEB-INF/ConnectionData/conexion.properties" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -271,12 +267,12 @@
       <updated>1511134207066</updated>
       <workItem from="1511134208479" duration="1942000" />
       <workItem from="1511136280970" duration="53000" />
-      <workItem from="1511141744934" duration="838000" />
+      <workItem from="1511141744934" duration="4489000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2833000" />
+    <option name="totallyTimeSpent" value="6484000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1600" height="904" extended-state="6" />

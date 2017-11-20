@@ -1,5 +1,4 @@
-RFC12:
-
+--RFC12
 (SELECT *
 FROM USUARIOS_REGISTRADOS
   NATURAL JOIN
@@ -30,3 +29,57 @@ MINUS
 FROM USUARIOS_REGISTRADOS U JOIN (HISTORIAL NATURAL JOIN (SELECT ID AS ID_PRODUCTO
 FROM PRODUCTOS
 WHERE PRECIO <= 36885.84)) ON (U.ID=ID_USUARIO_REGISTRADO)));
+
+
+--RFC9 usuarios que consumieron al menos un producto de un determinado restaurante en un rango de fechas.
+
+--RFC10 usuarios que consumieron al menos un producto de un determinado restaurante en un rango de fechas.
+
+--RFC11 Muestra,  para  cada  día  de  la semana, el  producto más consumido, el  producto  menos  consumido,
+-- el  restaurante más frecuentado y el  restaurante  menos  frecuentado.
+
+-- mas consumido
+
+WITH TEMP AS (
+      SELECT DIA1, MAX(CONT) CONTEO FROM (SELECT  ID_PRODUCTO, DIA AS DIA1, CONT
+        FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT
+                FROM HISTORIAL H
+                GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))
+        GROUP BY DIA1) ,
+
+    TEMP2 AS (
+
+      SELECT *
+        FROM TEMP
+        JOIN (SELECT  ID_PRODUCTO, DIA AS DIA2, CONT
+        FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT
+                FROM HISTORIAL H
+                GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))
+        ON TEMP.DIA1 = DIA2 AND TEMP.CONTEO = CONT)
+
+SELECT DISTINCT DIA2,CONT, first_value(ID_PRODUCTO)
+  OVER (PARTITION BY DIA2,CONT )
+  FROM  TEMP2;
+
+-- menos consumido
+
+WITH TEMP AS (
+      SELECT DIA1, MIN(CONT) CONTEO FROM (SELECT  ID_PRODUCTO, DIA AS DIA1, CONT
+        FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT
+                FROM HISTORIAL H
+                GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))
+        GROUP BY DIA1) ,
+
+    TEMP2 AS (
+
+      SELECT *
+        FROM TEMP
+        JOIN (SELECT  ID_PRODUCTO, DIA AS DIA2, CONT
+        FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT
+                FROM HISTORIAL H
+                GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))
+        ON TEMP.DIA1 = DIA2 AND TEMP.CONTEO = CONT)
+
+SELECT DISTINCT DIA2,CONT, first_value(ID_PRODUCTO)
+  OVER (PARTITION BY DIA2,CONT )
+  FROM  TEMP2;
