@@ -1,0 +1,17 @@
+ADMIN
+
+usuario: admin
+password: password
+id: 22
+
+RESTAURANTE
+
+usuario: restaurante
+password: password
+id: 6
+
+USUARIO
+
+usuario: usuario
+password: password
+id: 19
