@@ -100,6 +100,40 @@ public class HistorialServices {
 			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
 		}
 	}
+	
+	@GET
+	@Path( "diaMayorConsumo" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getDiasMayorConsumo()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<RespuestaRequerimiento11> v = tm.diasMayorConsumo();
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
+	
+	@GET
+	@Path( "diaMenorConsumo" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getDiasMenorConsumo()
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<RespuestaRequerimiento11> v = tm.diasMenorConsumo();
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
 
     /**
      * Metodo que expone servicio REST usando POST que agrega el video que recibe en Json

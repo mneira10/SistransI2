@@ -143,6 +143,23 @@ public class UsuariosRegistradosServices {
 			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
 		}
 	}
+	
+	@GET
+	@Path( "buenosClientes" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getBuenosClientes(  )
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			List<UsuarioRegistrado> v = tm.buscarBuenosClientes();
+			return Response.status( 200 ).entity( v ).build( );			
+		}
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
+		}
+	}
 
 
     /**

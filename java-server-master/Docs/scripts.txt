@@ -1,4 +1,7 @@
+
 --RFC12
+
+
 (SELECT *
 FROM USUARIOS_REGISTRADOS
   NATURAL JOIN
@@ -33,10 +36,29 @@ WHERE PRECIO <= 36885.84)) ON (U.ID=ID_USUARIO_REGISTRADO)));
 
 --RFC9 usuarios que consumieron al menos un producto de un determinado restaurante en un rango de fechas.
 
+
+SELECT *
+FROM USUARIOS JOIN (SELECT * 
+FROM PRODUCTOS JOIN HISTORIAL ON (HISTORIAL.ID_PRODUCTO = PRODUCTOS.ID)
+WHERE PRODUCTOS.ID_RESTAURANTE = idRestaurante AND (to_date(to_char(HISTORIAL.FECHA, 'YYYY/MM/DD HH24:MI:SS'), 'YYYY/MM/DD HH24:MI:SS') between to_date(fecha1, 'YYYY/MM/DD HH24:MI:SS') and to_date(fecha2, 'YYYY/MM/DD HH24:MI:SS')))
+ON (USUARIOS.ID=PRODUCTOS.ID_USUARIO);
+
+
 --RFC10 usuarios que consumieron al menos un producto de un determinado restaurante en un rango de fechas.
+
+
+SELECT * FROM USUARIOS 
+MINUS
+SELECT *
+FROM USUARIOS JOIN (SELECT * 
+FROM PRODUCTOS JOIN HISTORIAL ON (HISTORIAL.ID_PRODUCTO = PRODUCTOS.ID)
+WHERE PRODUCTOS.ID_RESTAURANTE = idRestaurante AND (to_date(to_char(HISTORIAL.FECHA, 'YYYY/MM/DD HH24:MI:SS'), 'YYYY/MM/DD HH24:MI:SS') between to_date(fecha1, 'YYYY/MM/DD HH24:MI:SS') and to_date(fecha2, 'YYYY/MM/DD HH24:MI:SS')))
+ON (USUARIOS.ID=PRODUCTOS.ID_USUARIO);
+
 
 --RFC11 Muestra,  para  cada  día  de  la semana, el  producto más consumido, el  producto  menos  consumido,
 -- el  restaurante más frecuentado y el  restaurante  menos  frecuentado.
+
 
 -- mas consumido
 
@@ -57,9 +79,10 @@ WITH TEMP AS (
                 GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))
         ON TEMP.DIA1 = DIA2 AND TEMP.CONTEO = CONT)
 
-SELECT DISTINCT DIA2,CONT, first_value(ID_PRODUCTO)
-  OVER (PARTITION BY DIA2,CONT )
-  FROM  TEMP2;
+SELECT DISTINCT DIA2 AS DIA_SEMANA,CONT AS CANTIDAD , first_value(ID_PRODUCTO)
+  OVER (PARTITION BY DIA2,CONT ) AS PRODUCTO_ID
+  FROM  TEMP2
+  ORDER BY DIA2 ASC;
 
 -- menos consumido
 
@@ -80,6 +103,11 @@ WITH TEMP AS (
                 GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))
         ON TEMP.DIA1 = DIA2 AND TEMP.CONTEO = CONT)
 
-SELECT DISTINCT DIA2,CONT, first_value(ID_PRODUCTO)
-  OVER (PARTITION BY DIA2,CONT )
-  FROM  TEMP2;
+SELECT DISTINCT DIA2 AS DIA_SEMANA , CONT AS CANTIDAD , first_value(ID_PRODUCTO)
+  OVER (PARTITION BY DIA2,CONT ) AS PRODUCTO_ID
+  FROM  TEMP2
+  ORDER BY DIA2 ASC;
+  
+  --restaurante mas frecuentado
+  
+  --restaurante menos frecuentado

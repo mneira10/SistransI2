@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import vos.Historial;
 import vos.Usuario;
@@ -68,6 +70,51 @@ public class DAOTablaUsuarios {
         }
 
         return usuario;
+    }
+    
+    public ArrayList<Usuario> requerimiento9 (Long idRestaurante, Date fecha1, Date fecha2 ) throws SQLException, Exception{
+    	
+    	 ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+
+         String sql = "SELECT *\r\n" + 
+         		"FROM USUARIOS JOIN (SELECT * \r\n" + 
+         		"FROM PRODUCTOS JOIN HISTORIAL ON (HISTORIAL.ID_PRODUCTO = PRODUCTOS.ID)\r\n" + 
+         		"WHERE PRODUCTOS.ID_RESTAURANTE = idRestaurante AND (to_date(to_char(HISTORIAL.FECHA, 'YYYY/MM/DD HH24:MI:SS'), 'YYYY/MM/DD HH24:MI:SS') between to_date(fecha1, 'YYYY/MM/DD HH24:MI:SS') and to_date(fecha2, 'YYYY/MM/DD HH24:MI:SS')))\r\n" + 
+         		"ON (USUARIOS.ID=PRODUCTOS.ID_USUARIO)";
+
+         PreparedStatement prepStmt = conn.prepareStatement(sql);
+         recursos.add(prepStmt);
+         ResultSet rs = prepStmt.executeQuery();
+
+         while (rs.next()) {
+             insertarUsuario(rs,usuarios);
+         }
+         return usuarios;
+    	
+    }
+    
+    
+    public ArrayList<Usuario> requerimiento10 (Long idRestaurante, Date fecha1, Date fecha2 ) throws SQLException, Exception{
+    	
+    	 ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+
+         String sql = "SELECT * FROM USUARIOS \r\n" + 
+         		"MINUS\r\n" + 
+         		"SELECT *\r\n" + 
+         		"FROM USUARIOS JOIN (SELECT * \r\n" + 
+         		"FROM PRODUCTOS JOIN HISTORIAL ON (HISTORIAL.ID_PRODUCTO = PRODUCTOS.ID)\r\n" + 
+         		"WHERE PRODUCTOS.ID_RESTAURANTE = idRestaurante AND (to_date(to_char(HISTORIAL.FECHA, 'YYYY/MM/DD HH24:MI:SS'), 'YYYY/MM/DD HH24:MI:SS') between to_date(fecha1, 'YYYY/MM/DD HH24:MI:SS') and to_date(fecha2, 'YYYY/MM/DD HH24:MI:SS')))\r\n" + 
+         		"ON (USUARIOS.ID=PRODUCTOS.ID_USUARIO)";
+
+         PreparedStatement prepStmt = conn.prepareStatement(sql);
+         recursos.add(prepStmt);
+         ResultSet rs = prepStmt.executeQuery();
+
+         while (rs.next()) {
+             insertarUsuario(rs,usuarios);
+         }
+         return usuarios;
+    	
     }
 
     public void updateUsuario(Usuario usuario) throws SQLException, Exception {

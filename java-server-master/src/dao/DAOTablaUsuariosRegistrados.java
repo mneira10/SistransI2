@@ -44,6 +44,21 @@ public class DAOTablaUsuariosRegistrados {
         }
         return usuarioRegistrados;
     }
+    
+    public ArrayList<UsuarioRegistrado> darBuenosClientes() throws SQLException, Exception {
+    	ArrayList<UsuarioRegistrado> usuarioRegistrados = new ArrayList<UsuarioRegistrado>();
+
+        String sql = "(SELECT * FROM USUARIOS_REGISTRADOS NATURAL JOIN (SELECT ID_USUARIO_REGISTRADO AS ID FROM HISTORIAL GROUP BY ID_USUARIO_REGISTRADO HAVING (COUNT(DISTINCT TO_NUMBER(TO_CHAR(HISTORIAL.FECHA, 'WW')))-1 = TO_NUMBER(TO_CHAR(SYSDATE, 'WW')) - MIN(TO_NUMBER(TO_CHAR(HISTORIAL.FECHA, 'WW')) )) )) UNION (SELECT * FROM USUARIOS_REGISTRADOS  WHERE TIPO LIKE NULL MINUS (SELECT U.* FROM USUARIOS_REGISTRADOS U JOIN (HISTORIAL NATURAL JOIN (SELECT ID AS ID_PRODUCTO FROM MENUS )) ON (U.ID=ID_USUARIO_REGISTRADO))) UNION (SELECT * FROM USUARIOS_REGISTRADOS WHERE TIPO LIKE NULL MINUS (SELECT U.* FROM USUARIOS_REGISTRADOS U JOIN (HISTORIAL NATURAL JOIN (SELECT ID AS ID_PRODUCTO FROM PRODUCTOS WHERE PRECIO <= 36885.84)) ON (U.ID=ID_USUARIO_REGISTRADO)))";
+
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            insertarUsuarioRegistrado(rs,usuarioRegistrados);
+        }
+        return usuarioRegistrados;
+    }
 
     public UsuarioRegistrado buscarUsuarioRegistradosPorID(Long id) throws SQLException, Exception {
         ArrayList<UsuarioRegistrado> usuarioRegistrados = new ArrayList<UsuarioRegistrado>();

@@ -11,6 +11,7 @@ import java.util.List;
 import vos.Historial;
 import vos.ProductoFacturado;
 import vos.ProductoMasVendido;
+import vos.RespuestaRequerimiento11;
 
 
 public class DAOTablaHistorial {
@@ -68,7 +69,81 @@ public class DAOTablaHistorial {
         return historial;
     }
     
-    public ArrayList<Historial> buscarHistorialPorIdProducto(Long idProducto) throws SQLException, Exception {
+    public ArrayList<RespuestaRequerimiento11> darInformacionDiaMasConsumido() throws SQLException, Exception{
+    	
+    	ArrayList<RespuestaRequerimiento11> historial = new ArrayList<RespuestaRequerimiento11>();
+        String sql = "WITH TEMP AS (\r\n" + 
+        		"      SELECT DIA1, MAX(CONT) CONTEO FROM (SELECT  ID_PRODUCTO, DIA AS DIA1, CONT\r\n" + 
+        		"        FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT\r\n" + 
+        		"                FROM HISTORIAL H\r\n" + 
+        		"                GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))\r\n" + 
+        		"        GROUP BY DIA1) ,\r\n" + 
+        		"\r\n" + 
+        		"    TEMP2 AS (\r\n" + 
+        		"\r\n" + 
+        		"      SELECT *\r\n" + 
+        		"        FROM TEMP\r\n" + 
+        		"        JOIN (SELECT  ID_PRODUCTO, DIA AS DIA2, CONT\r\n" + 
+        		"        FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT\r\n" + 
+        		"                FROM HISTORIAL H\r\n" + 
+        		"                GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))\r\n" + 
+        		"        ON TEMP.DIA1 = DIA2 AND TEMP.CONTEO = CONT)\r\n" + 
+        		"\r\n" + 
+        		"SELECT DISTINCT DIA2 AS DIA_SEMANA,CONT AS CANTIDAD , first_value(ID_PRODUCTO)\r\n" + 
+        		"  OVER (PARTITION BY DIA2,CONT ) AS PRODUCTO_ID\r\n" + 
+        		"  FROM  TEMP2\r\n" + 
+        		"  ORDER BY DIA2 ASC";
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            insertarRespuestaReq11(rs, historial);
+        }
+
+        return historial;
+    	
+    }
+    
+public ArrayList<RespuestaRequerimiento11> darInformacionDiaMenosConsumido() throws SQLException, Exception{
+    	
+    	ArrayList<RespuestaRequerimiento11> historial = new ArrayList<RespuestaRequerimiento11>();
+        String sql = "WITH TEMP AS (\r\n" + 
+        		"      SELECT DIA1, MIN(CONT) CONTEO FROM (SELECT  ID_PRODUCTO, DIA AS DIA1, CONT\r\n" + 
+        		"        FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT\r\n" + 
+        		"                FROM HISTORIAL H\r\n" + 
+        		"                GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))\r\n" + 
+        		"        GROUP BY DIA1) ,\r\n" + 
+        		"\r\n" + 
+        		"    TEMP2 AS (\r\n" + 
+        		"\r\n" + 
+        		"      SELECT *\r\n" + 
+        		"        FROM TEMP\r\n" + 
+        		"        JOIN (SELECT  ID_PRODUCTO, DIA AS DIA2, CONT\r\n" + 
+        		"        FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT\r\n" + 
+        		"                FROM HISTORIAL H\r\n" + 
+        		"                GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))\r\n" + 
+        		"        ON TEMP.DIA1 = DIA2 AND TEMP.CONTEO = CONT)\r\n" + 
+        		"\r\n" + 
+        		"SELECT DISTINCT DIA2 AS DIA_SEMANA , CONT AS CANTIDAD , first_value(ID_PRODUCTO)\r\n" + 
+        		"  OVER (PARTITION BY DIA2,CONT ) AS PRODUCTO_ID\r\n" + 
+        		"  FROM  TEMP2\r\n" + 
+        		"  ORDER BY DIA2 ASC";
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            insertarRespuestaReq11(rs, historial);
+        }
+
+        return historial;
+    	
+    }
+    
+    
+
+	public ArrayList<Historial> buscarHistorialPorIdProducto(Long idProducto) throws SQLException, Exception {
         ArrayList<Historial> historial = new ArrayList<Historial>();
 
         String sql = "SELECT * FROM HISTORIAL WHERE ID_PRODUCTO ='" + idProducto +"'";
@@ -129,6 +204,13 @@ public class DAOTablaHistorial {
         Date fecha=rs.getDate("FECHA");
         historial.add(new Historial(idProducto, idUsuarioRegistrado, fecha));
     }
+    
+    private void insertarRespuestaReq11(ResultSet rs, ArrayList<RespuestaRequerimiento11> historial) throws SQLException {
+		Long idProducto=rs.getLong("PRODUCTO_ID");
+		int cantidad=rs.getInt("CANTIDAD");
+		int diaSemana= rs.getInt("DIA_SEMANA");
+		historial.add(new RespuestaRequerimiento11(idProducto, cantidad, diaSemana));	
+	}
 
     public List<ProductoFacturado> darTotProductosFacturados(Date fechaInicio,Date fechaFin) throws SQLException {
         ArrayList<ProductoFacturado> productoFacturados = new ArrayList<>();

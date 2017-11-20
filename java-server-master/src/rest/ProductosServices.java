@@ -152,7 +152,7 @@ public class ProductosServices {
      * el error que se produjo
      */
 	@GET
-	@Path( "restaurante/{id: \\d+}" )
+	@Path( "restaurante/{idRestaurante: \\d+}" )
 	@Produces( { MediaType.APPLICATION_JSON } )
 	public Response getProductoRestaurante( @PathParam( "idRestaurante" ) Long idRestaurante )
 	{
