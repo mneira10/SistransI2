@@ -48,7 +48,32 @@ public class DAOTablaUsuariosRegistrados {
     public ArrayList<UsuarioRegistrado> darBuenosClientes() throws SQLException, Exception {
     	ArrayList<UsuarioRegistrado> usuarioRegistrados = new ArrayList<UsuarioRegistrado>();
 
-        String sql = "(SELECT * FROM USUARIOS_REGISTRADOS NATURAL JOIN (SELECT ID_USUARIO_REGISTRADO AS ID FROM HISTORIAL GROUP BY ID_USUARIO_REGISTRADO HAVING (COUNT(DISTINCT TO_NUMBER(TO_CHAR(HISTORIAL.FECHA, 'WW')))-1 = TO_NUMBER(TO_CHAR(SYSDATE, 'WW')) - MIN(TO_NUMBER(TO_CHAR(HISTORIAL.FECHA, 'WW')) )) )) UNION (SELECT * FROM USUARIOS_REGISTRADOS  WHERE TIPO LIKE NULL MINUS (SELECT U.* FROM USUARIOS_REGISTRADOS U JOIN (HISTORIAL NATURAL JOIN (SELECT ID AS ID_PRODUCTO FROM MENUS )) ON (U.ID=ID_USUARIO_REGISTRADO))) UNION (SELECT * FROM USUARIOS_REGISTRADOS WHERE TIPO LIKE NULL MINUS (SELECT U.* FROM USUARIOS_REGISTRADOS U JOIN (HISTORIAL NATURAL JOIN (SELECT ID AS ID_PRODUCTO FROM PRODUCTOS WHERE PRECIO <= 36885.84)) ON (U.ID=ID_USUARIO_REGISTRADO)))";
+        String sql = "(SELECT *\n" + 
+        		"FROM USUARIOS_REGISTRADOS\n" + 
+        		"  NATURAL JOIN\n" + 
+        		"  (SELECT ID_USUARIO_REGISTRADO AS ID\n" + 
+        		"      FROM HISTORIAL\n" + 
+        		"      GROUP BY ID_USUARIO_REGISTRADO\n" + 
+        		"      HAVING (COUNT(DISTINCT TO_NUMBER(TO_CHAR(HISTORIAL.FECHA, 'WW')))-1\n" + 
+        		"          = TO_NUMBER(TO_CHAR(SYSDATE, 'WW')) - MIN(TO_NUMBER(TO_CHAR(HISTORIAL.FECHA, 'WW')) )) ))\n" + 
+        		"\n" + 
+        		"UNION\n" + 
+        		"\n" + 
+        		"(SELECT *\n" + 
+        		"FROM USUARIOS_REGISTRADOS  WHERE TIPO LIKE NULL\n" + 
+        		"MINUS\n" + 
+        		"(SELECT U.*\n" + 
+        		"FROM USUARIOS_REGISTRADOS U JOIN (HISTORIAL H JOIN MENUS M ON (H.ID_PRODUCTO=M.ID)) ON (U.ID=ID_USUARIO_REGISTRADO)))\n" + 
+        		"\n" + 
+        		"UNION\n" + 
+        		"\n" + 
+        		"(SELECT *\n" + 
+        		"FROM USUARIOS_REGISTRADOS WHERE TIPO LIKE NULL\n" + 
+        		"\n" + 
+        		"MINUS\n" + 
+        		"\n" + 
+        		"(SELECT U.*\n" + 
+        		"FROM USUARIOS_REGISTRADOS U JOIN (HISTORIAL H1 JOIN PRODUCTO P ON( H1 AND P.PRECIO <= 36885.84)) ON (U.ID=ID_USUARIO_REGISTRADO)));";
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
