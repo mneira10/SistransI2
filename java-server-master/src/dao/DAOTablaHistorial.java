@@ -12,6 +12,7 @@ import vos.Historial;
 import vos.ProductoFacturado;
 import vos.ProductoMasVendido;
 import vos.RespuestaRequerimiento11;
+import vos.RespuestaRequerimiento11A;
 
 
 public class DAOTablaHistorial {
@@ -104,6 +105,40 @@ public class DAOTablaHistorial {
         return historial;
     	
     }
+    
+ public ArrayList<RespuestaRequerimiento11A> darInformacionDiaMenosFrecuentado() throws SQLException, Exception{
+    	
+    	ArrayList<RespuestaRequerimiento11A> historial = new ArrayList<RespuestaRequerimiento11A>();
+        String sql = "";
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            insertarRespuestaReq11A(rs, historial);
+        }
+
+        return historial;
+    	
+    }
+ 
+ 
+
+public ArrayList<RespuestaRequerimiento11A> darInformacionDiaMasFrecuentado() throws SQLException, Exception{
+ 	
+ 	ArrayList<RespuestaRequerimiento11A> historial = new ArrayList<RespuestaRequerimiento11A>();
+     String sql = "";
+     PreparedStatement prepStmt = conn.prepareStatement(sql);
+     recursos.add(prepStmt);
+     ResultSet rs = prepStmt.executeQuery();
+
+     while (rs.next()) {
+         insertarRespuestaReq11A(rs, historial);
+     }
+
+     return historial;
+ 	
+ }
     
 public ArrayList<RespuestaRequerimiento11> darInformacionDiaMenosConsumido() throws SQLException, Exception{
     	
@@ -203,6 +238,13 @@ public ArrayList<RespuestaRequerimiento11> darInformacionDiaMenosConsumido() thr
         Long idUsuarioRegistrado = rs.getLong("ID_USUARIO_REGISTRADO");
         Date fecha=rs.getDate("FECHA");
         historial.add(new Historial(idProducto, idUsuarioRegistrado, fecha));
+    }
+    
+    private void insertarRespuestaReq11A(ResultSet rs, ArrayList<RespuestaRequerimiento11A> historial) throws SQLException {
+    	Long idProducto=rs.getLong("RESTAURANTE_ID");
+		int frecuencia=rs.getInt("FRECUENCIA");
+		int diaSemana= rs.getInt("DIA_SEMANA");
+		historial.add(new RespuestaRequerimiento11A(idProducto, frecuencia, diaSemana));	
     }
     
     private void insertarRespuestaReq11(ResultSet rs, ArrayList<RespuestaRequerimiento11> historial) throws SQLException {
