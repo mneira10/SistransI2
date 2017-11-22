@@ -2252,9 +2252,9 @@ public class RotondAndesTM {
 		return zonas;
 	}
 
-	public List<Usuario> darUsuariosReq9(Long idRestaurante, Date fecha1, Date fecha2) throws Exception{
-		List<Usuario> zonas;
-		DAOTablaUsuarios daoZonas = new DAOTablaUsuarios();
+	public List<UsuarioRegistrado> darUsuariosReq9(Long idRestaurante, Date fecha1, Date fecha2) throws Exception{
+		List<UsuarioRegistrado> zonas;
+		DAOTablaUsuariosRegistrados daoZonas = new DAOTablaUsuariosRegistrados();
 		try 
 		{
 			//////transaccion
@@ -2284,9 +2284,9 @@ public class RotondAndesTM {
 		return zonas;
 	}
 
-	public List<Usuario> darUsuariosReq10(Long idRestaurante, Date fecha1, Date fecha2) throws Exception {
-		List<Usuario> zonas;
-		DAOTablaUsuarios daoZonas = new DAOTablaUsuarios();
+	public List<UsuarioRegistrado> darUsuariosReq10(Long idRestaurante, Date fecha1, Date fecha2) throws Exception {
+		List<UsuarioRegistrado> zonas;
+		DAOTablaUsuariosRegistrados daoZonas = new DAOTablaUsuariosRegistrados();
 		try 
 		{
 			//////transaccion

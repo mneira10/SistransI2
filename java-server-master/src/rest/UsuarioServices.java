@@ -40,43 +40,7 @@ public class UsuarioServices {
         return Response.status(200).entity(usuarios).build();
     }
     
-    @GET
-    @Path("req9")
-    @Produces({ MediaType.APPLICATION_JSON })
-    public Response getRequerimiento9(@HeaderParam("idRestaurante") Long idRestaurante, @HeaderParam("fecha1") String fecha1, @HeaderParam("fecha1") String fecha2) {
-        RotondAndesTM tm = new RotondAndesTM(getPath());
-        List<Usuario> usuarios;
-        SimpleDateFormat formato = new SimpleDateFormat("YYYY/MM/DD HH24:MI:SS");
-        Date fecha11=null;
-        Date fecha12=null;
-        try {
-        	fecha11=formato.parse(fecha1);
-        	fecha12=formato.parse(fecha2);
-            usuarios = tm.darUsuariosReq9(idRestaurante, fecha11, fecha12);
-        } catch (Exception e) {
-            return Response.status(500).entity(doErrorMessage(e)).build();
-        }
-        return Response.status(200).entity(usuarios).build();
-    }
     
-    @GET
-    @Path("req10")
-    @Produces({ MediaType.APPLICATION_JSON })
-    public Response getRequerimiento10(@HeaderParam("idRestaurante") Long idRestaurante, @HeaderParam("fecha1") String fecha1, @HeaderParam("fecha1") String fecha2) {
-        RotondAndesTM tm = new RotondAndesTM(getPath());
-        List<Usuario> usuarios;
-        SimpleDateFormat formato = new SimpleDateFormat("YYYY/MM/DD HH24:MI:SS");
-        Date fecha11=null;
-        Date fecha12=null;
-        try {
-        	fecha11=formato.parse(fecha1);
-        	fecha12=formato.parse(fecha2);
-            usuarios = tm.darUsuariosReq10(idRestaurante, fecha11, fecha12);
-        } catch (Exception e) {
-            return Response.status(500).entity(doErrorMessage(e)).build();
-        }
-        return Response.status(200).entity(usuarios).build();
-    }
 
 
     @GET

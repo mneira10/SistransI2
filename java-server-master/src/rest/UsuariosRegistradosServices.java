@@ -11,7 +11,9 @@
 package rest;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -33,6 +35,7 @@ import tm.RotondAndesTM;
 import vos.Historial;
 import vos.Producto;
 import vos.ProductoPreferido;
+import vos.Usuario;
 import vos.UsuarioRegistrado;
 import vos.UsuarioRegistradoDetail;
 import vos.Zona;
@@ -83,6 +86,44 @@ public class UsuariosRegistradosServices {
 		}
 		return Response.status(200).entity(usuariosRegistrados).build();
 	}
+	
+	@GET
+    @Path("req9")
+    @Produces({ MediaType.APPLICATION_JSON })
+    public Response getRequerimiento9(@HeaderParam("idRestaurante") Long idRestaurante, @HeaderParam("fecha1") String fecha1, @HeaderParam("fecha1") String fecha2) {
+        RotondAndesTM tm = new RotondAndesTM(getPath());
+        List<UsuarioRegistrado> usuarios;
+        SimpleDateFormat formato = new SimpleDateFormat("YYYY/MM/DD HH24:MI:SS");
+        Date fecha11=null;
+        Date fecha12=null;
+        try {
+        	fecha11=formato.parse(fecha1);
+        	fecha12=formato.parse(fecha2);
+            usuarios = tm.darUsuariosReq9(idRestaurante, fecha11, fecha12);
+        } catch (Exception e) {
+            return Response.status(500).entity(doErrorMessage(e)).build();
+        }
+        return Response.status(200).entity(usuarios).build();
+    }
+    
+    @GET
+    @Path("req10")
+    @Produces({ MediaType.APPLICATION_JSON })
+    public Response getRequerimiento10(@HeaderParam("idRestaurante") Long idRestaurante, @HeaderParam("fecha1") String fecha1, @HeaderParam("fecha1") String fecha2) {
+        RotondAndesTM tm = new RotondAndesTM(getPath());
+        List<UsuarioRegistrado> usuarios;
+        SimpleDateFormat formato = new SimpleDateFormat("YYYY/MM/DD HH24:MI:SS");
+        Date fecha11=null;
+        Date fecha12=null;
+        try {
+        	fecha11=formato.parse(fecha1);
+        	fecha12=formato.parse(fecha2);
+            usuarios = tm.darUsuariosReq10(idRestaurante, fecha11, fecha12);
+        } catch (Exception e) {
+            return Response.status(500).entity(doErrorMessage(e)).build();
+        }
+        return Response.status(200).entity(usuarios).build();
+    }
 
 	 /**
      * Metodo que expone servicio REST usando GET que busca el video con el id que entra como parametro

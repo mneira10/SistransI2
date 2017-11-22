@@ -73,27 +73,24 @@ public class DAOTablaHistorial {
     public ArrayList<RespuestaRequerimiento11> darInformacionDiaMasConsumido() throws SQLException, Exception{
     	
     	ArrayList<RespuestaRequerimiento11> historial = new ArrayList<RespuestaRequerimiento11>();
-        String sql = "WITH TEMP AS (\r\n" + 
-        		"      SELECT DIA1, MAX(CONT) CONTEO FROM (SELECT  ID_PRODUCTO, DIA AS DIA1, CONT\r\n" + 
-        		"        FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT\r\n" + 
-        		"                FROM HISTORIAL H\r\n" + 
-        		"                GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))\r\n" + 
-        		"        GROUP BY DIA1) ,\r\n" + 
-        		"\r\n" + 
-        		"    TEMP2 AS (\r\n" + 
-        		"\r\n" + 
-        		"      SELECT *\r\n" + 
-        		"        FROM TEMP\r\n" + 
-        		"        JOIN (SELECT  ID_PRODUCTO, DIA AS DIA2, CONT\r\n" + 
-        		"        FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT\r\n" + 
-        		"                FROM HISTORIAL H\r\n" + 
-        		"                GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))\r\n" + 
-        		"        ON TEMP.DIA1 = DIA2 AND TEMP.CONTEO = CONT)\r\n" + 
-        		"\r\n" + 
-        		"SELECT DISTINCT DIA2 AS DIA_SEMANA,CONT AS CANTIDAD , first_value(ID_PRODUCTO)\r\n" + 
-        		"  OVER (PARTITION BY DIA2,CONT ) AS PRODUCTO_ID\r\n" + 
-        		"  FROM  TEMP2\r\n" + 
-        		"  ORDER BY DIA2 ASC";
+        String sql = "WITH TEMP AS ("+
+      " SELECT DIA1, MAX(CONT) CONTEO FROM (SELECT  ID_PRODUCTO, DIA AS DIA1, CONT"+
+        " FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT"+
+                " FROM HISTORIAL H"+
+               " GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))"+
+        " GROUP BY DIA1) ,"+
+    " TEMP2 AS ("+
+     " SELECT *"+
+        " FROM TEMP"+
+        " JOIN (SELECT  ID_PRODUCTO, DIA AS DIA2, CONT"+
+        " FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT"+
+                " FROM HISTORIAL H"+
+                " GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))"+
+        " ON TEMP.DIA1 = DIA2 AND TEMP.CONTEO = CONT)"+
+" SELECT DISTINCT DIA2 AS DIA_SEMANA,CONT AS CANTIDAD , first_value(ID_PRODUCTO)"+
+  " OVER (PARTITION BY DIA2,CONT ) AS PRODUCTO_ID"+
+  " FROM  TEMP2"+
+  " ORDER BY DIA2 ASC";
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
         ResultSet rs = prepStmt.executeQuery();
@@ -109,7 +106,25 @@ public class DAOTablaHistorial {
  public ArrayList<RespuestaRequerimiento11A> darInformacionDiaMenosFrecuentado() throws SQLException, Exception{
     	
     	ArrayList<RespuestaRequerimiento11A> historial = new ArrayList<RespuestaRequerimiento11A>();
-        String sql = "";
+        String sql = "WITH TEMP AS ( "+
+       		 "SELECT DIA1, MIN(CONT) CONTEO "+ 
+       		 "FROM (SELECT RESTAURANTES_ID, DIA AS DIA1, CONT "+
+       		 	"FROM (SELECT RESTAURANTES_ID, to_char(H.FECHA, 'd') DIA , COUNT(P.RESTAURANTES_ID) CONT "+
+       		                 "FROM (HISTORIAL H JOIN PRODUCTOS P ON(H.ID_PRODUCTO=P.ID)) "+
+       		 		"GROUP BY to_char(H.FECHA, 'd'), P.RESTAURANTES_ID)) "+
+       		         "GROUP BY DIA1) , "+
+       		 "TEMP2 AS ( "+
+       		 "SELECT * "+
+       		 "FROM TEMP "+
+       		  "JOIN (SELECT RESTAURANTES_ID, DIA AS DIA2, CONT "+
+       		 		"FROM (SELECT RESTAURANTES_ID, to_char(H.FECHA, 'd') DIA , COUNT(P.RESTAURANTES_ID) CONT "+
+       		 			"FROM (HISTORIAL H JOIN PRODUCTOS P ON(H.ID_PRODUCTO=P.ID)) "+
+       		 			"GROUP BY to_char(H.FECHA, 'd'), P.RESTAURANTES_ID)) "+
+       		 	"ON TEMP.DIA1 = DIA2 AND TEMP.CONTEO = CONT) "+
+       		 "SELECT DISTINCT DIA2 AS DIA_SEMANA,CONT AS CANTIDAD, first_value(RESTAURANTES_ID) "+
+       		  "OVER (PARTITION BY DIA2,CONT) AS ID_RESTAURANTE "+
+       		 "FROM TEMP2 "+
+       		 "ORDER BY DIA2 ASC";
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
         ResultSet rs = prepStmt.executeQuery();
@@ -127,7 +142,25 @@ public class DAOTablaHistorial {
 public ArrayList<RespuestaRequerimiento11A> darInformacionDiaMasFrecuentado() throws SQLException, Exception{
  	
  	ArrayList<RespuestaRequerimiento11A> historial = new ArrayList<RespuestaRequerimiento11A>();
-     String sql = "";
+     String sql = "WITH TEMP AS ( "+
+    		 "SELECT DIA1, MAX(CONT) CONTEO "+ 
+    		 "FROM (SELECT RESTAURANTES_ID, DIA AS DIA1, CONT "+
+    		 	"FROM (SELECT RESTAURANTES_ID, to_char(H.FECHA, 'd') DIA , COUNT(P.RESTAURANTES_ID) CONT "+
+    		                 "FROM (HISTORIAL H JOIN PRODUCTOS P ON(H.ID_PRODUCTO=P.ID)) "+
+    		 		"GROUP BY to_char(H.FECHA, 'd'), P.RESTAURANTES_ID)) "+
+    		         "GROUP BY DIA1) , "+
+    		 "TEMP2 AS ( "+
+    		 "SELECT * "+
+    		 "FROM TEMP "+
+    		  "JOIN (SELECT RESTAURANTES_ID, DIA AS DIA2, CONT "+
+    		 		"FROM (SELECT RESTAURANTES_ID, to_char(H.FECHA, 'd') DIA , COUNT(P.RESTAURANTES_ID) CONT "+
+    		 			"FROM (HISTORIAL H JOIN PRODUCTOS P ON(H.ID_PRODUCTO=P.ID)) "+
+    		 			"GROUP BY to_char(H.FECHA, 'd'), P.RESTAURANTES_ID)) "+
+    		 	"ON TEMP.DIA1 = DIA2 AND TEMP.CONTEO = CONT) "+
+    		 "SELECT DISTINCT DIA2 AS DIA_SEMANA,CONT AS CANTIDAD, first_value(RESTAURANTES_ID) "+
+    		  "OVER (PARTITION BY DIA2,CONT) AS ID_RESTAURANTE "+
+    		 "FROM TEMP2 "+
+    		 "ORDER BY DIA2 ASC";
      PreparedStatement prepStmt = conn.prepareStatement(sql);
      recursos.add(prepStmt);
      ResultSet rs = prepStmt.executeQuery();
@@ -143,27 +176,24 @@ public ArrayList<RespuestaRequerimiento11A> darInformacionDiaMasFrecuentado() th
 public ArrayList<RespuestaRequerimiento11> darInformacionDiaMenosConsumido() throws SQLException, Exception{
     	
     	ArrayList<RespuestaRequerimiento11> historial = new ArrayList<RespuestaRequerimiento11>();
-        String sql = "WITH TEMP AS (\r\n" + 
-        		"      SELECT DIA1, MIN(CONT) CONTEO FROM (SELECT  ID_PRODUCTO, DIA AS DIA1, CONT\r\n" + 
-        		"        FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT\r\n" + 
-        		"                FROM HISTORIAL H\r\n" + 
-        		"                GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))\r\n" + 
-        		"        GROUP BY DIA1) ,\r\n" + 
-        		"\r\n" + 
-        		"    TEMP2 AS (\r\n" + 
-        		"\r\n" + 
-        		"      SELECT *\r\n" + 
-        		"        FROM TEMP\r\n" + 
-        		"        JOIN (SELECT  ID_PRODUCTO, DIA AS DIA2, CONT\r\n" + 
-        		"        FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT\r\n" + 
-        		"                FROM HISTORIAL H\r\n" + 
-        		"                GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))\r\n" + 
-        		"        ON TEMP.DIA1 = DIA2 AND TEMP.CONTEO = CONT)\r\n" + 
-        		"\r\n" + 
-        		"SELECT DISTINCT DIA2 AS DIA_SEMANA , CONT AS CANTIDAD , first_value(ID_PRODUCTO)\r\n" + 
-        		"  OVER (PARTITION BY DIA2,CONT ) AS PRODUCTO_ID\r\n" + 
-        		"  FROM  TEMP2\r\n" + 
-        		"  ORDER BY DIA2 ASC";
+        String sql = "WITH TEMP AS ("+
+      " SELECT DIA1, MIN(CONT) CONTEO FROM (SELECT  ID_PRODUCTO, DIA AS DIA1, CONT"+
+        " FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT"+
+                " FROM HISTORIAL H"+
+                " GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))"+
+        " GROUP BY DIA1) ,"+
+    " TEMP2 AS ("+
+      " SELECT *"+
+        " FROM TEMP"+
+        " JOIN (SELECT  ID_PRODUCTO, DIA AS DIA2, CONT"+
+        " FROM (SELECT H.ID_PRODUCTO ID_PRODUCTO, to_char(H.FECHA, 'd') DIA , COUNT(H.ID_PRODUCTO) CONT"+
+                " FROM HISTORIAL H"+
+                " GROUP BY to_char(H.FECHA, 'd'), H.ID_PRODUCTO))"+
+        " ON TEMP.DIA1 = DIA2 AND TEMP.CONTEO = CONT)"+
+" SELECT DISTINCT DIA2 AS DIA_SEMANA , CONT AS CANTIDAD , first_value(ID_PRODUCTO)"+
+  " OVER (PARTITION BY DIA2,CONT ) AS PRODUCTO_ID"+
+  " FROM  TEMP2"+
+  " ORDER BY DIA2 ASC";
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
         ResultSet rs = prepStmt.executeQuery();

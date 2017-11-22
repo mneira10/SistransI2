@@ -1,5 +1,6 @@
 package dao;
 
+import vos.Usuario;
 import vos.UsuarioRegistrado;
 
 import java.sql.Connection;
@@ -7,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DAOTablaUsuariosRegistrados {
 
@@ -45,35 +47,76 @@ public class DAOTablaUsuariosRegistrados {
         return usuarioRegistrados;
     }
     
+    public ArrayList<UsuarioRegistrado> requerimiento9 (Long idRestaurante, Date fecha1, Date fecha2 ) throws SQLException, Exception{
+    	
+   	 ArrayList<UsuarioRegistrado> usuarios = new ArrayList<UsuarioRegistrado>();
+
+   	String sql = "SELECT *"+
+   			" FROM"+
+   			  " USUARIOS_REGISTRADOS"+
+   			  " JOIN (SELECT ID_USUARIO_REGISTRADO"+
+   			          " FROM PRODUCTOS JOIN HISTORIAL ON (HISTORIAL.ID_PRODUCTO = PRODUCTOS.ID)"+
+   			          " WHERE PRODUCTOS.RESTAURANTES_ID = "+idRestaurante+" AND (to_date(to_char(HISTORIAL.FECHA, 'YYYY/MM/DD HH24:MI:SS'), 'YYYY/MM/DD HH24:MI:SS') between to_date('"+fecha1+"', 'YYYY/MM/DD HH24:MI:SS') and to_date('"+fecha2+"', 'YYYY/MM/DD HH24:MI:SS')))"+
+   			 " ON (USUARIOS_REGISTRADOS.ID = ID_USUARIO_REGISTRADO)";
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            insertarUsuarioRegistrado(rs,usuarios);
+        }
+        return usuarios;
+   	
+   }
+   
+   
+   public ArrayList<UsuarioRegistrado> requerimiento10 (Long idRestaurante, Date fecha1, Date fecha31 ) throws SQLException, Exception{
+   	
+   	 ArrayList<UsuarioRegistrado> usuarios = new ArrayList<UsuarioRegistrado>();
+        String sql ="SELECT * FROM USUARIOS_REGISTRADOS"+
+        " MINUS"+
+        " (SELECT USUARIOS_REGISTRADOS.*"+
+        " FROM"+
+          " USUARIOS_REGISTRADOS"+
+          " JOIN (SELECT ID_USUARIO_REGISTRADO"+
+                  " FROM PRODUCTOS JOIN HISTORIAL ON (HISTORIAL.ID_PRODUCTO = PRODUCTOS.ID)"+
+                  " WHERE PRODUCTOS.RESTAURANTES_ID = "+idRestaurante+" AND (to_date(to_char(HISTORIAL.FECHA, 'YYYY/MM/DD HH24:MI:SS'), 'YYYY/MM/DD HH24:MI:SS') between to_date('"+fecha1+"', 'YYYY/MM/DD HH24:MI:SS') and to_date('"+fecha31+"', 'YYYY/MM/DD HH24:MI:SS')))"+
+          " ON (USUARIOS_REGISTRADOS.ID = ID_USUARIO_REGISTRADO))";
+
+        PreparedStatement prepStmt = conn.prepareStatement(sql);
+        recursos.add(prepStmt);
+        ResultSet rs = prepStmt.executeQuery();
+
+        while (rs.next()) {
+            insertarUsuarioRegistrado(rs,usuarios);
+        }
+        return usuarios;
+   	
+   }
+    
     public ArrayList<UsuarioRegistrado> darBuenosClientes() throws SQLException, Exception {
     	ArrayList<UsuarioRegistrado> usuarioRegistrados = new ArrayList<UsuarioRegistrado>();
 
-        String sql = "(SELECT *\n" + 
-        		"FROM USUARIOS_REGISTRADOS\n" + 
-        		"  NATURAL JOIN\n" + 
-        		"  (SELECT ID_USUARIO_REGISTRADO AS ID\n" + 
-        		"      FROM HISTORIAL\n" + 
-        		"      GROUP BY ID_USUARIO_REGISTRADO\n" + 
-        		"      HAVING (COUNT(DISTINCT TO_NUMBER(TO_CHAR(HISTORIAL.FECHA, 'WW')))-1\n" + 
-        		"          = TO_NUMBER(TO_CHAR(SYSDATE, 'WW')) - MIN(TO_NUMBER(TO_CHAR(HISTORIAL.FECHA, 'WW')) )) ))\n" + 
-        		"\n" + 
-        		"UNION\n" + 
-        		"\n" + 
-        		"(SELECT *\n" + 
-        		"FROM USUARIOS_REGISTRADOS  WHERE TIPO LIKE NULL\n" + 
-        		"MINUS\n" + 
-        		"(SELECT U.*\n" + 
-        		"FROM USUARIOS_REGISTRADOS U JOIN (HISTORIAL H JOIN MENUS M ON (H.ID_PRODUCTO=M.ID)) ON (U.ID=ID_USUARIO_REGISTRADO)))\n" + 
-        		"\n" + 
-        		"UNION\n" + 
-        		"\n" + 
-        		"(SELECT *\n" + 
-        		"FROM USUARIOS_REGISTRADOS WHERE TIPO LIKE NULL\n" + 
-        		"\n" + 
-        		"MINUS\n" + 
-        		"\n" + 
-        		"(SELECT U.*\n" + 
-        		"FROM USUARIOS_REGISTRADOS U JOIN (HISTORIAL H1 JOIN PRODUCTO P ON( H1 AND P.PRECIO <= 36885.84)) ON (U.ID=ID_USUARIO_REGISTRADO)));";
+        String sql = "(SELECT *"+
+" FROM USUARIOS_REGISTRADOS"+
+  " NATURAL JOIN"+
+  " (SELECT ID_USUARIO_REGISTRADO AS ID"+
+      " FROM HISTORIAL"+
+      " GROUP BY ID_USUARIO_REGISTRADO"+
+      " HAVING (COUNT(DISTINCT TO_NUMBER(TO_CHAR(HISTORIAL.FECHA, 'WW')))-1"+
+          " = TO_NUMBER(TO_CHAR(SYSDATE, 'WW')) - MIN(TO_NUMBER(TO_CHAR(HISTORIAL.FECHA, 'WW')) )) ))"+
+" UNION"+
+" (SELECT *"+
+" FROM USUARIOS_REGISTRADOS  WHERE TIPO LIKE 'USUARIO'"+
+" MINUS"+
+" (SELECT U.*"+
+" FROM USUARIOS_REGISTRADOS U JOIN (HISTORIAL H JOIN MENUS M ON (H.ID_PRODUCTO=M.ID)) ON (U.ID=ID_USUARIO_REGISTRADO)))"+
+" UNION"+
+" (SELECT *"+
+" FROM USUARIOS_REGISTRADOS WHERE TIPO LIKE 'USUARIO'"+
+"MINUS"+
+" (SELECT U.*"+
+" FROM USUARIOS_REGISTRADOS U JOIN (HISTORIAL H1 JOIN PRODUCTOS P ON( H1.ID_PRODUCTO  = P.ID AND P.PRECIO <= 36885.84)) ON (U.ID=ID_USUARIO_REGISTRADO)))";
 
         PreparedStatement prepStmt = conn.prepareStatement(sql);
         recursos.add(prepStmt);
