@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Properties;
 
 import dao.DAOTablaZonas;
+import dtm.RotondAndesDistributed;
 
 public class RotondAndesTM {
 
@@ -64,10 +65,15 @@ public class RotondAndesTM {
 	 */
 	private Connection conn;
 
+	
+	private RotondAndesDistributed dtm;
 
 	public RotondAndesTM(String contextPathP) {
 		connectionDataPath = contextPathP + CONNECTION_DATA_FILE_NAME_REMOTE;
 		initConnectionData();
+		System.out.println("A");
+		dtm=RotondAndesDistributed.getInstance(this);
+		System.out.println("B");
 	}
 
 	private void initConnectionData() {
