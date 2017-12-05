@@ -11,5 +11,11 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/jf.ramos/Downloads/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jf.ramos/Downloads/jboss-ejb-api_3.2_spec-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="/ejemploGit/WebContent/WEB-INF/lib/amqp-client-3.6.5.jar" sourcepath="/home/andfoy/.m2/repository/com/rabbitmq/amqp-client/3.6.5/amqp-client-3.6.5-sources.jar"/>
+	<classpathentry kind="lib" path="/ejemploGit/WebContent/WEB-INF/lib/geronimo-jms_1.1_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/ejemploGit/WebContent/WEB-INF/lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="/ejemploGit/WebContent/WEB-INF/lib/rabbitmq-jms-1.6.0-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
