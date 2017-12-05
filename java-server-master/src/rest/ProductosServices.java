@@ -80,30 +80,6 @@ public class ProductosServices {
 		}
 		return Response.status(200).entity(productos).build();
 	}
-
-	 /**
-     * Metodo que expone servicio REST usando GET que busca el video con el id que entra como parametro
-     * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos/<<id>>" para la busqueda"
-     * @param name - Nombre del video a buscar que entra en la URL como parametro 
-     * @return Json con el/los videos encontrados con el nombre que entra como parametro o json con 
-     * el error que se produjo
-     */
-	@GET
-	@Path( "{id: \\d+}" )
-	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getProducto( @PathParam( "id" ) Long id )
-	{
-		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
-		try
-		{
-			Producto v = tm.buscarProductoPorId( id );
-			return Response.status( 200 ).entity( v ).build( );			
-		}
-		catch( Exception e )
-		{
-			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
-		}
-	}
 	
 	@GET
 	@Path( "masOfrecido" )
@@ -143,73 +119,6 @@ public class ProductosServices {
 			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
 		}
 	}
-	
-	 /**
-     * Metodo que expone servicio REST usando GET que busca el video con el id que entra como parametro
-     * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos/<<id>>" para la busqueda"
-     * @param name - Nombre del video a buscar que entra en la URL como parametro 
-     * @return Json con el/los videos encontrados con el nombre que entra como parametro o json con 
-     * el error que se produjo
-     */
-	@GET
-	@Path( "restaurante/{idRestaurante: \\d+}" )
-	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getProductoRestaurante( @PathParam( "idRestaurante" ) Long idRestaurante )
-	{
-		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
-		try
-		{
-			List<Producto> v = tm.buscarProductosRestaurante( idRestaurante );
-			return Response.status( 200 ).entity( v ).build( );			
-		}
-		catch( Exception e )
-		{
-			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
-		}
-	}
-	
-	 /**
-     * Metodo que expone servicio REST usando GET que busca el video con el id que entra como parametro
-     * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos/<<id>>" para la busqueda"
-     * @param name - Nombre del video a buscar que entra en la URL como parametro 
-     * @return Json con el/los videos encontrados con el nombre que entra como parametro o json con 
-     * el error que se produjo
-     */
-	@GET
-	@Path( "precios" )
-	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getProductoRango( @HeaderParam( "rangoMinimo" ) Double rangoMinimo, @HeaderParam( "rangoMaximo" ) Double rangoMaximo )
-	{
-		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
-		try
-		{
-			List<Producto> v = tm.buscarProductosRangoPrecios(rangoMinimo, rangoMaximo);
-			return Response.status( 200 ).entity( v ).build( );			
-		}
-		catch( Exception e )
-		{
-			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
-		}
-	}
-	
-	
-	
-	@GET
-	@Path( "categoria" )
-	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getProductoRango( @HeaderParam( "categoria" ) String categoria)
-	{
-		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
-		try
-		{
-			List<Producto> v = tm.buscarProductosCategoria(categoria);
-			return Response.status( 200 ).entity( v ).build( );			
-		}
-		catch( Exception e )
-		{
-			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
-		}
-	}
 
     /**
      * Metodo que expone servicio REST usando POST que agrega el video que recibe en Json
@@ -236,43 +145,22 @@ public class ProductosServices {
 		return Response.status(200).entity(producto).build();
 	}
 	
-    /**
-     * Metodo que expone servicio REST usando PUT que actualiza el video que recibe en Json
-     * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos
-     * @param video - video a actualizar. 
-     * @return Json con el video que actualizo o Json con el error que se produjo
-     */
-	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateVideo(Zona zona) {
-		RotondAndesTM tm = new RotondAndesTM(getPath());
-		try {
-			tm.updateZona(zona);
-		} catch (Exception e) {
-			return Response.status(500).entity(doErrorMessage(e)).build();
+	//RFC1
+	@GET
+	@Path( "general" )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getProductos1( @HeaderParam( "idRestaurante" ) Long idRestaurante, @HeaderParam( "categoria" ) String categoria, @HeaderParam( "rangoMinimo" ) Double rangoMinimo, @HeaderParam( "rangoMaximo" ) Double rangoMaximo, @HeaderParam("criteriosOrdenamiento") String criterios)
+	{
+		RotondAndesTM tm = new RotondAndesTM( getPath( ) );
+		try
+		{
+			String[]criterios2=criterios.split(",");
+			List<Producto> v = tm.buscarProductosGenerales(idRestaurante, categoria, rangoMinimo, rangoMaximo, criterios2);
+			return Response.status( 200 ).entity( v ).build( );			
 		}
-		return Response.status(200).entity(zona).build();
-	}
-	
-    /**
-     * Metodo que expone servicio REST usando DELETE que elimina el video que recibe en Json
-     * <b>URL: </b> http://"ip o nombre de host":8080/VideoAndes/rest/videos
-     * @param video - video a aliminar. 
-     * @return Json con el video que elimino o Json con el error que se produjo
-     */
-	@DELETE
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteVideo(Zona zona) {
-		RotondAndesTM tm = new RotondAndesTM(getPath());
-		try {
-			tm.deleteZona(zona);
-		} catch (Exception e) {
-			return Response.status(500).entity(doErrorMessage(e)).build();
+		catch( Exception e )
+		{
+			return Response.status( 500 ).entity( doErrorMessage( e ) ).build( );
 		}
-		return Response.status(200).entity(zona).build();
 	}
-
-
 }

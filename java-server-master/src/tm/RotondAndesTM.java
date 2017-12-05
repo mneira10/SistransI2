@@ -2379,5 +2379,38 @@ public class RotondAndesTM {
 		}
 		return zonas;
 	}
+
+	public List<Producto> buscarProductosGenerales(Long idRestaurante, String categoria, Double rangoMinimo,
+			Double rangoMaximo, String[] criterios) throws Exception {
+		List<Producto> productos;
+		DAOTablaProductos daoProductos = new DAOTablaProductos();
+		try 
+		{
+			//////transaccion
+			this.conn = darConexion();
+			daoProductos.setConn(conn);
+			productos = daoProductos.buscarProductosGenerales(idRestaurante, categoria, rangoMinimo, rangoMaximo, criterios);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoProductos.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return productos;
+	}
 }
 

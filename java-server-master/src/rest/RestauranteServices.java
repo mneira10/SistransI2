@@ -214,11 +214,13 @@ public class RestauranteServices {
 		}
 		return Response.status(200).entity(r).build();
 	}
+	
+	//\RFC5
 	@GET
-	@Path( "rentabilidad/{idRestaurante: \\d+}" )
+	@Path( "rentabilidad" )
 	@Produces( { MediaType.APPLICATION_JSON } )
-	public Response getRentabilidadRestaurante( UsuarioRegistrado usuarioRegistrado
-												,@PathParam( "idRestaurante" ) Integer idRestaurante,
+	public Response getRentabilidadRestaurante( @HeaderParam( "idUsuarioRegistrado" ) Long idUsuarioRegistrado,
+												@HeaderParam( "idRestaurante" ) Integer idRestaurante,
 												@HeaderParam("login") String login,
 												@HeaderParam("password") String password,
 												@HeaderParam("fechaInicio") Date fechaInicio,
@@ -228,6 +230,7 @@ public class RestauranteServices {
 
 		try
 		{
+			UsuarioRegistrado usuarioRegistrado = tm.buscarUsuarioRegistradoporId(idUsuarioRegistrado);
 			if(usuarioRegistrado.getTipo().equals("RESTAURANTE")){
 				if(tm.verificarCredencialesRestaurante(login,password)){
 					return Response.status(200).entity(tm.darProductosFacturadosRestaurante(usuarioRegistrado.getUsuario_id(),fechaInicio,fechaFin)).build();

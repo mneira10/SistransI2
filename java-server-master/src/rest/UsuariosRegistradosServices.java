@@ -103,7 +103,8 @@ public class UsuariosRegistradosServices {
         } catch (Exception e) {
             return Response.status(500).entity(doErrorMessage(e)).build();
         }
-        return Response.status(200).entity(usuarios).build();
+        Response.ResponseBuilder rb =Response.fromResponse(Response.status(200).entity(usuarios).build());
+        return rb.header("nombre", "valor").build();
     }
     
     @GET
@@ -269,5 +270,5 @@ public class UsuariosRegistradosServices {
 		return Response.status(200).entity(user).build();
 	}
 
-
+	
 }
